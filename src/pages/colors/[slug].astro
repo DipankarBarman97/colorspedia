@@ -1,0 +1,874 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  colorFamilies,
+  getTextColor,
+  hexToRgb,
+  hexToHsl,
+} from "../../data/colors";
+
+export async function getStaticPaths() {
+  return colorFamilies?.map((color) => ({
+    params: { slug: color.slug },
+    props: { color },
+  }));
+}
+
+const { color } = Astro.props;
+const prevColor =
+  colorFamilies[colorFamilies.findIndex((c) => c.id === color.id) - 1];
+const nextColor =
+  colorFamilies[colorFamilies.findIndex((c) => c.id === color.id) + 1];
+---
+
+<Layout
+  title={`${color.name} Color Shades — Chromatic`}
+  description={`Explore all ${color.shades.length} shades of ${color.name}. Get hex, RGB, and HSL values for every shade.`}
+>
+  <!-- Back nav -->
+  <div class="back-bar">
+    <div class="back-inner">
+      <a href="/" class="back-link">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5m0 0l7-7m-7 7l7 7"></path>
+        </svg>
+        All colors
+      </a>
+      <div class="breadcrumb-divider" aria-hidden="true">/</div>
+      <span class="breadcrumb-current">{color.name}</span>
+    </div>
+  </div>
+
+  <!-- Color Hero -->
+  <section class="color-hero" style={`--hero-color: ${color.baseHex}`}>
+    <!-- Full spectrum bar -->
+    <div class="full-spectrum">
+      {
+        color.shades?.map((shade) => (
+          <div
+            class="spectrum-band"
+            style={`background: ${shade.hex}`}
+            title={shade.name}
+          />
+        ))
+      }
+    </div>
+
+    <div class="color-hero-inner">
+      <!-- Left: Info -->
+      <div class="hero-info animate-fade-in-up">
+        <div class="color-tags">
+          {color.tags?.map((tag) => <span class="color-tag">{tag}</span>)}
+        </div>
+        <h1 class="color-title">{color.name}</h1>
+        <p class="color-desc">{color.description}</p>
+        <div class="color-meta">
+          <div class="meta-chip">
+            <span class="meta-label">Shades</span>
+            <span class="meta-value">{color.shades.length}</span>
+          </div>
+          <div class="meta-chip">
+            <span class="meta-label">Base</span>
+            <span class="meta-value mono">{color.baseHex}</span>
+          </div>
+          <div class="meta-chip">
+            <span class="meta-label">RGB</span>
+            <span class="meta-value mono">{hexToRgb(color.baseHex)}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Big swatch mosaic -->
+      <div class="hero-mosaic animate-scale-in">
+        {
+          color.shades.slice(0, 9)?.map((shade, i) => (
+            <div
+              class="mosaic-cell"
+              style={`background: ${shade.hex}; animation-delay: ${i * 0.05}s`}
+              title={shade.name}
+            >
+              <span
+                class="mosaic-label"
+                style={`color: ${getTextColor(shade.hex)}`}
+              >
+                {shade.weight}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Shades Grid -->
+  <section class="shades-section">
+    <div class="shades-inner">
+      <div class="section-header">
+        <h2 class="section-title">All {color.name} Shades</h2>
+        <p class="section-desc">
+          Click any shade to copy the hex code instantly.
+        </p>
+      </div>
+
+      <!-- Format toggle -->
+      <div class="format-toggle" role="group" aria-label="Color format">
+        <button class="fmt-btn fmt-btn--active" data-fmt="hex">HEX</button>
+        <button class="fmt-btn" data-fmt="rgb">RGB</button>
+        <button class="fmt-btn" data-fmt="hsl">HSL</button>
+      </div>
+
+      <div class="shades-grid">
+        {
+          color.shades?.map((shade, i) => {
+            const textCol = getTextColor(shade.hex);
+            const rgb = hexToRgb(shade.hex);
+            const hsl = hexToHsl(shade.hex);
+            return (
+              <button
+                class="shade-card"
+                data-hex={shade.hex}
+                data-rgb={`rgb(${rgb})`}
+                data-hsl={`hsl(${hsl})`}
+                style={`background: ${shade.hex}; --text: ${textCol}; animation-delay: ${i * 0.04}s`}
+                aria-label={`Copy ${shade.name} — ${shade.hex}`}
+              >
+                <div
+                  class="shade-weight"
+                  style={`color: ${textCol}; opacity: 0.6`}
+                >
+                  {shade.weight}
+                </div>
+                <div class="shade-info">
+                  <div class="shade-name" style={`color: ${textCol}`}>
+                    {shade.name}
+                  </div>
+                  <div
+                    class="shade-value mono"
+                    style={`color: ${textCol}; opacity: 0.8`}
+                  >
+                    <span class="val-hex">{shade.hex}</span>
+                    <span class="val-rgb" style="display:none">
+                      rgb({rgb})
+                    </span>
+                    <span class="val-hsl" style="display:none">
+                      hsl({hsl})
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="copy-indicator"
+                  style={`color: ${textCol}; opacity: 0`}
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Copied!
+                </div>
+              </button>
+            );
+          })
+        }
+      </div>
+
+      <!-- Usage Guide -->
+      <div class="usage-section">
+        <h3 class="usage-title">Usage in Code</h3>
+        <div class="code-tabs">
+          <div class="code-tab">
+            <div class="code-tab-header">
+              <span>CSS Variables</span>
+              <button class="copy-code-btn" data-code="css">Copy</button>
+            </div>
+            <pre
+              class="code-block"
+              id="css-code"><code>{`:root {
+${color.shades?.map(s => `  --${color.slug}-${s.weight}: ${s.hex};`).join('\n')}
+}`}</code></pre>
+          </div>
+
+          <div class="code-tab">
+            <div class="code-tab-header">
+              <span>Tailwind Config</span>
+              <button class="copy-code-btn" data-code="tw">Copy</button>
+            </div>
+            <pre
+              class="code-block"
+              id="tw-code"><code>{`// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        ${color.slug}: {
+${color.shades?.map(s => `          ${s.weight}: '${s.hex}',`).join('\n')}
+        },
+      },
+    },
+  },
+};`}</code></pre>
+          </div>
+
+          <div class="code-tab">
+            <div class="code-tab-header">
+              <span>SCSS Map</span>
+              <button class="copy-code-btn" data-code="scss">Copy</button>
+            </div>
+            <pre
+              class="code-block"
+              id="scss-code"><code>{`$${color.slug}-palette: (
+${color.shades?.map(s => `  ${s.weight}: ${s.hex},`).join('\n')}
+);`}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adjacent Colors Nav -->
+  <nav class="adjacent-nav">
+    <div class="adjacent-inner">
+      {
+        prevColor ? (
+          <a href={`/colors/${prevColor.slug}`} class="adj-link adj-link--prev">
+            <div class="adj-dot" style={`background: ${prevColor.baseHex}`} />
+            <div class="adj-text">
+              <span class="adj-dir">← Previous</span>
+              <span class="adj-name">{prevColor.name}</span>
+            </div>
+          </a>
+        ) : (
+          <div />
+        )
+      }
+
+      <a href="/" class="adj-home">All Colors</a>
+
+      {
+        nextColor ? (
+          <a href={`/colors/${nextColor.slug}`} class="adj-link adj-link--next">
+            <div class="adj-text">
+              <span class="adj-dir">Next →</span>
+              <span class="adj-name">{nextColor.name}</span>
+            </div>
+            <div class="adj-dot" style={`background: ${nextColor.baseHex}`} />
+          </a>
+        ) : (
+          <div />
+        )
+      }
+    </div>
+  </nav>
+</Layout>
+
+<style>
+  /* Back bar */
+  .back-bar {
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface);
+  }
+  .back-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    font-weight: 500;
+  }
+  .back-link:hover {
+    color: var(--orange);
+  }
+  .breadcrumb-divider {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .breadcrumb-current {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Color Hero */
+  .color-hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+
+  .full-spectrum {
+    display: flex;
+    height: 10px;
+  }
+  .spectrum-band {
+    flex: 1;
+  }
+
+  .color-hero-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 48px 24px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-info {
+    opacity: 0;
+  }
+
+  .color-tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .color-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--hero-color) 12%, transparent);
+    color: var(--hero-color);
+    border: 1px solid color-mix(in srgb, var(--hero-color) 25%, transparent);
+  }
+
+  .color-title {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(48px, 7vw, 80px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .color-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+  }
+
+  .color-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 14px;
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .mono {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  /* Hero mosaic */
+  .hero-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+  }
+
+  .mosaic-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 8px;
+    opacity: 0;
+    animation: scaleIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transition: transform 0.2s ease;
+    cursor: default;
+  }
+
+  .mosaic-cell:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }
+
+  .mosaic-label {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+
+  /* Shades section */
+  .shades-section {
+    padding: 56px 0 80px;
+  }
+
+  .shades-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: "Syne", sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Format toggle */
+  .format-toggle {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+    width: fit-content;
+  }
+
+  .fmt-btn {
+    padding: 5px 16px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: "DM Mono", monospace;
+    transition: all 0.15s ease;
+  }
+  .fmt-btn--active {
+    background: var(--surface-card);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Shades grid */
+  .shades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .shade-card {
+    position: relative;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+    opacity: 0;
+    animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transition:
+      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .shade-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+
+  .shade-weight {
+    font-family: "Syne", sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .shade-info {
+    margin-top: auto;
+  }
+
+  .shade-name {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  .shade-value {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+
+  .copy-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .shade-card.just-copied .copy-indicator {
+    opacity: 1 !important;
+  }
+  .shade-card.just-copied .shade-weight,
+  .shade-card.just-copied .shade-info {
+    opacity: 0;
+  }
+
+  /* Usage section */
+  .usage-section {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 48px;
+  }
+
+  .usage-title {
+    font-family: "Syne", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .code-tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .code-tab {
+    background: var(--dark);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .code-tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .copy-code-btn {
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "DM Sans", sans-serif;
+    transition: all 0.15s ease;
+  }
+  .copy-code-btn:hover {
+    background: var(--orange);
+    color: white;
+  }
+
+  .code-block {
+    padding: 16px;
+    overflow-x: auto;
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    max-height: 220px;
+  }
+
+  /* Adjacent nav */
+  .adjacent-nav {
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface);
+  }
+
+  .adjacent-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .adj-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    transition: all 0.2s ease;
+    background: var(--surface-card);
+  }
+  .adj-link:hover {
+    border-color: var(--border);
+    box-shadow: var(--shadow-md);
+    transform: translateX(-2px);
+  }
+  .adj-link--next {
+    justify-content: flex-end;
+  }
+  .adj-link--next:hover {
+    transform: translateX(2px);
+  }
+
+  .adj-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .adj-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .adj-dir {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .adj-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: "Syne", sans-serif;
+  }
+
+  .adj-home {
+    padding: 9px 20px;
+    border-radius: 8px;
+    background: var(--orange);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  .adj-home:hover {
+    background: var(--orange-hover);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .color-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .hero-mosaic {
+      max-width: 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .color-hero-inner {
+      padding: 32px 16px;
+    }
+    .shades-inner {
+      padding: 0 16px;
+    }
+    .shades-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .shade-card {
+      min-height: 96px;
+    }
+    .adjacent-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .adj-home {
+      display: none;
+    }
+    .code-tabs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Format toggle
+  const fmtBtns = document.querySelectorAll<HTMLButtonElement>(".fmt-btn");
+  let activeFmt = "hex";
+
+  fmtBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeFmt = btn.dataset.fmt || "hex";
+      fmtBtns.forEach((b) => b.classList.remove("fmt-btn--active"));
+      btn.classList.add("fmt-btn--active");
+
+      document
+        .querySelectorAll(".val-hex, .val-rgb, .val-hsl")
+        .forEach((el) => {
+          (el as HTMLElement).style.display = "none";
+        });
+      document.querySelectorAll(`.val-${activeFmt}`).forEach((el) => {
+        (el as HTMLElement).style.display = "";
+      });
+    });
+  });
+
+  // Shade card copy
+  document
+    .querySelectorAll<HTMLButtonElement>(".shade-card")
+    .forEach((card) => {
+      card.addEventListener("click", () => {
+        const fmt = activeFmt;
+        const value =
+          fmt === "hex"
+            ? card.dataset.hex
+            : fmt === "rgb"
+              ? card.dataset.rgb
+              : card.dataset.hsl;
+
+        if (value && navigator.clipboard) {
+          navigator.clipboard.writeText(value).catch(() => {});
+        }
+
+        card.classList.add("just-copied");
+        setTimeout(() => card.classList.remove("just-copied"), 1200);
+      });
+    });
+
+  // Code copy
+  document
+    .querySelectorAll<HTMLButtonElement>(".copy-code-btn")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.code + "-code";
+        const code = document.getElementById(id)?.textContent || "";
+        navigator.clipboard.writeText(code).catch(() => {});
+        const orig = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => {
+          btn.textContent = orig;
+        }, 1800);
+      });
+    });
+
+  // Animate hero elements on load
+  document
+    .querySelector(".hero-info")
+    ?.setAttribute(
+      "style",
+      (document.querySelector(".hero-info") as HTMLElement)?.style.cssText +
+        "; animation: fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards;",
+    );
+  document
+    .querySelector(".hero-mosaic")
+    ?.setAttribute(
+      "style",
+      (document.querySelector(".hero-mosaic") as HTMLElement)?.style.cssText +
+        "; animation: scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;",
+    );
+</script>
