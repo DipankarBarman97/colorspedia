@@ -5,22 +5,18 @@ const currentYear = new Date().getFullYear();
 <footer class="footer-root">
   <div class="footer-inner">
     <div class="footer-left">
-      <div class="footer-logo">
-        <div class="footer-spectrum">
-          {
-            [
-              "#ef4444",
-              "#f97316",
-              "#eab308",
-              "#22c55e",
-              "#3b82f6",
-              "#a855f7",
-              "#ec4899",
-            ]?.map((c) => <span style={`background:${c}`} />)
-          }
+      <!-- Logo -->
+      <a href="/" class="logo-link" aria-label="Chromatic Home">
+        <div class="logo-icon">
+          <div class="logo-dot" style="background:#ef4444"></div>
+          <div class="logo-dot" style="background:#f97316"></div>
+          <div class="logo-dot" style="background:#eab308"></div>
+          <div class="logo-dot" style="background:#22c55e"></div>
+          <div class="logo-dot" style="background:#3b82f6"></div>
+          <div class="logo-dot" style="background:#a855f7"></div>
         </div>
-        <span>Chromatic</span>
-      </div>
+        <span class="logo-text">Chromatic</span>
+      </a>
       <p class="footer-tagline">Every color. Every shade. All in one place.</p>
     </div>
 
@@ -56,28 +52,6 @@ const currentYear = new Date().getFullYear();
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: "Syne", sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
-
-  .footer-spectrum {
-    display: flex;
-    gap: 2px;
-  }
-  .footer-spectrum span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: block;
   }
 
   .footer-tagline {

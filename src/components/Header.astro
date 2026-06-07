@@ -56,57 +56,14 @@ const currentPath = Astro.url.pathname;
     height: 64px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 32px;
-  }
-
-  .logo-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-
-  .logo-icon {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    width: 22px;
-    height: 22px;
-  }
-
-  .logo-dot {
-    border-radius: 50%;
-    width: 6px;
-    height: 6px;
-    transition: transform 0.2s ease;
-  }
-
-  .logo-link:hover .logo-dot:nth-child(1) {
-    transform: scale(1.4);
-  }
-  .logo-link:hover .logo-dot:nth-child(3) {
-    transform: scale(1.4);
-    transition-delay: 0.05s;
-  }
-  .logo-link:hover .logo-dot:nth-child(5) {
-    transform: scale(1.4);
-    transition-delay: 0.1s;
-  }
-
-  .logo-text {
-    font-family: "Syne", sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
   }
 
   .nav {
     display: flex;
     align-items: center;
     gap: 4px;
-    flex: 1;
   }
 
   .nav-link {
