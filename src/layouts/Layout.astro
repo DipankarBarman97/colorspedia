@@ -1,36 +1,115 @@
 ---
 import "../styles/global.css";
 import "../styles/variables.scss";
+
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
+const siteName = "Colorspedia";
+const siteUrl = "https://colorspedia.com";
+
 const {
-  title = "Chromatic — Every Color, Every Shade",
-  description = "Explore the complete spectrum of colors with all their shades, hex codes, and values.",
+  title = "Every Color, Every Shade",
+  description = "Explore thousands of colors, shades, HEX, RGB, HSL values, palettes, gradients, and color tools.",
+  image = "/og-image.png",
+  canonicalURL = Astro.url.href,
 } = Astro.props;
+
+const pageTitle =
+  title === "Every Color, Every Shade"
+    ? `${siteName} — ${title}`
+    : `${title} | ${siteName}`;
+
+const imageUrl = new URL(image, siteUrl).toString();
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Core -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>{title}</title>
+
+    <!-- Title -->
+    <title>{pageTitle}</title>
+
+    <!-- SEO -->
     <meta name="description" content={description} />
+
+    <meta
+      name="keywords"
+      content="colors, color shades, hex colors, rgb colors, hsl colors, color palette, color picker, web colors, css colors"
+    />
+
+    <meta name="author" content="Colorspedia" />
+
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#f97316" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+
+    <meta property="og:site_name" content={siteName} />
+
+    <meta property="og:title" content={pageTitle} />
+
+    <meta property="og:description" content={description} />
+
+    <meta property="og:url" content={canonicalURL} />
+
+    <meta property="og:image" content={imageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content={pageTitle} />
+
+    <meta name="twitter:description" content={description} />
+
+    <meta name="twitter:image" content={imageUrl} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: siteName,
+        url: siteUrl,
+        description,
+      })}
+    />
   </head>
+
   <body>
     <Header />
+
     <main>
       <slot />
     </main>
+
     <Footer />
   </body>
 </html>
