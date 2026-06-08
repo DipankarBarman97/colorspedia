@@ -1,0 +1,227 @@
+---
+// src/components/ColorsGridSkeleton.astro
+interface Props {
+  count?: number;
+}
+const { count = 12 } = Astro.props;
+---
+
+<div class="skeleton-grid" id="colors-skeleton" aria-busy="true" aria-label="Loading colors…">
+  {Array.from({ length: count })?.map((_, i) => (
+    <div class="skeleton-card" style={`--i:${i}`}>
+
+      <!-- Shade strip row (matches .shade-strip-row) -->
+      <div class="sk-strip-row">
+        {Array.from({ length: 11 })?.map(() => (
+          <div class="sk sk-strip"></div>
+        ))}
+      </div>
+
+      <!-- Swatch body (matches .card-swatch) -->
+      <div class="sk-swatch">
+        <div class="sk-swatch-inner">
+          <div class="sk sk-name"></div>
+          <div class="sk sk-hex"></div>
+        </div>
+        <div class="sk sk-count"></div>
+      </div>
+
+      <!-- Tags row (matches .card-tags) -->
+      <div class="sk-tags">
+        <div class="sk sk-tag"></div>
+        <div class="sk sk-tag sk-tag--wide"></div>
+      </div>
+
+    </div>
+  ))}
+</div>
+
+<script>
+  // ── Skeleton reveal ───────────────────────────────────────────────────────
+  function revealGrid() {
+    const skeleton = document.getElementById("colors-skeleton");
+    const grid = document.getElementById("colors-grid");
+
+    if (!skeleton || !grid) return;
+
+    // Show real grid
+    grid.style.display = "";
+    grid.classList.add("grid--revealed");
+
+    // Fade out skeleton
+    skeleton.classList.add("skeleton--out");
+
+    skeleton.addEventListener(
+      "transitionend",
+      () => {
+        skeleton.remove();
+      },
+      { once: true },
+    );
+  }
+
+  // Keep skeleton visible briefly so users can actually see it
+  window.addEventListener("load", () => {
+    setTimeout(revealGrid, 500);
+  });
+</script>
+
+<style>
+  /* ── Grid wrapper — mirrors the real .colors-grid layout ────── */
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .skeleton-grid.skeleton--out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ── Card shell — mirrors .color-card ───────────────────────── */
+  .skeleton-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border-subtle);
+    opacity: 0;
+    animation: skIn 0.4s ease forwards;
+    animation-delay: calc(var(--i) * 25ms);
+  }
+
+  @keyframes skIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Shimmer ─────────────────────────────────────────────────── */
+  .sk {
+    background: linear-gradient(
+      90deg,
+      var(--skeleton-base, rgba(0, 0, 0, 0.055)) 25%,
+      var(--skeleton-shine, rgba(0, 0, 0, 0.1)) 50%,
+      var(--skeleton-base, rgba(0, 0, 0, 0.055)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.7s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 60ms);
+    border-radius: 4px;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* ── Shade strip row — mirrors .shade-strip-row ─────────────── */
+  .sk-strip-row {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .sk-strip {
+    flex: 1;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  /* ── Swatch body — mirrors .card-swatch ─────────────────────── */
+  .sk-swatch {
+    padding: 20px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 110px;
+    justify-content: space-between;
+  }
+
+  .sk-swatch-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sk-name {
+    height: 18px;
+    width: 52%;
+  }
+
+  .sk-hex {
+    height: 11px;
+    width: 38%;
+  }
+
+  .sk-count {
+    height: 10px;
+    width: 28%;
+  }
+
+  /* ── Tags — mirrors .card-tags ──────────────────────────────── */
+  .sk-tags {
+    padding: 10px 14px;
+    display: flex;
+    gap: 6px;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--white);
+  }
+
+  .sk-tag {
+    height: 20px;
+    width: 44px;
+    border-radius: 999px;
+  }
+
+  .sk-tag--wide {
+    width: 60px;
+  }
+
+  /* ── Real grid reveal ───────────────────────────────────────── */
+  :global(#colors-grid.grid--revealed) {
+    animation: gridFadeIn 0.35s ease;
+  }
+
+  @keyframes gridFadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  :global(#colors-grid.grid--revealed .grid-item) {
+    animation: cardIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

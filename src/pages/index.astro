@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ColorCard from "../components/ColorCard.astro";
 import { colorFamilies } from "../data/colors";
+import Colorsgridskeleton from "../components/Colorsgridskeleton.astro";
 
 const totalShades = colorFamilies.reduce((sum, c) => sum + c.shades.length, 0);
 const tags = [...new Set(colorFamilies.flatMap((c) => c.tags))];
@@ -295,7 +296,7 @@ const colorData = colorFamilies?.map((c) => ({
       </div>
     </div>
 
-    <div class="colors-grid" id="colors-grid">
+    <div class="colors-grid" id="colors-grid" style="display:none">
       {
         colorFamilies?.map((color, i) => (
           <div
@@ -314,6 +315,8 @@ const colorData = colorFamilies?.map((c) => ({
         ))
       }
     </div>
+
+    <Colorsgridskeleton count={20} />
 
     <!-- Empty state -->
     <div id="empty-state" class="empty-state" style="display: none;">
