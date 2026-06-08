@@ -1,0 +1,282 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const lastUpdated = "June 9, 2025";
+
+const sections = [
+  {
+    id: "information-we-collect",
+    title: "Information We Collect",
+    content: `We collect minimal information to provide and improve Colorspedia. This includes:
+    
+    <strong>Usage Data</strong> — When you visit Colorspedia, we may automatically collect certain information about your device and how you interact with the site, such as your IP address, browser type, pages visited, and time spent on pages. This data is collected in aggregate and is not linked to any personally identifiable information.
+    
+    <strong>Cookies & Local Storage</strong> — We use cookies and browser local storage to remember your preferences (such as theme settings or recently viewed colors). These are strictly functional and do not track you across other websites.
+    
+    <strong>No Account Required</strong> — Colorspedia does not require you to create an account. We do not collect your name, email address, or any personal details unless you voluntarily contact us.`,
+  },
+  {
+    id: "how-we-use-information",
+    title: "How We Use Information",
+    content: `The information we collect is used solely to:
+    
+    <ul>
+      <li>Operate and maintain the Colorspedia website</li>
+      <li>Understand how visitors use the site so we can improve it</li>
+      <li>Remember your preferences across sessions</li>
+      <li>Diagnose technical issues and ensure stability</li>
+    </ul>
+    
+    We do not sell, rent, or share your information with third parties for marketing purposes.`,
+  },
+  {
+    id: "third-party-services",
+    title: "Third-Party Services",
+    content: `Colorspedia may use the following third-party services, each with their own privacy policies:
+    
+    <ul>
+      <li><strong>Google Fonts</strong> — Used to load typefaces. Google may log font requests. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+      <li><strong>Analytics</strong> — We may use a privacy-friendly analytics provider to understand aggregate traffic. No personal data is sold or shared.</li>
+      <li><strong>Hosting</strong> — The site is hosted on a third-party infrastructure provider. Your IP address may be processed as part of normal web traffic handling.</li>
+    </ul>`,
+  },
+  {
+    id: "cookies",
+    title: "Cookies",
+    content: `We use only essential cookies necessary for the site to function correctly. We do not use advertising cookies or cross-site tracking cookies.
+    
+    You can disable cookies in your browser settings at any time. Note that disabling cookies may affect certain preferences and features of the site.`,
+  },
+  {
+    id: "data-retention",
+    title: "Data Retention",
+    content: `Any aggregated usage data we collect is retained only as long as necessary to fulfil its purpose and is not tied to any personally identifiable information. Functional cookies and local storage data are stored in your browser and can be cleared by you at any time.`,
+  },
+  {
+    id: "childrens-privacy",
+    title: "Children's Privacy",
+    content: `Colorspedia is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.`,
+  },
+  {
+    id: "your-rights",
+    title: "Your Rights",
+    content: `Depending on your location, you may have the right to access, correct, or delete any personal data we hold about you. Since we collect very little personal data, there is typically nothing to access or delete. If you have a specific concern, please reach out and we will address it promptly.`,
+  },
+  {
+    id: "changes",
+    title: "Changes to This Policy",
+    content: `We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of this page. We encourage you to review this page periodically to stay informed.`,
+  },
+];
+---
+
+<Layout
+  title="Privacy Policy"
+  description="How Colorspedia collects, uses, and protects your information."
+>
+  <div class="legal-page">
+    <div class="legal-hero">
+      <span class="legal-eyebrow">Legal</span>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <p class="legal-meta">
+        Last updated: <time datetime="2025-06-09">{lastUpdated}</time>
+      </p>
+      <p class="legal-lead">
+        Colorspedia is built with respect for your privacy. This page explains
+        what data we collect, why, and how we use it. We keep it simple because
+        our approach is simple.
+      </p>
+    </div>
+
+    <div class="legal-layout">
+      <!-- Sticky TOC -->
+      <aside class="legal-toc">
+        <p class="toc-label">On this page</p>
+        <nav>
+          <ul>
+            {
+              sections?.map((s) => (
+                <li>
+                  <a href={`#${s.id}`} class="toc-link">
+                    {s.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="legal-content">
+        {
+          sections?.map((s) => (
+            <section id={s.id} class="legal-section">
+              <h2 class="section-title">{s.title}</h2>
+              <div class="section-body" set:html={s.content} />
+            </section>
+          ))
+        }
+      </article>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  /* Hero */
+  .legal-hero {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+
+  .legal-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .legal-title {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .legal-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .legal-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* Layout */
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* TOC */
+  .legal-toc {
+    position: sticky;
+    top: 88px;
+  }
+
+  .toc-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .legal-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc-link {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    transition:
+      color 0.15s,
+      background 0.15s;
+    line-height: 1.4;
+  }
+  .toc-link:hover {
+    color: var(--orange);
+    background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  }
+
+  /* Content */
+  .legal-section {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .legal-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+  }
+
+  .section-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .section-body ul {
+    padding-left: 20px;
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .section-body li {
+    line-height: 1.6;
+  }
+
+  .section-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .section-body a,
+  :global(.prose-link) {
+    color: var(--orange);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .legal-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .legal-toc {
+      position: static;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  }
+</style>

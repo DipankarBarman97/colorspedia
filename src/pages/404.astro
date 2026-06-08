@@ -1,0 +1,336 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const suggestions = [
+  { href: "/", label: "Explore Colors", desc: "Browse all color families" },
+  { href: "/sitemap", label: "Sitemap", desc: "See all pages" },
+];
+
+const dots = [
+  "#ef4444",
+  "#f97316",
+  "#eab308",
+  "#22c55e",
+  "#3b82f6",
+  "#a855f7",
+  "#ec4899",
+  "#14b8a6",
+  "#6366f1",
+];
+---
+
+<Layout
+  title="404 — Page Not Found"
+  description="The page you're looking for doesn't exist."
+  noindex={true}
+>
+  <div class="page-404">
+    <!-- Floating color dots background -->
+    <div class="dots-bg" aria-hidden="true">
+      {
+        dots?.map((color, i) => (
+          <span
+            class="float-dot"
+            style={`--color: ${color}; --delay: ${i * 0.4}s; --x: ${10 + i * 10}%; --size: ${28 + (i % 3) * 14}px`}
+          />
+        ))
+      }
+    </div>
+
+    <div class="content">
+      <!-- Big 404 -->
+      <div class="code-wrap" aria-hidden="true">
+        <span class="code-4 code-left">4</span>
+        <div class="code-o">
+          <div class="o-dots">
+            {
+              dots
+                .slice(0, 6)
+                ?.map((color) => (
+                  <span class="o-dot" style={`background: ${color}`} />
+                ))
+            }
+          </div>
+        </div>
+        <span class="code-4 code-right">4</span>
+      </div>
+
+      <h1 class="title">Page not found</h1>
+      <p class="subtitle">
+        The color you're chasing doesn't exist here — but there are thousands
+        more waiting.
+      </p>
+
+      <div class="actions">
+        <a href="/" class="btn-primary">Back to Colors</a>
+        <a href="/sitemap" class="btn-ghost">View Sitemap</a>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="suggestions">
+        <p class="suggestions-label">Try one of these</p>
+        <ul class="suggestions-list">
+          {
+            suggestions?.map((s) => (
+              <li>
+                <a href={s.href} class="suggestion-link">
+                  <span class="s-label">{s.label}</span>
+                  <span class="s-desc">{s.desc}</span>
+                  <span class="s-arrow">→</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-404 {
+    min-height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 48px 24px;
+  }
+
+  /* Floating background dots */
+  .dots-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .float-dot {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: var(--color);
+    left: var(--x);
+    bottom: -60px;
+    opacity: 0.12;
+    animation: floatUp 8s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.12;
+    }
+    50% {
+      transform: translateY(-60vh) scale(1.1);
+      opacity: 0.18;
+    }
+    100% {
+      transform: translateY(-120vh) scale(0.9);
+      opacity: 0;
+    }
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  /* 404 code */
+  .code-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    user-select: none;
+  }
+
+  .code-4 {
+    font-size: clamp(5rem, 16vw, 9rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    opacity: 0.08;
+  }
+
+  .code-o {
+    width: clamp(72px, 16vw, 128px);
+    height: clamp(72px, 16vw, 128px);
+    border-radius: 50%;
+    border: 3px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .o-dots {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    padding: 10px;
+    animation: spin 20s linear infinite reverse;
+  }
+
+  .o-dot {
+    width: clamp(10px, 2.5vw, 16px);
+    height: clamp(10px, 2.5vw, 16px);
+    border-radius: 50%;
+    display: block;
+  }
+
+  /* Text */
+  .title {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  /* Buttons */
+  .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 24px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition:
+      opacity 0.15s,
+      transform 0.15s;
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 24px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    text-decoration: none;
+    transition:
+      color 0.15s,
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .btn-ghost:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+    transform: translateY(-1px);
+  }
+
+  /* Suggestions */
+  .suggestions-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .suggestion-link {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    text-decoration: none;
+    transition:
+      border-color 0.15s,
+      transform 0.15s,
+      box-shadow 0.15s;
+    position: relative;
+  }
+  .suggestion-link:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .s-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .s-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .s-arrow {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition:
+      transform 0.15s,
+      color 0.15s;
+  }
+  .suggestion-link:hover .s-arrow {
+    transform: translateX(3px);
+    color: var(--orange);
+  }
+
+  @media (max-width: 480px) {
+    .suggestions-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

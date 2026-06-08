@@ -1,0 +1,340 @@
+---
+import { colorFamilies } from "../data/colors";
+import Layout from "../layouts/Layout.astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+];
+
+const tools = [
+  { href: "/tools/color-picker", label: "Color Picker" },
+  { href: "/tools/palette-generator", label: "Palette Generator" },
+  { href: "/tools/contrast-checker", label: "Contrast Checker" },
+  { href: "/tools/gradient-generator", label: "Gradient Generator" },
+  { href: "/tools/color-converter", label: "Color Converter" },
+  { href: "/tools/color-mixer", label: "Color Mixer" },
+  { href: "/tools/tint-shade-generator", label: "Tint & Shade Generator" },
+  { href: "/tools/complementary-colors", label: "Complementary Colors" },
+];
+
+const legal = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Use" },
+];
+---
+
+<Layout
+  title="Sitemap"
+  description="A full overview of every page on Colorspedia — colors, tools, and more."
+  noindex={true}
+>
+  <div class="sitemap-page">
+    <header class="sitemap-hero">
+      <p class="sitemap-eyebrow">Site overview</p>
+      <h1 class="sitemap-title">Sitemap</h1>
+      <p class="sitemap-sub">Every page on Colorspedia, organized for you.</p>
+      <a
+        href="/sitemap-index.xml"
+        class="xml-link"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+          ></path><polyline points="14 2 14 8 20 8"></polyline></svg
+        >
+        View XML Sitemap
+      </a>
+    </header>
+
+    <div class="sitemap-grid">
+      <!-- Pages -->
+      <section class="sitemap-section">
+        <div class="section-label">
+          <span class="section-dot" style="background: #3b82f6"></span>
+          Pages
+        </div>
+        <ul class="link-list">
+          {
+            navLinks?.map((l) => (
+              <li>
+                <a href={l.href} class="sitemap-link">
+                  <span class="link-arrow">→</span>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+          {
+            legal?.map((l) => (
+              <li>
+                <a href={l.href} class="sitemap-link sitemap-link--muted">
+                  <span class="link-arrow">→</span>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- Tools -->
+      <section class="sitemap-section">
+        <div class="section-label">
+          <span class="section-dot" style="background: #f97316"></span>
+          Tools
+        </div>
+        <ul class="link-list">
+          {
+            tools?.map((t) => (
+              <li>
+                <a href={t.href} class="sitemap-link">
+                  <span class="link-arrow">→</span>
+                  {t.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- Colors — full width -->
+      <section class="sitemap-section sitemap-section--full">
+        <div class="section-label">
+          <span class="section-dot" style="background: #a855f7"></span>
+          Colors
+          <span class="section-count">{colorFamilies.length} families</span>
+        </div>
+        <ul class="color-grid">
+          {
+            colorFamilies?.map((color) => (
+              <li>
+                <a href={`/colors/${color.slug}`} class="color-chip">
+                  <span
+                    class="color-swatch"
+                    style={`background: ${color.baseHex}`}
+                  />
+                  <span class="color-name">{color.name}</span>
+                  <span class="color-shades">{color.shades.length} shades</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .sitemap-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  /* Hero */
+  .sitemap-hero {
+    margin-bottom: 56px;
+  }
+
+  .sitemap-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .sitemap-title {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .sitemap-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .xml-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 6px 12px;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+  .xml-link:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  /* Grid layout */
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .sitemap-section--full {
+    grid-column: 1 / -1;
+  }
+
+  /* Section */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* Link list */
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sitemap-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    transition:
+      background 0.12s,
+      color 0.12s;
+  }
+  .sitemap-link:hover {
+    background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+    color: var(--orange);
+  }
+  .sitemap-link--muted {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .link-arrow {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition:
+      transform 0.12s,
+      color 0.12s;
+  }
+  .sitemap-link:hover .link-arrow {
+    transform: translateX(3px);
+    color: var(--orange);
+  }
+
+  /* Color grid */
+  .color-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+
+  .color-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    text-decoration: none;
+    transition:
+      border-color 0.15s,
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+  .color-chip:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .color-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  .color-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .color-shades {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .sitemap-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .color-grid {
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+  }
+</style>

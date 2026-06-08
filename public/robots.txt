@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Block utility/internal paths
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /search?*
+
+# Allow search page itself but block query params for crawlers
+Allow: /search$
+
+# Crawl-delay for well-behaved bots
+Crawl-delay: 10
+
+# Common bad bots
+User-agent: AhrefsBot
+Crawl-delay: 30
+
+User-agent: SemrushBot
+Crawl-delay: 30
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://colorspedia.com/sitemap-index.xml

@@ -1,0 +1,286 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const lastUpdated = "June 9, 2025";
+
+const sections = [
+  {
+    id: "acceptance",
+    title: "Acceptance of Terms",
+    content: `By accessing or using Colorspedia ("the Site"), you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the Site.
+    
+    We reserve the right to update these Terms at any time. Continued use of the Site after changes are posted constitutes your acceptance of the revised Terms.`,
+  },
+  {
+    id: "use-of-site",
+    title: "Use of the Site",
+    content: `Colorspedia is a free, publicly available resource for exploring colors, shades, HEX, RGB, and HSL values, palettes, gradients, and related design tools.
+    
+    You may use the Site for personal or commercial design work, including:
+    <ul>
+      <li>Referencing color values in your projects</li>
+      <li>Using generated palettes in design work</li>
+      <li>Copying HEX, RGB, or HSL values for use in code or design tools</li>
+    </ul>
+    
+    You may <strong>not</strong>:
+    <ul>
+      <li>Scrape or mass-download content from the Site in an automated manner without permission</li>
+      <li>Reproduce or redistribute the Site's interface, branding, or content as your own product</li>
+      <li>Use the Site in any way that could damage, disable, or impair its availability</li>
+    </ul>`,
+  },
+  {
+    id: "intellectual-property",
+    title: "Intellectual Property",
+    content: `The Colorspedia name, logo, visual design, and written content are the property of Colorspedia and are protected by applicable intellectual property laws.
+    
+    <strong>Color values themselves</strong> (HEX codes, RGB values, HSL values) are factual data and are not subject to copyright. You are free to use any color value you find on this Site in your own work without attribution.
+    
+    The color naming system, descriptions, and curated organization of color families on this Site are original works and may not be reproduced wholesale without permission.`,
+  },
+  {
+    id: "third-party-links",
+    title: "Third-Party Links",
+    content: `The Site may contain links to external websites such as the Tailwind CSS documentation. These links are provided for convenience only. Colorspedia has no control over the content or privacy practices of third-party sites and accepts no responsibility for them.`,
+  },
+  {
+    id: "disclaimers",
+    title: "Disclaimers",
+    content: `Colorspedia is provided "as is" and "as available" without any warranties of any kind, express or implied. We do not warrant that:
+    
+    <ul>
+      <li>The Site will be uninterrupted, error-free, or free of viruses</li>
+      <li>Color values displayed on screen will exactly match printed or physical colors (colors vary by display calibration)</li>
+      <li>The Site will meet your specific requirements</li>
+    </ul>
+    
+    Color accuracy on digital screens depends on your monitor's calibration. Always verify critical colors using a calibrated tool before production use.`,
+  },
+  {
+    id: "limitation-of-liability",
+    title: "Limitation of Liability",
+    content: `To the fullest extent permitted by law, Colorspedia and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the Site or its content.`,
+  },
+  {
+    id: "governing-law",
+    title: "Governing Law",
+    content: `These Terms shall be governed by and construed in accordance with applicable law. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the relevant courts.`,
+  },
+  {
+    id: "changes",
+    title: "Changes to These Terms",
+    content: `We may revise these Terms of Use at any time by updating this page. The "Last updated" date at the top of this page will reflect when changes were made. Your continued use of the Site following any changes constitutes acceptance of the new Terms.`,
+  },
+];
+---
+
+<Layout
+  title="Terms of Use"
+  description="The terms and conditions governing your use of Colorspedia."
+>
+  <div class="legal-page">
+    <div class="legal-hero">
+      <span class="legal-eyebrow">Legal</span>
+      <h1 class="legal-title">Terms of Use</h1>
+      <p class="legal-meta">
+        Last updated: <time datetime="2025-06-09">{lastUpdated}</time>
+      </p>
+      <p class="legal-lead">
+        These terms govern your use of Colorspedia. We've written them to be
+        clear and straightforward — no unnecessary legalese.
+      </p>
+    </div>
+
+    <div class="legal-layout">
+      <!-- Sticky TOC -->
+      <aside class="legal-toc">
+        <p class="toc-label">On this page</p>
+        <nav>
+          <ul>
+            {
+              sections?.map((s) => (
+                <li>
+                  <a href={`#${s.id}`} class="toc-link">
+                    {s.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="legal-content">
+        {
+          sections?.map((s) => (
+            <section id={s.id} class="legal-section">
+              <h2 class="section-title">{s.title}</h2>
+              <div class="section-body" set:html={s.content} />
+            </section>
+          ))
+        }
+      </article>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  /* Hero */
+  .legal-hero {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+
+  .legal-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .legal-title {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .legal-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .legal-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* Layout */
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* TOC */
+  .legal-toc {
+    position: sticky;
+    top: 88px;
+  }
+
+  .toc-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .legal-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc-link {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    transition:
+      color 0.15s,
+      background 0.15s;
+    line-height: 1.4;
+  }
+  .toc-link:hover {
+    color: var(--orange);
+    background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  }
+
+  /* Content */
+  .legal-section {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .legal-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+  }
+
+  .section-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .section-body ul {
+    padding-left: 20px;
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .section-body li {
+    line-height: 1.6;
+  }
+
+  .section-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .section-body a,
+  :global(.prose-link) {
+    color: var(--orange);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .legal-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .legal-toc {
+      position: static;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  }
+</style>

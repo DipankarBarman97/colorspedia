@@ -1,4 +1,3 @@
-// src/data/colors.ts
 // Complete color data with all shades for each color family
 
 export interface ColorShade {

@@ -1,37 +1,54 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+];
+
+const legal = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Use" },
+];
 ---
 
 <footer class="footer-root">
   <div class="footer-inner">
-    <div class="footer-left">
-      <!-- Logo -->
-      <a href="/" class="logo-link" aria-label="Colorspedia Home">
-        <div class="logo-icon">
-          <div class="logo-dot" style="background:#ef4444"></div>
-          <div class="logo-dot" style="background:#f97316"></div>
-          <div class="logo-dot" style="background:#eab308"></div>
-          <div class="logo-dot" style="background:#22c55e"></div>
-          <div class="logo-dot" style="background:#3b82f6"></div>
-          <div class="logo-dot" style="background:#a855f7"></div>
-        </div>
-        <span class="logo-text">Colorspedia</span>
-      </a>
-      <p class="footer-tagline">Every color. Every shade. All in one place.</p>
+    <div class="footer-top">
+      <!-- Left: Logo + tagline -->
+      <div class="footer-left">
+        <a href="/" class="logo-link" aria-label="Colorspedia Home">
+          <div class="logo-icon">
+            <div class="logo-dot" style="background:#ef4444"></div>
+            <div class="logo-dot" style="background:#f97316"></div>
+            <div class="logo-dot" style="background:#eab308"></div>
+            <div class="logo-dot" style="background:#22c55e"></div>
+            <div class="logo-dot" style="background:#3b82f6"></div>
+            <div class="logo-dot" style="background:#a855f7"></div>
+          </div>
+          <span class="logo-text">ColorsPedia</span>
+        </a>
+        <p class="footer-tagline">
+          Every color. Every shade. All in one place.
+        </p>
+      </div>
+
+      <!-- Right: Nav links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {navLinks?.map((link) => <a href={link.href}>{link.label}</a>)}
+        {legal?.map((link) => <a href={link.href}>{link.label}</a>)}
+        <a href="/sitemap">Sitemap</a>
+        <a
+          href="https://tailwindcss.com/docs/customizing-colors"
+          target="_blank"
+          rel="noopener">Tailwind Docs ↗</a
+        >
+      </nav>
     </div>
 
-    <div class="footer-links">
-      <a href="/">Explore Colors</a>
-      <a href="/about">About</a>
-      <a
-        href="https://tailwindcss.com/docs/customizing-colors"
-        target="_blank"
-        rel="noopener">Tailwind Docs ↗</a
-      >
-    </div>
-
-    <div class="footer-copy">
-      © {currentYear} Colorspedia — Built with Astro & Tailwind CSS
+    <!-- Bottom: copyright -->
+    <div class="footer-bottom">
+      <span>© {currentYear} Colorspedia — Built with Astro & Tailwind CSS</span>
     </div>
   </div>
 </footer>
@@ -46,44 +63,72 @@ const currentYear = new Date().getFullYear();
   .footer-inner {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 32px 24px;
+    padding: 36px 24px 48px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* Top row */
+  .footer-top {
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  /* Left */
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .footer-tagline {
     font-size: 13px;
     color: var(--text-muted);
+    margin: 0;
   }
 
-  .footer-links {
+  /* Right nav */
+  .footer-nav {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 24px;
     flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
-  .footer-links a {
+  .footer-nav a {
     font-size: 13px;
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.15s ease;
+    white-space: nowrap;
   }
-  .footer-links a:hover {
+
+  .footer-nav a:hover {
     color: var(--orange);
   }
 
-  .footer-copy {
+  /* Bottom bar */
+  .footer-bottom {
+    padding-top: 20px;
+    border-top: 1px solid var(--border-subtle);
     font-size: 12px;
     color: var(--text-muted);
   }
 
+  /* Mobile */
   @media (max-width: 640px) {
-    .footer-inner {
+    .footer-top {
       flex-direction: column;
-      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .footer-nav {
+      justify-content: flex-start;
+      gap: 16px;
     }
   }
 </style>
