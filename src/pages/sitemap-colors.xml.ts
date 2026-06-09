@@ -15,7 +15,7 @@ export const GET: APIRoute = () => {
     <priority>0.8</priority>
   </url>`,
       // Individual shade pages
-      ...color.shades.map(
+      ...color.shades?.map(
         (shade) => `  <url>
     <loc>${siteUrl}/colors/${color.slug}/${shade.weight}</loc>
     <lastmod>${now}</lastmod>

@@ -17,7 +17,7 @@ const tools = [
 ];
 
 export const GET: APIRoute = () => {
-  const urls = tools.map(
+  const urls = tools?.map(
     (tool) => `  <url>
     <loc>${siteUrl}/tools/${tool.slug}</loc>
     <lastmod>${now}</lastmod>

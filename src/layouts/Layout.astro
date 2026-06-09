@@ -137,7 +137,7 @@ const allKeywords = [...defaultKeywords, ...tags].join(", ");
 
     {type === "article" && <meta property="article:author" content={author} />}
 
-    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    {tags?.map((tag) => <meta property="article:tag" content={tag} />)}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

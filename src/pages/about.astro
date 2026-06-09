@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { colorFamilies } from "../data/colors";
+import { paletteSets } from "../data/palettes";
 
 const totalShades = colorFamilies.reduce((sum, c) => sum + c.shades.length, 0);
 ---
@@ -22,6 +23,17 @@ const totalShades = colorFamilies.reduce((sum, c) => sum + c.shades.length, 0);
         with complete shades, multiple format support, and copy-ready code
         snippets.
       </p>
+      <div class="hero-strip" aria-hidden="true">
+        {
+          paletteSets
+            .slice(0, 4)
+            .flatMap((p) =>
+              p.colors?.map((color) => (
+                <div class="strip-swatch" style={`background:${color.hex}`} />
+              )),
+            )
+        }
+      </div>
     </div>
   </section>
 
@@ -175,6 +187,21 @@ const totalShades = colorFamilies.reduce((sum, c) => sum + c.shades.length, 0);
     line-height: 1.7;
     color: var(--text-secondary);
     opacity: 0;
+    margin-bottom: 32px;
+  }
+
+  .hero-strip {
+    display: flex;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .strip-swatch {
+    flex: 1;
   }
 
   .about-content {
