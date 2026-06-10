@@ -917,7 +917,7 @@ const paletteWithValues = palette.colors?.map((color) => ({
   /* Three-column grid that gracefully collapses */
   .usage-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
     align-items: start;
   }
@@ -1320,7 +1320,7 @@ const paletteWithValues = palette.colors?.map((color) => ({
 
     .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
 
-    .usage-grid { grid-template-columns: 1fr; }
+    .usage-grid { grid-template-columns: 1fr 1fr; }
     .usage-card--code { grid-column: auto; }
 
     .pnav-inner { grid-template-columns: 1fr 1fr; }
@@ -1342,6 +1342,7 @@ const paletteWithValues = palette.colors?.map((color) => ({
     .breadcrumb-inner { padding: 10px 16px; }
     .pnav-inner { padding: 16px; gap: 10px; }
     .pnav-dots  { display: none; }
+    .usage-grid { grid-template-columns: 1fr; }
   }
 
   /* Respect reduced-motion */
