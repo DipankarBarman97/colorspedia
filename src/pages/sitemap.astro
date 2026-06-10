@@ -1,5 +1,6 @@
 ---
 import { colorFamilies } from "../data/colors";
+import { paletteSets } from "../data/palettes";
 import Layout from "../layouts/Layout.astro";
 
 const navLinks = [
@@ -9,14 +10,9 @@ const navLinks = [
 ];
 
 const tools = [
-  { href: "/tools/color-picker", label: "Color Picker" },
-  { href: "/tools/palette-generator", label: "Palette Generator" },
-  { href: "/tools/contrast-checker", label: "Contrast Checker" },
   { href: "/tools/gradient-generator", label: "Gradient Generator" },
   { href: "/tools/color-converter", label: "Color Converter" },
   { href: "/tools/color-mixer", label: "Color Mixer" },
-  { href: "/tools/tint-shade-generator", label: "Tint & Shade Generator" },
-  { href: "/tools/complementary-colors", label: "Complementary Colors" },
 ];
 
 const legal = [
@@ -78,7 +74,7 @@ const legal = [
         </ul>
       </section>
 
-      <!-- Tools -->
+      <!-- Legal -->
       <section class="sitemap-section">
         <div class="section-label">
           <span class="section-dot" style="background: #f97316"></span>
@@ -95,16 +91,6 @@ const legal = [
               </li>
             ))
           }
-          <!-- {
-            tools?.map((t) => (
-              <li>
-                <a href={t.href} class="sitemap-link">
-                  <span class="link-arrow">→</span>
-                  {t.label}
-                </a>
-              </li>
-            ))
-          } -->
         </ul>
       </section>
 
@@ -126,6 +112,34 @@ const legal = [
                   />
                   <span class="color-name">{color.name}</span>
                   <span class="color-shades">{color.shades.length} shades</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- Palettes — full width -->
+      <section class="sitemap-section sitemap-section--full">
+        <div class="section-label">
+          <span class="section-dot" style="background: #f97316"></span>
+          Palettes
+          <span class="section-count">{paletteSets.length} palettes</span>
+        </div>
+        <ul class="color-grid">
+          {
+            paletteSets?.map((palette) => (
+              <li>
+                <a href={`/palettes/${palette.id}`} class="color-chip">
+                  <div class="palette-swatch-strip">
+                    {palette.colors?.map((c) => (
+                      <span style={`background:${c.hex};flex:1;height:100%`} />
+                    ))}
+                  </div>
+                  <span class="color-name">{palette.name}</span>
+                  <span class="color-shades">
+                    {palette.colors.length} colors
+                  </span>
                 </a>
               </li>
             ))
@@ -326,6 +340,15 @@ const legal = [
   .color-shades {
     font-size: 11px;
     color: var(--text-muted);
+  }
+
+  /* Palettes */
+  .palette-swatch-strip {
+    display: flex;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   }
 
   /* Responsive */

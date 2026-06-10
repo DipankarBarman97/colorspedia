@@ -1,0 +1,1476 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { colorFamilies } from "../../data/colors";
+import { paletteSets } from "../../data/palettes";
+
+export async function getStaticPaths() {
+  return paletteSets?.map((palette) => ({
+    params: { id: palette.id },
+    props: { palette },
+  }));
+}
+
+const { palette } = Astro.props;
+
+const currentIdx = paletteSets.findIndex((p) => p.id === palette.id);
+const prevPalette = paletteSets[currentIdx - 1] ?? null;
+const nextPalette = paletteSets[currentIdx + 1] ?? null;
+
+const related = paletteSets
+  .filter(
+    (p) => p.id !== palette.id && p.tags.some((t) => palette.tags.includes(t)),
+  )
+  .slice(0, 3);
+
+// Find related color families based on approximate hue match
+const relatedFamilies = colorFamilies
+  .filter((cf) =>
+    palette.colors.some((pc) => {
+      const pr = parseInt(pc.hex.slice(1, 3), 16);
+      const pg = parseInt(pc.hex.slice(3, 5), 16);
+      const pb = parseInt(pc.hex.slice(5, 7), 16);
+      const fr = parseInt(cf.baseHex.slice(1, 3), 16);
+      const fg = parseInt(cf.baseHex.slice(3, 5), 16);
+      const fb = parseInt(cf.baseHex.slice(5, 7), 16);
+      return (
+        Math.abs(pr - fr) < 40 &&
+        Math.abs(pg - fg) < 40 &&
+        Math.abs(pb - fb) < 40
+      );
+    }),
+  )
+  .slice(0, 4);
+
+// ── Colour helpers (server-side) ─────────────────────────────────────────────
+function getLum(hex: string) {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function getTextColor(hex: string) {
+  return getLum(hex) > 0.45 ? "#1c1917" : "#ffffff";
+}
+
+function hexToRgb(hex: string) {
+  return `${parseInt(hex.slice(1, 3), 16)}, ${parseInt(hex.slice(3, 5), 16)}, ${parseInt(hex.slice(5, 7), 16)}`;
+}
+
+function hexToHsl(hex: string) {
+  let r = parseInt(hex.slice(1, 3), 16) / 255,
+    g = parseInt(hex.slice(3, 5), 16) / 255,
+    b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return `${Math.round(h * 360)}°, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+}
+
+// Precompute values so templates stay clean
+const paletteWithValues = palette.colors?.map((color) => ({
+  ...color,
+  tc:    getTextColor(color.hex),
+  rgb:   hexToRgb(color.hex),
+  hsl:   hexToHsl(color.hex),
+}));
+---
+
+<Layout
+  title={`${palette.name} Color Palette — Colorspedia`}
+  description={palette.longDescription}
+>
+  <div class="palette-detail">
+
+    <!-- ── Breadcrumb ──────────────────────────────────────────────────────── -->
+    <div class="breadcrumb-bar">
+      <div class="breadcrumb-inner">
+        <a href="/"        class="bc-link">Colors</a>
+        <span class="bc-sep" aria-hidden="true">›</span>
+        <a href="/palettes" class="bc-link">Palettes</a>
+        <span class="bc-sep" aria-hidden="true">›</span>
+        <span class="bc-current">{palette.name}</span>
+      </div>
+    </div>
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <section class="hero">
+
+      <!-- Animated colour strip -->
+      <div class="hero-strip" role="img" aria-label={`${palette.name} colour strip`}>
+        {paletteWithValues?.map((color, i) => (
+          <button
+            class="strip-swatch"
+            style={`background:${color.hex}; animation-delay:${i * 0.07}s`}
+            data-hex={color.hex}
+            aria-label={`Copy ${color.name} — ${color.hex}`}
+          >
+            <span class="strip-info">
+              <span class="strip-name">{color.name}</span>
+              <span class="strip-hex">{color.hex}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Meta: title + actions + swatch sidebar -->
+      <div class="hero-body">
+        <div class="hero-left">
+          <!-- Tags -->
+          <div class="palette-chips" role="list">
+            {palette.tags?.map((tag) => (
+              <span class="palette-chip" role="listitem">{tag}</span>
+            ))}
+            <span class="palette-chip palette-chip--mood">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+              {palette.mood}
+            </span>
+          </div>
+
+          <h1 class="hero-title">{palette.name}</h1>
+          <p class="hero-desc">{palette.longDescription}</p>
+
+          <!-- Action row -->
+          <div class="hero-actions">
+            <button
+              class="btn-primary"
+              id="copy-all-btn"
+              data-hexes={palette.colors?.map((c) => c.hex).join(",")}
+              aria-label="Copy all hex codes to clipboard"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copy All
+            </button>
+            <button
+              class="btn-secondary"
+              id="copy-css-vars-btn"
+              aria-label="Copy CSS variables to clipboard"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+              Copy CSS
+            </button>
+          </div>
+
+          <!-- Quick stat pills -->
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-num">{palette.colors.length}</span>
+              <span class="hero-stat-label">Colors</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">{palette.tags.length}</span>
+              <span class="hero-stat-label">Tags</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">3</span>
+              <span class="hero-stat-label">Formats</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swatch sidebar — visible only on ≥ md -->
+        <aside class="hero-right" aria-label="Colour swatches">
+          <div class="swatch-column">
+            {paletteWithValues?.map((color) => (
+              <button
+                class="swatch-row-btn copy-swatch"
+                style={`background:${color.hex}`}
+                data-hex={color.hex}
+                aria-label={`Copy ${color.name} — ${color.hex}`}
+              >
+                <span class="swatch-row-name" style={`color:${color.tc}`}>
+                  {color.name}
+                </span>
+                <span class="swatch-row-hex" style={`color:${color.tc}`}>
+                  {color.hex}
+                </span>
+              </button>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── Colour Cards ──────────────────────────────────────────────────── -->
+    <section class="cards-section">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Palette Colours</h2>
+            <p class="section-sub">Click any card to copy. Toggle format below.</p>
+          </div>
+          <!-- Format toggle -->
+          <div class="fmt-toggle" role="group" aria-label="Colour format">
+            <button class="fmt-btn fmt-btn--active" data-fmt="hex">HEX</button>
+            <button class="fmt-btn"                 data-fmt="rgb">RGB</button>
+            <button class="fmt-btn"                 data-fmt="hsl">HSL</button>
+          </div>
+        </div>
+
+        <div class="color-cards">
+          {paletteWithValues?.map((color, i) => (
+            <button
+              class="color-card"
+              data-hex={color.hex}
+              data-rgb={`rgb(${color.rgb})`}
+              data-hsl={`hsl(${color.hsl})`}
+              style={`--card-bg:${color.hex}; animation-delay:${i * 0.06}s`}
+              aria-label={`Copy ${color.name} — ${color.hex}`}
+            >
+              <div class="card-swatch" style={`background:${color.hex}`}>
+                <!-- Copy confirm overlay — driven purely by JS class, no inline opacity -->
+                <div class="card-copy-hint" style={`color:${color.tc}`} aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  Copied!
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="card-name">{color.name}</div>
+                <div class="card-vals">
+                  <span class="val val-hex">{color.hex}</span>
+                  <span class="val val-rgb" hidden>rgb({color.rgb})</span>
+                  <span class="val val-hsl" hidden>hsl({color.hsl})</span>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Usage + Mood + Code ──────────────────────────────────────────── -->
+    <section class="usage-section">
+      <div class="section-inner usage-grid">
+
+        <!-- Best used for -->
+        <div class="usage-card">
+          <div class="usage-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3 class="usage-title">Best Used For</h3>
+          <ul class="usage-list">
+            {palette.bestFor?.map((item) => (
+              <li class="usage-item">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Mood -->
+        <div class="usage-card">
+          <div class="usage-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+          </div>
+          <h3 class="usage-title">Mood &amp; Tone</h3>
+          <p class="usage-mood-name">{palette.mood}</p>
+          <div class="mood-bar" aria-hidden="true">
+            {palette.colors?.map((c) => (
+              <div class="mood-seg" style={`background:${c.hex}`}/>
+            ))}
+          </div>
+          <div class="mood-tags">
+            {palette.tags?.map((t) => (
+              <span class="mood-tag">{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- CSS snippet -->
+        <div class="usage-card usage-card--code">
+          <div class="usage-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3 class="usage-title">CSS Variables</h3>
+          <pre class="code-block"><code id="css-code-content">{`:root {\n${palette.colors?.map((c, i) => `  --palette-${i + 1}: ${c.hex}; /* ${c.name} */`).join("\n")}\n}`}</code></pre>
+          <button class="copy-code-btn" id="copy-snippet-btn" aria-label="Copy CSS variables">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy CSS
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Related Colour Families ──────────────────────────────────────── -->
+    {relatedFamilies.length > 0 && (
+      <section class="families-section">
+        <div class="section-inner">
+          <h2 class="section-title">Related Colour Families</h2>
+          <p class="section-sub">
+            Explore the full shade scale for colours used in this palette.
+          </p>
+          <div class="families-grid">
+            {relatedFamilies?.map((cf) => {
+              const tc = getTextColor(cf.baseHex);
+              return (
+                <a
+                  href={`/colors/${cf.slug}`}
+                  class="family-card"
+                  style={`--fc:${cf.baseHex}`}
+                >
+                  <div class="family-shade-strip">
+                    {cf.shades?.map((s) => (
+                      <div style={`background:${s.hex};flex:1`}/>
+                    ))}
+                  </div>
+                  <div class="family-swatch" style={`background:${cf.baseHex}`}>
+                    <span class="family-name" style={`color:${tc}`}>{cf.name}</span>
+                    <span class="family-hex"  style={`color:${tc}`}>{cf.baseHex}</span>
+                  </div>
+                  <div class="family-footer">
+                    <span class="family-count">{cf.shades.length} shades</span>
+                    <span class="family-arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ── Related Palettes ──────────────────────────────────────────────── -->
+    {related.length > 0 && (
+      <section class="related-section">
+        <div class="section-inner">
+          <h2 class="section-title">Similar Palettes</h2>
+          <div class="related-grid">
+            {related?.map((rp) => (
+              <a href={`/palettes/${rp.id}`} class="related-card">
+                <div class="related-strip">
+                  {rp.colors?.map((c) => (
+                    <div class="related-seg" style={`background:${c.hex}`}/>
+                  ))}
+                </div>
+                <div class="related-body">
+                  <div class="related-name">{rp.name}</div>
+                  <div class="related-desc">{rp.description}</div>
+                  <div class="related-tags">
+                    {rp.tags?.map((t) => (
+                      <span class="related-tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ── Prev / Next nav ──────────────────────────────────────────────── -->
+    <nav class="pnav" aria-label="Palette navigation">
+      <div class="pnav-inner">
+        <!-- Prev -->
+        <div class="pnav-slot pnav-slot--prev">
+          {prevPalette ? (
+            <a href={`/palettes/${prevPalette.id}`} class="pnav-link">
+              <div class="pnav-dots" aria-hidden="true">
+                {prevPalette.colors?.map((c) => (
+                  <div class="pnav-dot" style={`background:${c.hex}`}/>
+                ))}
+              </div>
+              <div class="pnav-text">
+                <span class="pnav-dir">← Previous</span>
+                <span class="pnav-name">{prevPalette.name}</span>
+              </div>
+            </a>
+          ) : (
+            <span class="pnav-empty">First palette</span>
+          )}
+        </div>
+
+        <!-- Home -->
+        <a href="/palettes" class="pnav-all">All Palettes</a>
+
+        <!-- Next -->
+        <div class="pnav-slot pnav-slot--next">
+          {nextPalette ? (
+            <a href={`/palettes/${nextPalette.id}`} class="pnav-link pnav-link--next">
+              <div class="pnav-text">
+                <span class="pnav-dir">Next →</span>
+                <span class="pnav-name">{nextPalette.name}</span>
+              </div>
+              <div class="pnav-dots" aria-hidden="true">
+                {nextPalette.colors?.map((c) => (
+                  <div class="pnav-dot" style={`background:${c.hex}`}/>
+                ))}
+              </div>
+            </a>
+          ) : (
+            <span class="pnav-empty pnav-empty--right">Last palette</span>
+          )}
+        </div>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</Layout>
+
+<!-- ─────────────────────────────────────────────────────────────────────────── -->
+<style>
+  /* ── Tokens ─────────────────────────────────────────────────────────────── */
+  .palette-detail {
+    --radius:    14px;
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-height: 100dvh;
+  }
+
+  /* ── Breadcrumb ─────────────────────────────────────────────────────────── */
+  .breadcrumb-bar {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .breadcrumb-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .bc-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .15s;
+  }
+  .bc-link:hover { color: var(--orange); }
+  .bc-sep   { color: var(--text-muted); }
+  .bc-current { color: var(--text-primary); font-weight: 600; }
+
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* Colour strip */
+  .hero-strip {
+    display: flex;
+    height: 200px;
+    /* No border-radius — bleeds edge to edge for visual impact */
+  }
+
+  .strip-swatch {
+    flex: 1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    /* Use translateX (not scaleY) to avoid Safari layout bug */
+    opacity: 0;
+    transform: translateY(8px);
+    animation: stripIn .45s var(--ease-spring) forwards;
+    transition: flex .35s var(--ease-spring);
+  }
+  .strip-swatch:hover { flex: 3; }
+  .strip-swatch.copied .strip-info {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .strip-swatch.copied::after {
+    content: "✓";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    animation: fadeInScale 0.2s ease forwards;
+  }
+  
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .strip-swatch:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: -3px;
+    z-index: 2;
+  }
+
+  @keyframes stripIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .strip-info {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 100%);
+    transform: translateY(100%);
+    transition: transform .22s ease;
+    pointer-events: none;
+  }
+  .strip-swatch:hover .strip-info,
+  .strip-swatch:focus-visible .strip-info { transform: translateY(0); }
+
+  .strip-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .strip-hex {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,.75);
+  }
+
+  /* Hero body */
+  .hero-body {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 40px 24px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ── Left column ─────────────────────────────────────────────────────── */
+  .palette-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .palette-chip {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: .03em;
+  }
+  .palette-chip--mood {
+    background: color-mix(in srgb, var(--orange) 10%, transparent);
+    border-color: color-mix(in srgb, var(--orange) 25%, transparent);
+    color: var(--orange);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .hero-title {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.0;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+  }
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 540px;
+    margin-bottom: 28px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, transform .15s, box-shadow .15s;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--orange) 35%, transparent);
+  }
+  .btn-primary:hover {
+    background: var(--orange-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--orange) 35%, transparent);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    background: var(--white);
+    color: var(--text-primary);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, transform .15s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    transform: translateY(-1px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .hero-stat-num {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-muted);
+  }
+
+  /* ── Right column — swatch sidebar ──────────────────────────────────── */
+  .hero-right {
+    flex-shrink: 0;
+  }
+  .swatch-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 164px;
+  }
+  .swatch-row-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    transition: transform .2s var(--ease-spring), box-shadow .2s;
+    box-shadow: var(--shadow-sm);
+  }
+  .swatch-row-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    z-index: 1;
+  }
+  .swatch-row-btn:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+  .swatch-row-name {
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
+  }
+  .swatch-row-hex {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 10px;
+    opacity: .7;
+    flex-shrink: 0;
+  }
+
+  /* ── Shared section shell ───────────────────────────────────────────── */
+  .section-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Format toggle ──────────────────────────────────────────────────── */
+  .fmt-toggle {
+    display: flex;
+    gap: 3px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+  .fmt-btn {
+    padding: 5px 14px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: "DM Mono", "Courier New", monospace;
+    transition: background .15s, color .15s, box-shadow .15s;
+  }
+  .fmt-btn--active {
+    background: var(--white);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+  .fmt-btn:hover:not(.fmt-btn--active) { color: var(--text-secondary); }
+
+  /* ── Colour cards ───────────────────────────────────────────────────── */
+  .cards-section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .color-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    gap: 12px;
+  }
+
+  .color-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    /* Use translate + outline for hover — avoids color-mix FF bug */
+    transition: transform .2s var(--ease-spring), box-shadow .2s, border-color .2s;
+    opacity: 0;
+    animation: cardIn .4s var(--ease-spring) forwards;
+    padding: 0; /* reset button default */
+  }
+  .color-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(0,0,0,.15);
+  }
+  .color-card:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-swatch {
+    height: 112px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Copy overlay: hidden by default via class, not inline style */
+  .card-copy-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(0,0,0,.2);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity .15s;
+    pointer-events: none;
+  }
+  /* Show on hover AND after copy */
+  .color-card.copied .card-copy-hint { opacity: 1; }
+
+  .card-body {
+    padding: 10px 13px 13px;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .card-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .val {
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: .02em;
+  }
+
+  /* ── Usage section ──────────────────────────────────────────────────── */
+  .usage-section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Three-column grid that gracefully collapses */
+  .usage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .usage-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    height: 100%;
+    transition: box-shadow .2s;
+  }
+  .usage-card:hover { box-shadow: var(--shadow-md); }
+
+  .usage-icon {
+    width: 34px;
+    height: 34px;
+    background: color-mix(in srgb, var(--orange) 10%, transparent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .usage-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -.01em;
+  }
+  .usage-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .usage-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .usage-item svg { color: var(--orange); flex-shrink: 0; }
+
+  .usage-mood-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+  .mood-bar {
+    display: flex;
+    height: 7px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .mood-seg { flex: 1; }
+  .mood-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mood-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  /* Code card */
+  .usage-card--code {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;   
+    overflow: hidden;
+  }
+  .code-block {
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: rgba(255,255,255,.72);
+    margin: 0 0 12px;
+    overflow-x: auto;
+    max-width: 100%;
+    min-width: 0;
+    white-space: pre;       
+    word-break: normal;     
+    overflow-wrap: normal;
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.15) transparent;
+  }
+  .code-block::-webkit-scrollbar { height: 4px; }
+  .code-block::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px; }
+
+  .copy-code-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 7px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .copy-code-btn:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--white);
+  }
+
+  /* ── Related colour families ─────────────────────────────────────────── */
+  .families-section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .families-section .section-title { margin-bottom: 6px; }
+
+  .families-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .family-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: var(--white);
+    transition: transform .2s var(--ease-spring), box-shadow .2s, border-color .2s;
+  }
+  .family-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--fc) 40%, transparent);
+  }
+  .family-shade-strip { display: flex; height: 5px; }
+  .family-swatch {
+    height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 12px;
+    gap: 2px;
+  }
+  .family-name { font-size: 14px; font-weight: 700; }
+  .family-hex  { font-family: "DM Mono", "Courier New", monospace; font-size: 10px; opacity: .7; }
+  .family-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .family-count { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .family-arrow {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: transform .15s, color .15s;
+  }
+  .family-card:hover .family-arrow { transform: translateX(4px); color: var(--orange); }
+
+  /* ── Related palettes ───────────────────────────────────────────────── */
+  .related-section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .related-section .section-title { margin-bottom: 24px; }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .related-card {
+    text-decoration: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+    transition: transform .2s var(--ease-spring), box-shadow .2s;
+    display: block;
+  }
+  .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(0,0,0,.12); }
+  .related-strip { display: flex; height: 68px; }
+  .related-seg   { flex: 1; transition: flex .28s ease; }
+  .related-card:hover .related-seg:hover { flex: 2.5; }
+  .related-body  { padding: 13px 15px; }
+  .related-name  { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .related-desc  { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 9px; }
+  .related-tags  { display: flex; gap: 4px; flex-wrap: wrap; }
+  .related-tag   {
+    font-size: 10px; font-weight: 600; text-transform: capitalize;
+    padding: 2px 8px; border-radius: 999px;
+    background: var(--light); border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  /* ── Prev / Next nav ────────────────────────────────────────────────── */
+  .pnav { border-top: 1px solid var(--border); background: var(--surface); }
+  .pnav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pnav-slot { display: flex; }
+  .pnav-slot--prev { justify-content: flex-start; }
+  .pnav-slot--next { justify-content: flex-end; }
+
+  .pnav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--white);
+    text-decoration: none;
+    min-width: 0;
+    transition: border-color .2s, box-shadow .2s, transform .2s, background .2s;
+  }
+  .pnav-link:hover {
+    border-color: var(--orange);
+    background: color-mix(in srgb, var(--orange) 4%, var(--white));
+    box-shadow: var(--shadow-md);
+    transform: translateX(-3px);
+  }
+  .pnav-link--next:hover { transform: translateX(3px); }
+  .pnav-link:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+  .pnav-dots { display: flex; gap: 5px; flex-shrink: 0; }
+  .pnav-dot  {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .pnav-link:hover .pnav-dot { transform: scale(1.1); }
+
+  .pnav-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .pnav-dir  {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: .04em;
+  }
+  .pnav-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .2s;
+  }
+  .pnav-link:hover .pnav-name { color: var(--orange); }
+
+  .pnav-empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 12px 0;
+    font-style: italic;
+  }
+  .pnav-empty--right { text-align: right; width: 100%; }
+
+  .pnav-all {
+    padding: 11px 24px;
+    border-radius: var(--radius-sm);
+    background: var(--orange);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .15s, transform .15s, box-shadow .15s;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--orange) 35%, transparent);
+  }
+  .pnav-all:hover {
+    background: var(--orange-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--orange) 35%, transparent);
+  }
+
+  /* ── pnav responsive ───────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .pnav-inner {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 16px 20px;
+      gap: 12px;
+    }
+    .pnav-slot--prev { flex: 1; min-width: 0; order: 1; justify-content: flex-start; }
+    .pnav-slot--next { flex: 1; min-width: 0; order: 2; justify-content: flex-end; }
+    .pnav-all        { order: 3; flex-shrink: 0; }
+    .pnav-empty      { width: auto; padding: 10px 0; white-space: nowrap; }
+    .pnav-empty--right { text-align: right; }
+    .pnav-link       { padding: 10px 14px; gap: 8px; }
+    .pnav-dots       { display: none; }
+    .pnav-name       { font-size: 13px; }
+  }
+
+  @media (max-width: 640px) {
+    .pnav-inner {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 12px 16px;
+      gap: 10px;
+    }
+    .pnav-slot--prev { flex: 1; min-width: 0; order: 1; justify-content: flex-start; }
+    .pnav-slot--next { flex: 1; min-width: 0; order: 2; justify-content: flex-end; }
+    .pnav-all        { display: none; }
+    .pnav-empty      { width: auto; padding: 8px 0; white-space: nowrap; font-size: 12px; }
+    .pnav-empty--right { text-align: right; }
+    .pnav-link       { padding: 10px 12px; gap: 7px; width: 100%; }
+    .pnav-slot--next .pnav-link { flex-direction: row-reverse; }
+    .pnav-dots       { display: none; }
+    .pnav-dir        { font-size: 10px; }
+    .pnav-name       { font-size: 12px; }
+  }
+
+  /* ── Toast ──────────────────────────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: #111827;
+    color: var(--white);
+    font-family: "DM Mono", "Courier New", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    /* Below header (64px z-index) but above content */
+    z-index: 80;
+    white-space: nowrap;
+    max-width: calc(100vw - 32px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .toast--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    /* Stack usage cards: 2 + full-width code */
+    .usage-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .usage-card--code {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-body {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    /* Hide the sidebar on mobile — swatches are in the strip */
+    .hero-right { display: none; }
+
+    .hero-strip { height: 140px; }
+
+    .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+    .usage-grid { grid-template-columns: 1fr; }
+    .usage-card--code { grid-column: auto; }
+
+    .pnav-inner { grid-template-columns: 1fr 1fr; }
+    .pnav-all   { display: none; }
+    .pnav-slot--next { justify-content: flex-end; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-body    { padding: 28px 16px 36px; }
+    .section-inner { padding: 0 16px; }
+    .hero-strip   { height: 110px; }
+    .color-cards  { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .card-swatch  { height: 90px; }
+    .families-grid { grid-template-columns: repeat(2, 1fr); }
+    .related-grid  { grid-template-columns: 1fr; }
+    .hero-actions  { flex-direction: column; }
+    .btn-primary,
+    .btn-secondary { width: 100%; justify-content: center; }
+    .breadcrumb-inner { padding: 10px 16px; }
+    .pnav-inner { padding: 16px; gap: 10px; }
+    .pnav-dots  { display: none; }
+  }
+
+  /* Respect reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .strip-swatch,
+    .color-card { animation: none; opacity: 1; transform: none; }
+    .strip-info { transform: translateY(0); }
+  }
+</style>
+
+<script>
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  const toast = document.getElementById("toast")!;
+  let toastTimer: ReturnType<typeof setTimeout>;
+
+  function showToast(msg: string) {
+    toast.textContent = msg;
+    toast.classList.add("toast--visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("toast--visible"), 1800);
+  }
+
+  async function copyText(text: string): Promise<boolean> {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    }
+  }
+
+  function setButtonCopied(btn: HTMLButtonElement, duration = 1800) {
+    const original = btn.innerHTML;
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    btn.disabled = true;
+    btn.style.opacity = "0.85";
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }, duration);
+  }
+
+  // ── Strip swatches ─────────────────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>(".strip-swatch").forEach((el) => {
+    el.addEventListener("click", async () => {
+      const hex = el.dataset.hex || "";
+      if (await copyText(hex)) {
+        el.classList.add("copied");
+        showToast(hex);
+        setTimeout(() => el.classList.remove("copied"), 1200);
+      }
+    });
+  });
+
+  // ── Sidebar swatch column ──────────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>(".swatch-row-btn").forEach((el) => {
+    el.addEventListener("click", async () => {
+      const hex = el.dataset.hex || "";
+      if (await copyText(hex)) showToast(hex);
+    });
+  });
+
+  // ── Format toggle ──────────────────────────────────────────────────────────
+  let activeFmt = "hex";
+
+  document.querySelectorAll<HTMLButtonElement>(".fmt-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeFmt = btn.dataset.fmt || "hex";
+      document.querySelectorAll<HTMLButtonElement>(".fmt-btn").forEach((b) => {
+        b.classList.toggle("fmt-btn--active", b === btn);
+      });
+      document.querySelectorAll<HTMLElement>(".val-hex, .val-rgb, .val-hsl")
+        .forEach((el) => {
+          el.hidden = !el.classList.contains(`val-${activeFmt}`);
+        });
+    });
+  });
+
+  // ── Colour cards ───────────────────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>(".color-card").forEach((card) => {
+    card.addEventListener("click", async () => {
+      const val =
+        activeFmt === "hex" ? card.dataset.hex :
+        activeFmt === "rgb" ? card.dataset.rgb :
+                              card.dataset.hsl;
+      if (!val) return;
+      if (await copyText(val)) {
+        card.classList.add("copied");
+        showToast(val);
+        setTimeout(() => card.classList.remove("copied"), 1200);
+      }
+    });
+  });
+
+  // ── Copy all hex ───────────────────────────────────────────────────────────
+  const copyAllBtn = document.getElementById("copy-all-btn") as HTMLButtonElement | null;
+  copyAllBtn?.addEventListener("click", async () => {
+    const hexes = (copyAllBtn.dataset.hexes || "").split(",").join(", ");
+    if (await copyText(hexes)) {
+      setButtonCopied(copyAllBtn);
+      showToast("All hex codes copied!");
+    }
+  });
+
+  // ── Copy CSS variables (header button) ────────────────────────────────────
+  const copyCssVarsBtn = document.getElementById("copy-css-vars-btn") as HTMLButtonElement | null;
+  copyCssVarsBtn?.addEventListener("click", async () => {
+    const code = document.getElementById("css-code-content")?.textContent || "";
+    if (await copyText(code)) {
+      setButtonCopied(copyCssVarsBtn);
+      showToast("CSS variables copied!");
+    }
+  });
+
+  // ── Copy CSS variables (card button) ──────────────────────────────────────
+  const snippetBtn = document.getElementById("copy-snippet-btn") as HTMLButtonElement | null;
+  snippetBtn?.addEventListener("click", async () => {
+    const code = document.getElementById("css-code-content")?.textContent || "";
+    if (await copyText(code)) {
+      setButtonCopied(snippetBtn);
+      showToast("CSS variables copied!");
+    }
+  });
+</script>
