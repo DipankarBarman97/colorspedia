@@ -4,12 +4,12 @@ import { colorFamilies } from "../data/colors";
 import { paletteSets, allPaletteTags } from "../data/palettes";
 
 const allTags = allPaletteTags;
+const VISIBLE_TAGS = 8; // tags shown before "See More"
 ---
 
 <Layout
   title="Color Palettes"
   description="Curated color palette collections for designers and developers. Copy HEX codes, explore combinations, and build your next project."
-  tags={["color palettes", "color combinations", "design palettes"]}
 >
   <div class="palettes-page">
 
@@ -32,23 +32,48 @@ const allTags = allPaletteTags;
             ))
           )}
         </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-num">{paletteSets.length}</span>
+            <span class="hero-stat-label">Palettes</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">{allTags.length - 1}</span>
+            <span class="hero-stat-label">Moods</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">3</span>
+            <span class="hero-stat-label">Formats</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Filter bar -->
     <div class="filter-bar" id="palette-filter-bar">
       <div class="filter-inner">
-        <div class="filter-tags" role="group" aria-label="Filter palettes by tag">
-          {allTags?.map((tag) => (
-            <button
-              class={`filter-tag ${tag === "all" ? "filter-tag--active" : ""}`}
-              data-tag={tag}
-            >
-              {tag}
+        <div class="filter-tags-wrap">
+          <div class="filter-tags" id="filter-tags" role="group" aria-label="Filter palettes by tag">
+            {allTags?.map((tag, index) => (
+              <button
+                class={`filter-tag ${tag === "all" ? "filter-tag--active" : ""} ${index > VISIBLE_TAGS ? "filter-tag--hidden" : ""}`}
+                data-tag={tag}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+
+          {allTags.length > VISIBLE_TAGS + 1 && (
+            <button id="toggle-tags" class="tag-filter-toggle" type="button">
+              See More
             </button>
-          ))}
+          )}
         </div>
-        <span class="palette-count" id="palette-count">{paletteSets.length} palettes</span>
+
       </div>
     </div>
 
@@ -125,122 +150,27 @@ const allTags = allPaletteTags;
       </div>
 
       <!-- CTA -->
-       <div class="cta-section">
+      <div class="cta-section">
         <div class="cta-spectrum" aria-hidden="true">
-          {
-            colorFamilies?.map((c) => (
-              <div class="cta-bar" style={`background: ${c.baseHex}`} />
-            ))
-          }
+          {colorFamilies?.map((c) => (
+            <div class="cta-bar" style={`background: ${c.baseHex}`} />
+          ))}
         </div>
         <div class="cta-content">
           <h2 class="cta-title">Explore individual color families</h2>
           <p class="cta-desc">
-            Browse all {colorFamilies.length} color families with complete shade scales from 50 to 950.
+            Browse all {colorFamilies.length} color families with complete shade scales.
           </p>
           <a href="/" class="cta-link">Browse All Colors →</a>
         </div>
       </div>
     </section>
 
-    
-
   </div>
 </Layout>
 
 <!-- Toast notification -->
 <div class="toast" id="copy-toast" aria-live="polite">Copied!</div>
-
-<script>
-  // ── Copy single hex ──────────────────────────────────────────
-  const toast = document.getElementById("copy-toast");
-
-  function showToast(msg = "Copied!") {
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.classList.add("toast--visible");
-    clearTimeout((window as any).__toastTimer);
-    (window as any).__toastTimer = setTimeout(() => {
-      toast.classList.remove("toast--visible");
-    }, 1800);
-  }
-
-  async function copyText(text: string) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  document.querySelectorAll<HTMLElement>(".copy-swatch").forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const hex = btn.dataset.hex || "";
-      const ok = await copyText(hex);
-      if (ok) {
-        btn.classList.add("swatch--copied");
-        showToast(hex);
-        setTimeout(() => btn.classList.remove("swatch--copied"), 1200);
-      }
-    });
-  });
-
-  // ── Copy all hexes ───────────────────────────────────────────
-  document.querySelectorAll<HTMLElement>(".copy-all-btn").forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const hexes = (btn.dataset.hexes || "").split(",").join(", ");
-      const ok = await copyText(hexes);
-      if (ok) {
-        const orig = btn.innerHTML;
-        btn.textContent = "Copied!";
-        btn.classList.add("copy-all-btn--copied");
-        showToast("All hex codes copied");
-        setTimeout(() => {
-          btn.innerHTML = orig;
-          btn.classList.remove("copy-all-btn--copied");
-        }, 1500);
-      }
-    });
-  });
-
-  // ── Tag filter ───────────────────────────────────────────────
-  const filterBtns = document.querySelectorAll<HTMLElement>(".filter-tag");
-  const cards = document.querySelectorAll<HTMLElement>(".palette-card");
-  const countEl = document.getElementById("palette-count");
-  const emptyEl = document.getElementById("palettes-empty");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
-      btn.classList.add("filter-tag--active");
-      const tag = btn.dataset.tag || "all";
-      filterPalettes(tag);
-    });
-  });
-
-  function filterPalettes(tag: string) {
-    let visible = 0;
-    cards.forEach((card) => {
-      const tags = (card.dataset.tags || "").split(",");
-      const show = tag === "all" || tags.includes(tag);
-      card.style.display = show ? "" : "none";
-      if (show) visible++;
-    });
-    if (countEl) countEl.textContent = `${visible} palette${visible !== 1 ? "s" : ""}`;
-    if (emptyEl) emptyEl.style.display = visible === 0 ? "flex" : "none";
-  }
-
-  (window as any).resetFilter = () => {
-    filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
-    filterBtns[0]?.classList.add("filter-tag--active");
-    filterPalettes("all");
-  };
-</script>
 
 <style>
   .palettes-page {
@@ -309,8 +239,43 @@ const allTags = allPaletteTags;
     box-shadow: var(--shadow-sm);
   }
 
-  .strip-swatch {
-    flex: 1;
+  .strip-swatch { flex: 1; }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .hero-stat-num {
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .hero-stat-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+    flex-shrink: 0;
   }
 
   /* ── Filter bar ────────────────────────────────────────────── */
@@ -334,10 +299,21 @@ const allTags = allPaletteTags;
     flex-wrap: wrap;
   }
 
+  .filter-tags-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
   .filter-tags {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
+    align-items: center;
+    max-height: 320px;
+    overflow: auto;
   }
 
   .filter-tag {
@@ -364,22 +340,41 @@ const allTags = allPaletteTags;
     color: var(--white);
   }
 
-  .filter-tag--active:hover {
-    color: var(--white);
+  .filter-tag--active:hover { color: var(--white); }
+
+  /* Hidden tags — collapsed by default */
+  .filter-tag--hidden { display: none; }
+
+  /* Revealed when wrapper has expanded class */
+  .filter-tags--expanded .filter-tag--hidden { display: inline-flex; }
+
+  /* See More / See Less toggle */
+  .tag-filter-toggle {
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
   }
 
-  .palette-count {
-    font-size: 12px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    font-weight: 500;
+  .tag-filter-toggle:hover {
+    border-color: var(--orange);
+    color: var(--orange);
   }
+
 
   /* ── Palettes grid ─────────────────────────────────────────── */
   .palettes-section {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 32px 24px 80px;
+    padding: 24px 24px 80px;
   }
 
   .palettes-grid {
@@ -428,9 +423,7 @@ const allTags = allPaletteTags;
     overflow: hidden;
   }
 
-  .swatch-btn:hover {
-    flex: 2.5;
-  }
+  .swatch-btn:hover { flex: 2.5; }
 
   .swatch-btn:hover .swatch-tooltip {
     opacity: 1;
@@ -596,62 +589,7 @@ const allTags = allPaletteTags;
     transition: opacity 0.15s ease;
   }
 
-  .empty-reset:hover {
-    opacity: 0.85;
-  }
-
-  /* ── CTA ───────────────────────────────────────────────────── */
-  .cta-section {
-    border-radius: 24px;
-    overflow: hidden;
-    background: var(--dark);
-  }
-
-  .cta-spectrum {
-    display: flex;
-    height: 6px;
-  }
-  .cta-bar {
-    flex: 1;
-  }
-
-  .cta-content {
-    padding: 48px;
-    text-align: center;
-  }
-
-  .cta-title {
-    font-family: "Caveat", cursive, sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: white;
-    margin-bottom: 8px;
-  }
-
-  .cta-desc {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 28px;
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 28px;
-    background: var(--orange);
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  .cta-link:hover {
-    background: var(--orange-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px color-mix(in srgb, var(--orange) 35%, transparent);
-  }
+  .empty-reset:hover { opacity: 0.85; }
 
   /* ── Toast ─────────────────────────────────────────────────── */
   .toast {
@@ -669,7 +607,7 @@ const allTags = allPaletteTags;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 9999;
+    z-index: 80;
     white-space: nowrap;
   }
 
@@ -680,31 +618,109 @@ const allTags = allPaletteTags;
 
   /* ── Responsive ────────────────────────────────────────────── */
   @media (max-width: 640px) {
-    .palettes-hero {
-      padding: 48px 16px 36px;
-    }
-
-    .palettes-section {
-      padding: 20px 16px 60px;
-    }
-
-    .palettes-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .filter-inner {
-      padding: 10px 16px;
-    }
-
-    .swatch-row {
-      height: 80px;
-    }
-
-    .cta-content {
-      padding: 32px 20px;
-    }
-    .cta-title {
-      font-size: 24px;
-    }
+    .palettes-hero  { padding: 48px 16px 36px; }
+    .palettes-section { padding: 20px 16px 60px; }
+    .palettes-grid  { grid-template-columns: 1fr; }
+    .filter-inner   { padding: 10px 16px; }
+    .swatch-row     { height: 80px; }
   }
 </style>
+
+<script>
+  // ── Toast ────────────────────────────────────────────────────
+  const toast = document.getElementById("copy-toast");
+
+  function showToast(msg = "Copied!") {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add("toast--visible");
+    clearTimeout((window as any).__toastTimer);
+    (window as any).__toastTimer = setTimeout(
+      () => toast.classList.remove("toast--visible"),
+      1800,
+    );
+  }
+
+  async function copyText(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // ── Copy single swatch ───────────────────────────────────────
+  document.querySelectorAll<HTMLElement>(".copy-swatch").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const hex = btn.dataset.hex || "";
+      if (await copyText(hex)) {
+        btn.classList.add("swatch--copied");
+        showToast(hex);
+        setTimeout(() => btn.classList.remove("swatch--copied"), 1200);
+      }
+    });
+  });
+
+  // ── Copy all hexes ───────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>(".copy-all-btn").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const hexes = (btn.dataset.hexes || "").split(",").join(", ");
+      if (await copyText(hexes)) {
+        const orig = btn.innerHTML;
+        btn.textContent = "Copied!";
+        btn.classList.add("copy-all-btn--copied");
+        showToast("All hex codes copied");
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.remove("copy-all-btn--copied");
+        }, 1500);
+      }
+    });
+  });
+
+  // ── Tag filter ───────────────────────────────────────────────
+  const filterBtns = document.querySelectorAll<HTMLElement>(".filter-tag");
+  const cards      = document.querySelectorAll<HTMLElement>(".palette-card");
+  const emptyEl    = document.getElementById("palettes-empty");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
+      btn.classList.add("filter-tag--active");
+      filterPalettes(btn.dataset.tag || "all");
+    });
+  });
+
+  function filterPalettes(tag: string) {
+    let visible = 0;
+    cards.forEach((card) => {
+      const tags = (card.dataset.tags || "").split(",");
+      const show = tag === "all" || tags.includes(tag);
+      card.style.display = show ? "" : "none";
+      if (show) visible++;
+    });
+
+    if (emptyEl)
+      emptyEl.style.display = visible === 0 ? "flex" : "none";
+  }
+
+  (window as any).resetFilter = () => {
+    filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
+    filterBtns[0]?.classList.add("filter-tag--active");
+    filterPalettes("all");
+  };
+
+  // ── See More / See Less toggle ───────────────────────────────
+  const toggleBtn  = document.getElementById("toggle-tags");
+  const filterTags = document.getElementById("filter-tags");
+
+  toggleBtn?.addEventListener("click", () => {
+    const expanded = filterTags?.classList.toggle("filter-tags--expanded");
+    toggleBtn.textContent = expanded ? "See Less" : "See More";
+  });
+</script>
