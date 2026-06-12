@@ -1,31 +1,29 @@
 import type { APIRoute } from "astro";
-import { colorFamilies } from "../data/colors";
+import { paletteSets } from "../data/palettes";
 
 const siteUrl = "https://colorspedia.com";
 const now = new Date().toISOString();
 
 export const GET: APIRoute = () => {
-  const urls = colorFamilies.flatMap((color) => {
-    const entries = [
-      // Color family index page
-      `<url>
-    <loc>${siteUrl}/colors/${color.slug}</loc>
+  const urls = [
+    // Palettes index
+    `<url>
+    <loc>${siteUrl}/palettes</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`,
+
+    // Individual palette pages
+    ...paletteSets?.map(
+      (palette) => `  <url>
+    <loc>${siteUrl}/palettes/${palette.id}</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>`,
-      // Individual shade pages
-      ...color.shades?.map(
-        (shade) => `  <url>
-    <loc>${siteUrl}/colors/${color.slug}/${shade.weight}</loc>
-    <lastmod>${now}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>`,
-      ),
-    ];
-    return entries;
-  });
+    ),
+  ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

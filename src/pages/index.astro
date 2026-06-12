@@ -19,6 +19,16 @@ const colorData = colorFamilies?.map((c) => ({
   shadeHexes: c.shades?.map((s) => s.hex.toLowerCase()),
   shadeNames: c.shades?.map((s) => s.name.toLowerCase()),
 }));
+
+// Serialize palette data for client-side search
+const paletteData = paletteSets?.map((p) => ({
+  id: p.id,
+  name: p.name,
+  description: p.description,
+  tags: p.tags,
+  mood: p.mood,
+  colors: p.colors.map((c) => c.hex.toLowerCase()),
+}));
 ---
 
 <Layout title="Colorspedia — Every Color, Every Shade">
@@ -537,7 +547,7 @@ const colorData = colorFamilies?.map((c) => ({
     border-radius: 10px;
     border: none;
     background: var(--orange);
-    color: white;
+    color: var(--white);
     font-size: 14px;
     font-weight: 600;
 
@@ -649,7 +659,7 @@ const colorData = colorFamilies?.map((c) => ({
   .hint-pill:hover {
     background: var(--orange);
     border-color: var(--orange);
-    color: white;
+    color: var(--white);
   }
 
   /* Spectrum chips */
@@ -791,7 +801,7 @@ const colorData = colorFamilies?.map((c) => ({
   }
   .bar-search-clear:hover {
     background: var(--orange);
-    color: white;
+    color: var(--white);
   }
 
   .search-results-count {
@@ -848,7 +858,7 @@ const colorData = colorFamilies?.map((c) => ({
   .tag-filter--active {
     background: var(--orange);
     border-color: var(--orange);
-    color: white;
+    color: var(--white);
   }
 
   .tag-filter--hidden {
@@ -920,7 +930,7 @@ const colorData = colorFamilies?.map((c) => ({
   }
   .banner-clear:hover {
     background: var(--orange);
-    color: white;
+    color: var(--white);
   }
 
   /* ── Colors grid ─────────────────────────────────────────────────────────── */
@@ -982,7 +992,7 @@ const colorData = colorFamilies?.map((c) => ({
   .empty-cta {
     padding: 9px 20px;
     background: var(--orange);
-    color: white;
+    color: var(--white);
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -1188,9 +1198,40 @@ const colorData = colorFamilies?.map((c) => ({
   .suggestions-no-results strong {
     color: var(--text-primary);
   }
+
+  /* Palette suggestion swatch strip */
+  .suggestion-swatch-strip {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition:
+      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.2s ease;
+  }
+  .suggestion-item:hover .suggestion-swatch-strip,
+  .suggestion-item.highlighted .suggestion-swatch-strip {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.18),
+      0 0 0 2px color-mix(in srgb, var(--orange) 30%, transparent);
+    transform: scale(1.06);
+  }
+  .suggestion-swatch-strip-seg {
+    flex: 1;
+    height: 100%;
+  }
+
+  .suggestion-match-badge--palette {
+    background: color-mix(in srgb, #8b5cf6 12%, transparent);
+    color: #8b5cf6;
+    border-color: color-mix(in srgb, #8b5cf6 20%, transparent);
+  }
 </style>
 
-<script define:vars={{ colorData }}>
+<script define:vars={{ colorData, paletteData }}>
   // ── Shared state ──────────────────────────────────────────────────────────
   let activeTag = "all";
   let searchQuery = "";
@@ -1312,16 +1353,27 @@ const colorData = colorFamilies?.map((c) => ({
       return;
     }
 
-    const results = getMatchingColors(query);
+    const colorResults = (getMatchingColors(query) || []).map((c) => ({
+      ...c,
+      type: "color",
+    }));
+    const paletteResults = (getMatchingPalettes(query) || []).map((p) => ({
+      ...p,
+      type: "palette",
+    }));
+    const results = [...colorResults, ...paletteResults].sort(
+      (a, b) => b.score - a.score,
+    );
+
     lastSuggResults = results;
     suggHighlight = -1;
 
     if (results.length === 0) {
       heroSuggList.innerHTML = `
-        <div class="suggestions-no-results">
-          <p>No colors match <strong>"${escapeHtml(query)}"</strong></p>
-          <p style="margin-top:4px;font-size:12px">Try a color name, hex code, or tag like "warm"</p>
-        </div>`;
+      <div class="suggestions-no-results">
+        <p>No colors or palettes match <strong>"${escapeHtml(query)}"</strong></p>
+        <p style="margin-top:4px;font-size:12px">Try a name, hex code, tag, or mood like "warm"</p>
+      </div>`;
       suggFooter.style.display = "none";
       heroSuggBox.style.display = "";
       return;
@@ -1329,8 +1381,28 @@ const colorData = colorFamilies?.map((c) => ({
 
     const preview = results.slice(0, 6);
     heroSuggList.innerHTML = preview
-      ?.map(
-        (c, i) => `
+      ?.map((c, i) => {
+        if (c.type === "palette") {
+          return `
+      <a href="/palettes/${c.id}" class="suggestion-item" role="option" data-index="${i}">
+        ${buildPaletteSwatch(c)}
+        <div class="suggestion-info">
+          <div class="suggestion-name">
+            ${highlightText(c.name, query)}
+            <span class="suggestion-match-badge suggestion-match-badge--palette">${c.reason}</span>
+          </div>
+          <div class="suggestion-meta">${c.mood} · ${c.colors.length} colors</div>
+          <div class="suggestion-tags">
+            ${c.tags?.map((t) => `<span class="suggestion-tag">${t}</span>`).join("")}
+          </div>
+        </div>
+        <svg class="suggestion-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
+      </a>`;
+        }
+
+        return `
       <a href="/colors/${c.slug}" class="suggestion-item" role="option" data-index="${i}">
         ${buildSwatch(c)}
         <div class="suggestion-info">
@@ -1346,17 +1418,18 @@ const colorData = colorFamilies?.map((c) => ({
         <svg class="suggestion-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14m-7-7 7 7-7 7"/>
         </svg>
-      </a>`,
-      )
+      </a>`;
+      })
       .join("");
 
     if (results.length > 6) {
       suggFooter.style.display = "";
-      suggCount.textContent = `${results.length} colors found`;
+      suggCount.textContent = `${results.length} matches found`;
+      suggSeeAll.style.display = "";
     } else {
       suggFooter.style.display = results.length > 0 ? "" : "none";
       if (results.length > 0) {
-        suggCount.textContent = `${results.length} color${results.length > 1 ? "s" : ""} found`;
+        suggCount.textContent = `${results.length} match${results.length > 1 ? "es" : ""} found`;
         suggSeeAll.style.display = "none";
       }
     }
@@ -1389,6 +1462,69 @@ const colorData = colorFamilies?.map((c) => ({
   function closeSuggestions() {
     heroSuggBox.style.display = "none";
     suggHighlight = -1;
+  }
+
+  // ── Palette search logic ────────────────────────────────────────────────────
+  function scorePaletteMatch(palette, query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return { matches: true, score: 0, reason: "" };
+
+    const isHex = q.startsWith("#") || /^[0-9a-f]{3,6}$/.test(q);
+
+    // Exact name match
+    if (palette.name.toLowerCase() === q)
+      return { matches: true, score: 100, reason: "palette" };
+
+    // Name starts with
+    if (palette.name.toLowerCase().startsWith(q))
+      return { matches: true, score: 88, reason: "palette" };
+
+    // Name contains
+    if (palette.name.toLowerCase().includes(q))
+      return { matches: true, score: 78, reason: "palette" };
+
+    // Hex match against any color in the palette
+    if (isHex) {
+      const hexToFind = q.startsWith("#") ? q : "#" + q;
+      if (palette.colors.includes(hexToFind))
+        return { matches: true, score: 83, reason: "palette hex" };
+      const partial = palette.colors.some((h) => h.startsWith(hexToFind));
+      if (partial) return { matches: true, score: 68, reason: "palette hex" };
+    }
+
+    // Tag match
+    if (palette.tags.some((t) => t.toLowerCase().includes(q)))
+      return { matches: true, score: 74, reason: "palette tag" };
+
+    // Mood match
+    if (palette.mood.toLowerCase().includes(q))
+      return { matches: true, score: 60, reason: "palette mood" };
+
+    // Description match
+    if (palette.description.toLowerCase().includes(q))
+      return { matches: true, score: 38, reason: "palette" };
+
+    return { matches: false, score: 0, reason: "" };
+  }
+
+  function getMatchingPalettes(query) {
+    return paletteData
+      ?.map((p) => ({ ...p, ...scorePaletteMatch(p, query) }))
+      .filter((p) => p.matches)
+      .sort((a, b) => b.score - a.score);
+  }
+
+  function buildPaletteSwatch(palette) {
+    return `
+    <div class="suggestion-swatch-strip">
+      ${palette.colors
+        .slice(0, 5)
+        .map(
+          (hex) =>
+            `<div class="suggestion-swatch-strip-seg" style="background:${hex}"></div>`,
+        )
+        .join("")}
+    </div>`;
   }
 
   // ── Tag filters toggle ──────────────────────────────────────────────────────

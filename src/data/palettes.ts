@@ -145,6 +145,51 @@ export const paletteSets: Palette[] = [
       { hex: "#0c0a09", name: "Obsidian" },
     ],
   },
+  {
+    id: "wildfire",
+    name: "Wildfire",
+    description:
+      "Searing oranges and deep char tones of an uncontrolled blaze.",
+    longDescription:
+      "Wildfire captures the raw, consuming energy of flames spreading across dry land — blistering orange-red at the core, deepening to smoke-blackened char at the edges. It's a palette of urgency and unstoppable momentum, perfect for action brands, energy products, or anything that wants to feel like it's burning through the competition.",
+    tags: ["warm", "bold"],
+    mood: "Intense & Untamed",
+    bestFor: [
+      "Sports Brands",
+      "Energy Drinks",
+      "Action Gaming",
+      "Outdoor Adventure",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Flashpoint" },
+      { hex: "#fb923c", name: "Wildfire Orange" },
+      { hex: "#dc2626", name: "Blaze Red" },
+      { hex: "#7c2d12", name: "Scorched Earth" },
+      { hex: "#1c1917", name: "Char" },
+    ],
+  },
+  {
+    id: "cinnamon-spice",
+    name: "Cinnamon Spice",
+    description: "Warm browns, cinnamon reds, and toasted caramel tones.",
+    longDescription:
+      "Cinnamon Spice draws from the comforting aroma of a bakery in winter — toasted caramel, warm cinnamon brown, and the deep red-brown of nutmeg and clove. It's a palette built for cosiness and warmth, ideal for coffee shops, seasonal packaging, or home brands that want to feel inviting.",
+    tags: ["warm", "cozy"],
+    mood: "Cosy & Aromatic",
+    bestFor: [
+      "Coffee Shops",
+      "Bakery Brands",
+      "Autumn Packaging",
+      "Home Goods",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Toasted Sugar" },
+      { hex: "#d97706", name: "Cinnamon" },
+      { hex: "#92400e", name: "Nutmeg" },
+      { hex: "#7c2d12", name: "Clove" },
+      { hex: "#451a03", name: "Dark Roast" },
+    ],
+  },
 
   // ── Earth & Nature ───────────────────────────────────────────────────────
   {
@@ -274,6 +319,51 @@ export const paletteSets: Palette[] = [
       { hex: "#d2b48c", name: "Dusty Path" },
     ],
   },
+  {
+    id: "savanna",
+    name: "Savanna",
+    description: "Golden grasses and dusty ochres of the African plains.",
+    longDescription:
+      "Savanna stretches across the warm gold of sun-dried grass, the dusty ochre of red earth, and the muted green of scattered acacia trees beneath a wide open sky. It's a palette of vastness and warmth, ideal for travel brands, documentary work, or outdoor apparel that wants to feel expansive.",
+    tags: ["earthy", "warm"],
+    mood: "Wild & Expansive",
+    bestFor: [
+      "Travel & Safari",
+      "Documentary Branding",
+      "Outdoor Apparel",
+      "Nature Photography",
+    ],
+    colors: [
+      { hex: "#fef08a", name: "Sun-Dried Grass" },
+      { hex: "#facc15", name: "Golden Savanna" },
+      { hex: "#ca8a04", name: "Dry Earth" },
+      { hex: "#92400e", name: "Red Clay" },
+      { hex: "#4d7c0f", name: "Acacia" },
+    ],
+  },
+  {
+    id: "redwood",
+    name: "Redwood",
+    description:
+      "Deep bark browns and filtered green light of ancient forests.",
+    longDescription:
+      "Redwood draws from towering ancient groves — the deep reddish-brown of weathered bark, soft green light filtering through the canopy, and the cool shadow beneath. It's a palette of permanence and quiet grandeur, perfect for outdoor brands, sustainable architecture, or wellness retreats rooted in nature.",
+    tags: ["natural", "deep"],
+    mood: "Ancient & Grounding",
+    bestFor: [
+      "Outdoor Brands",
+      "Wellness Retreats",
+      "Sustainable Architecture",
+      "Eco Tourism",
+    ],
+    colors: [
+      { hex: "#d9f99d", name: "Filtered Light" },
+      { hex: "#4d7c0f", name: "Canopy Green" },
+      { hex: "#78350f", name: "Redwood Bark" },
+      { hex: "#451a03", name: "Deep Bark" },
+      { hex: "#1c1917", name: "Forest Shadow" },
+    ],
+  },
 
   // ── Ocean & Water ────────────────────────────────────────────────────────
   {
@@ -399,6 +489,40 @@ export const paletteSets: Palette[] = [
       { hex: "#4ade80", name: "After Rain" },
     ],
   },
+  {
+    id: "tidepool",
+    name: "Tidepool",
+    description: "Shallow rockpool greens and blues with sandy accents.",
+    longDescription:
+      "Tidepool captures the small, self-contained world of a coastal rockpool — clear shallow blue-green water, sea-anemone pink, and the warm sand visible just beneath the surface. It's a palette of curiosity and gentle discovery, perfect for marine education, kids' apps, or coastal lifestyle brands.",
+    tags: ["fresh", "cool"],
+    mood: "Curious & Refreshing",
+    bestFor: ["Marine Education", "Kids' Apps", "Coastal Brands", "Aquariums"],
+    colors: [
+      { hex: "#fef9c3", name: "Sand" },
+      { hex: "#a7f3d0", name: "Shallow Green" },
+      { hex: "#5eead4", name: "Pool Teal" },
+      { hex: "#0e7490", name: "Deep Pool" },
+      { hex: "#f9a8d4", name: "Anemone" },
+    ],
+  },
+  {
+    id: "glacier-melt",
+    name: "Glacier Melt",
+    description: "Pale ice blues transitioning into deep meltwater teal.",
+    longDescription:
+      "Glacier Melt traces the journey of ancient ice as it gives way to water — the palest icy blue at the surface, deepening through cool cyan to a rich meltwater teal below. It's a palette of clarity and quiet urgency, well suited to climate brands, outdoor gear, and clean technology.",
+    tags: ["cool", "fresh"],
+    mood: "Crisp & Clear",
+    bestFor: ["Climate Brands", "Outdoor Gear", "Water Brands", "Clean Tech"],
+    colors: [
+      { hex: "#f0f9ff", name: "Ice Surface" },
+      { hex: "#bae6fd", name: "Glacier Blue" },
+      { hex: "#22d3ee", name: "Meltwater Cyan" },
+      { hex: "#0e7490", name: "Deep Teal" },
+      { hex: "#164e63", name: "Glacial Pool" },
+    ],
+  },
 
   // ── Cool & Night ─────────────────────────────────────────────────────────
   {
@@ -517,6 +641,45 @@ export const paletteSets: Palette[] = [
       { hex: "#1e3a8a", name: "Abyssal Blue" },
       { hex: "#0f172a", name: "Deep Navy" },
       { hex: "#020617", name: "Abyss" },
+    ],
+  },
+  {
+    id: "starlit",
+    name: "Starlit",
+    description: "Deep navy night sky scattered with silver starlight.",
+    longDescription:
+      "Starlit draws from a clear night far from city lights — deep navy and indigo sky punctuated by the cool silver-white of distant stars. It's a palette of stillness and quiet wonder, ideal for astronomy apps, sleep and wellness products, or premium dark-mode interfaces.",
+    tags: ["deep", "cool"],
+    mood: "Quiet & Infinite",
+    bestFor: [
+      "Astronomy Apps",
+      "Sleep & Wellness",
+      "Premium Tech",
+      "Night Mode UI",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Starlight" },
+      { hex: "#94a3b8", name: "Faint Star" },
+      { hex: "#475569", name: "Dusk Blue" },
+      { hex: "#1e1b4b", name: "Night Sky" },
+      { hex: "#020617", name: "Deep Space" },
+    ],
+  },
+  {
+    id: "frostbite",
+    name: "Frostbite",
+    description: "Icy blues and stark whites with a touch of electric cyan.",
+    longDescription:
+      "Frostbite is sharp and unforgiving — bright white frost, cold steel blue, and a jolt of electric cyan that feels almost dangerous. It's a palette of extreme cold and high energy, well suited to gaming, winter sports brands, or tech products with an edge.",
+    tags: ["cool", "electric"],
+    mood: "Sharp & Chilling",
+    bestFor: ["Gaming", "Winter Sports", "Tech Brands", "Horror Aesthetic"],
+    colors: [
+      { hex: "#f0f9ff", name: "Frost White" },
+      { hex: "#a5f3fc", name: "Frostbite Cyan" },
+      { hex: "#0ea5e9", name: "Steel Blue" },
+      { hex: "#1e3a8a", name: "Deep Freeze" },
+      { hex: "#0f172a", name: "Arctic Dark" },
     ],
   },
 
@@ -639,6 +802,45 @@ export const paletteSets: Palette[] = [
       { hex: "#9d174d", name: "Bark" },
     ],
   },
+  {
+    id: "marshmallow",
+    name: "Marshmallow",
+    description: "Pillowy whites, soft pinks, and gentle creams.",
+    longDescription:
+      "Marshmallow is about as soft as a palette can get — near-white cream, the faintest blush pink, and pale vanilla that all feel light enough to float. It's the palette of comfort and innocence, perfect for baby brands, confectionery, or soft, approachable UI.",
+    tags: ["pastel", "soft"],
+    mood: "Soft & Sweet",
+    bestFor: ["Baby Brands", "Confectionery", "Soft UI", "Comfort Products"],
+    colors: [
+      { hex: "#fffbeb", name: "Marshmallow White" },
+      { hex: "#fef3c7", name: "Vanilla" },
+      { hex: "#fecdd3", name: "Blush" },
+      { hex: "#fbcfe8", name: "Cotton Pink" },
+      { hex: "#e9d5ff", name: "Soft Lilac" },
+    ],
+  },
+  {
+    id: "watercolor",
+    name: "Watercolor",
+    description: "Washed-out pastels that bleed gently into one another.",
+    longDescription:
+      "Watercolor mimics the soft diffusion of pigment on wet paper — pale blue bleeding into lavender, soft yellow fading into mint. Nothing here is fully saturated; everything feels gentle and handmade. It's ideal for stationery, art supplies, children's books, or wedding design.",
+    tags: ["pastel", "soft"],
+    mood: "Gentle & Artistic",
+    bestFor: [
+      "Stationery",
+      "Art Supplies",
+      "Children's Books",
+      "Wedding Invitations",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Pale Wash" },
+      { hex: "#d1fae5", name: "Mint Wash" },
+      { hex: "#bfdbfe", name: "Sky Wash" },
+      { hex: "#e9d5ff", name: "Lavender Wash" },
+      { hex: "#fbcfe8", name: "Pink Wash" },
+    ],
+  },
 
   // ── Vivid & Bold ─────────────────────────────────────────────────────────
   {
@@ -753,6 +955,40 @@ export const paletteSets: Palette[] = [
       { hex: "#818cf8", name: "Soft Indigo" },
       { hex: "#22d3ee", name: "Cyan Dream" },
       { hex: "#0d9488", name: "Teal Glow" },
+    ],
+  },
+  {
+    id: "tropicana",
+    name: "Tropicana",
+    description: "Juicy citrus brights — lime, mango, and hot pink.",
+    longDescription:
+      "Tropicana is built for maximum refreshment — zesty lime green, juicy mango orange, and a splash of hot pink against bright cyan. It's loud, fun, and unapologetically summery, ideal for juice brands, summer fashion, festivals, and beach clubs.",
+    tags: ["vivid", "tropical"],
+    mood: "Juicy & Energetic",
+    bestFor: ["Juice Brands", "Summer Fashion", "Festivals", "Beach Clubs"],
+    colors: [
+      { hex: "#bef264", name: "Lime Zest" },
+      { hex: "#fde047", name: "Mango Burst" },
+      { hex: "#fb923c", name: "Tangerine" },
+      { hex: "#f472b6", name: "Hot Pink" },
+      { hex: "#22d3ee", name: "Cyan Splash" },
+    ],
+  },
+  {
+    id: "graffiti",
+    name: "Graffiti",
+    description: "Spray-can brights clashing against urban concrete grey.",
+    longDescription:
+      "Graffiti throws saturated spray-paint colors — electric yellow, hot magenta, and vivid blue — against the flat grey of a concrete wall. It's deliberately clashing and full of attitude, perfect for streetwear, music festivals, skate brands, or urban art projects.",
+    tags: ["vivid", "bold"],
+    mood: "Urban & Rebellious",
+    bestFor: ["Streetwear", "Music Festivals", "Skate Brands", "Urban Art"],
+    colors: [
+      { hex: "#facc15", name: "Spray Yellow" },
+      { hex: "#f0abfc", name: "Spray Magenta" },
+      { hex: "#3b82f6", name: "Spray Blue" },
+      { hex: "#a3a3a3", name: "Concrete" },
+      { hex: "#27272a", name: "Wall Shadow" },
     ],
   },
 
@@ -884,6 +1120,45 @@ export const paletteSets: Palette[] = [
       { hex: "#065f46", name: "Jade" },
       { hex: "#14532d", name: "Deep Jade" },
       { hex: "#dc2626", name: "Lacquer Red" },
+    ],
+  },
+  {
+    id: "velvet",
+    name: "Velvet",
+    description: "Deep jewel tones of rich velvet upholstery.",
+    longDescription:
+      "Velvet draws from the plush interiors of old theatres and grand hotels — deep emerald, rich burgundy, and royal sapphire, all with the soft sheen of fabric catching low light. It's a palette of indulgence and drama, ideal for theatre branding, luxury furniture, or premium cosmetics.",
+    tags: ["luxury", "rich"],
+    mood: "Plush & Opulent",
+    bestFor: [
+      "Theatre Branding",
+      "Luxury Furniture",
+      "Premium Cosmetics",
+      "Fine Dining",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Gold Trim" },
+      { hex: "#065f46", name: "Emerald Velvet" },
+      { hex: "#831843", name: "Burgundy Velvet" },
+      { hex: "#1e3a8a", name: "Sapphire Velvet" },
+      { hex: "#1c1917", name: "Deep Shadow" },
+    ],
+  },
+  {
+    id: "art-deco",
+    name: "Art Deco",
+    description: "Black, gold, and emerald geometry of the Gatsby era.",
+    longDescription:
+      "Art Deco channels the glamour of the 1920s — sharp black geometry, gleaming gold accents, and the rich emerald green favoured by the era's grand hotels and theatres. It's a palette of celebration and precision, perfect for hospitality, event branding, fashion, or premium packaging.",
+    tags: ["luxury", "retro"],
+    mood: "Glamorous & Geometric",
+    bestFor: ["Hospitality", "Event Branding", "Fashion", "Premium Packaging"],
+    colors: [
+      { hex: "#fde68a", name: "Deco Gold" },
+      { hex: "#d4af37", name: "Antique Gold" },
+      { hex: "#065f46", name: "Deco Emerald" },
+      { hex: "#1c1917", name: "Deco Black" },
+      { hex: "#f5f5f4", name: "Ivory Trim" },
     ],
   },
 
@@ -1018,6 +1293,91 @@ export const paletteSets: Palette[] = [
       { hex: "#d97706", name: "Sepia" },
       { hex: "#92400e", name: "Old Leather" },
       { hex: "#44403c", name: "Iron Gall" },
+    ],
+  },
+  {
+    id: "fog",
+    name: "Fog",
+    description: "Soft greys and muted blues of an early morning mist.",
+    longDescription:
+      "Fog settles everything into soft focus — pale grey-blue, muted slate, and the faintest hint of lavender, as if seen through morning mist. It's a palette of calm and restraint, ideal for minimal UI, wellness apps, photography portfolios, or architecture studios.",
+    tags: ["neutral", "cool"],
+    mood: "Soft & Subdued",
+    bestFor: [
+      "Minimal UI",
+      "Wellness Apps",
+      "Photography Portfolios",
+      "Architecture",
+    ],
+    colors: [
+      { hex: "#f1f5f9", name: "Morning Mist" },
+      { hex: "#cbd5e1", name: "Fog Grey" },
+      { hex: "#94a3b8", name: "Mid Fog" },
+      { hex: "#64748b", name: "Slate Fog" },
+      { hex: "#334155", name: "Deep Fog" },
+    ],
+  },
+  {
+    id: "linen-room",
+    name: "Linen Room",
+    description: "Warm off-whites and gentle beige of a sunlit linen closet.",
+    longDescription:
+      "Linen Room is quiet domestic comfort — warm off-white, soft beige, and the faintest hint of dusty rose, like sunlight falling across folded linen. It's the palette of considered home brands, interior design, and hospitality that wants to feel lived-in and calm.",
+    tags: ["neutral", "warm"],
+    mood: "Calm & Domestic",
+    bestFor: [
+      "Home Goods",
+      "Interior Design",
+      "Hospitality",
+      "Minimal Branding",
+    ],
+    colors: [
+      { hex: "#fdfaf6", name: "Linen White" },
+      { hex: "#f5f0e8", name: "Warm Linen" },
+      { hex: "#e7ddd0", name: "Beige" },
+      { hex: "#cbb8a3", name: "Dusty Tan" },
+      { hex: "#a1887f", name: "Warm Taupe" },
+    ],
+  },
+
+  // ── Food & Culinary ───────────────────────────────────────────────────────
+  {
+    id: "matcha",
+    name: "Matcha",
+    description: "Earthy greens and warm creams of a Japanese tea ceremony.",
+    longDescription:
+      "Matcha draws from the quiet ritual of Japanese tea — vivid powdered-green matcha, soft cream, and the warm wood tones of a tea house. It's a palette of calm focus and ceremony, perfect for tea brands, wellness cafés, or anything inspired by Japanese aesthetics.",
+    tags: ["natural", "calm"],
+    mood: "Calm & Ceremonial",
+    bestFor: [
+      "Tea Brands",
+      "Wellness Cafes",
+      "Japanese Aesthetics",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fefce8", name: "Cream" },
+      { hex: "#d9f99d", name: "Pale Matcha" },
+      { hex: "#84cc16", name: "Matcha Green" },
+      { hex: "#4d7c0f", name: "Deep Matcha" },
+      { hex: "#78350f", name: "Tea Wood" },
+    ],
+  },
+  {
+    id: "espresso",
+    name: "Espresso",
+    description: "Rich coffee browns and creamy foam tones.",
+    longDescription:
+      "Espresso layers the colours of a perfect cup — dark roasted bean brown at the base, warm caramel mid-tones, and the soft cream of steamed milk foam on top. It's a palette of comfort and quality, ideal for coffee brands, cafés, and warm, inviting packaging.",
+    tags: ["warm", "rich"],
+    mood: "Rich & Comforting",
+    bestFor: ["Coffee Brands", "Cafes", "Branding", "Packaging"],
+    colors: [
+      { hex: "#fef3c7", name: "Milk Foam" },
+      { hex: "#d2b48c", name: "Latte" },
+      { hex: "#b45309", name: "Caramel" },
+      { hex: "#78350f", name: "Roasted Bean" },
+      { hex: "#2e1a0f", name: "Espresso" },
     ],
   },
 ];
