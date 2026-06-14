@@ -14,7 +14,6 @@
     "deploy": "astro build && wrangler pages deploy dist"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.7.0",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.4",
     "sass": "^1.100.0",
