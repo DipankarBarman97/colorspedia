@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types",
-    "deploy": "astro build && wrangler pages deploy dist"
+    "deploy": "astro build && wrangler pages deploy dist --project-name colorspedia"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",

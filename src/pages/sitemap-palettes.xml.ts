@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { paletteSets } from "../data/palettes";
 
+export const prerender = true;
 const siteUrl = "https://colorspedia.com";
 const now = new Date().toISOString();
 

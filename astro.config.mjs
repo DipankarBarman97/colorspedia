@@ -2,7 +2,8 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  output: "server",
+  output: "static",
+  site: "https://colorspedia.com",
   vite: {
     plugins: [tailwindcss()],
   },

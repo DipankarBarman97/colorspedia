@@ -26,7 +26,7 @@ const {
   title = "Every Color, Every Shade",
   description = "Explore thousands of colors, shades, HEX, RGB, HSL values, palettes, gradients, and color tools.",
   image = "/og-image.png",
-  canonicalURL = Astro.url.href,
+  canonicalURL = new URL(Astro.url.pathname, siteUrl).toString(),
   type = "website",
   publishedTime,
   modifiedTime,
