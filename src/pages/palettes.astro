@@ -55,11 +55,11 @@ const VISIBLE_TAGS = 8; // tags shown before "See More"
     <!-- Filter bar -->
     <div class="filter-bar" id="palette-filter-bar">
       <div class="filter-inner">
-        <div class="filter-tags-wrap">
-          <div class="filter-tags" id="filter-tags" role="group" aria-label="Filter palettes by tag">
+        <div class="tag-filters-wrap">
+          <div class="tag-filters" id="tag-filters" role="group" aria-label="Filter palettes by tag">
             {allTags?.map((tag, index) => (
               <button
-                class={`filter-tag ${tag === "all" ? "filter-tag--active" : ""} ${index > VISIBLE_TAGS ? "filter-tag--hidden" : ""}`}
+                class={`tag-filter ${tag === "all" ? "tag-filter--active" : ""} ${index > VISIBLE_TAGS ? "tag-filter--hidden" : ""}`}
                 data-tag={tag}
               >
                 {tag}
@@ -186,7 +186,7 @@ const VISIBLE_TAGS = 8; // tags shown before "See More"
   }
 
   .hero-inner {
-    max-width: 680px;
+    max-width: 880px;
     margin: 0 auto;
   }
 
@@ -277,98 +277,6 @@ const VISIBLE_TAGS = 8; // tags shown before "See More"
     background: var(--border);
     flex-shrink: 0;
   }
-
-  /* ── Filter bar ────────────────────────────────────────────── */
-  .filter-bar {
-    position: sticky;
-    top: 64px;
-    z-index: 40;
-    background: color-mix(in srgb, var(--surface) 92%, transparent);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .filter-inner {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .filter-tags-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    flex: 1;
-  }
-
-  .filter-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: center;
-    max-height: 320px;
-    overflow: auto;
-  }
-
-  .filter-tag {
-    padding: 5px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    text-transform: capitalize;
-    transition: all 0.15s ease;
-  }
-
-  .filter-tag:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-  }
-
-  .filter-tag--active {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: var(--white);
-  }
-
-  .filter-tag--active:hover { color: var(--white); }
-
-  /* Hidden tags — collapsed by default */
-  .filter-tag--hidden { display: none; }
-
-  /* Revealed when wrapper has expanded class */
-  .filter-tags--expanded .filter-tag--hidden { display: inline-flex; }
-
-  /* See More / See Less toggle */
-  .tag-filter-toggle {
-    padding: 5px 14px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    color: var(--text-secondary);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-
-  .tag-filter-toggle:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-  }
-
 
   /* ── Palettes grid ─────────────────────────────────────────── */
   .palettes-section {
@@ -684,14 +592,14 @@ const VISIBLE_TAGS = 8; // tags shown before "See More"
   });
 
   // ── Tag filter ───────────────────────────────────────────────
-  const filterBtns = document.querySelectorAll<HTMLElement>(".filter-tag");
+  const filterBtns = document.querySelectorAll<HTMLElement>(".tag-filter");
   const cards      = document.querySelectorAll<HTMLElement>(".palette-card");
   const emptyEl    = document.getElementById("palettes-empty");
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
-      btn.classList.add("filter-tag--active");
+      filterBtns.forEach((b) => b.classList.remove("tag-filter--active"));
+      btn.classList.add("tag-filter--active");
       filterPalettes(btn.dataset.tag || "all");
     });
   });
@@ -710,17 +618,17 @@ const VISIBLE_TAGS = 8; // tags shown before "See More"
   }
 
   (window as any).resetFilter = () => {
-    filterBtns.forEach((b) => b.classList.remove("filter-tag--active"));
-    filterBtns[0]?.classList.add("filter-tag--active");
+    filterBtns.forEach((b) => b.classList.remove("tag-filter--active"));
+    filterBtns[0]?.classList.add("tag-filter--active");
     filterPalettes("all");
   };
 
   // ── See More / See Less toggle ───────────────────────────────
   const toggleBtn  = document.getElementById("toggle-tags");
-  const filterTags = document.getElementById("filter-tags");
+  const filterTags = document.getElementById("tag-filters");
 
   toggleBtn?.addEventListener("click", () => {
-    const expanded = filterTags?.classList.toggle("filter-tags--expanded");
+    const expanded = filterTags?.classList.toggle("tag-filters--expanded");
     toggleBtn.textContent = expanded ? "See Less" : "See More";
   });
 </script>

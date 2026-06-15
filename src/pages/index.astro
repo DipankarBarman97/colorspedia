@@ -374,7 +374,7 @@ const paletteData = paletteSets?.map((p) => ({
   }
 
   .hero-inner {
-    max-width: 800px;
+    max-width: 880px;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -724,26 +724,7 @@ const paletteData = paletteSets?.map((p) => ({
     background: var(--border);
   }
 
-  /* ── Filter bar ──────────────────────────────────────────────────────────── */
-  .filter-bar {
-    position: sticky;
-    top: 64px;
-    z-index: 50;
-    background: color-mix(in srgb, var(--surface) 95%, transparent);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .filter-inner {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 12px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
+  /* ── Filter ──────────────────────────────────────────────────────────── */
   .search-wrap {
     position: relative;
     flex: 1;
@@ -815,77 +796,6 @@ const paletteData = paletteSets?.map((p) => ({
     border-radius: 999px;
     white-space: nowrap;
     pointer-events: none;
-  }
-
-  .tag-filters-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    flex: 1;
-  }
-
-  .tag-filters {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: center;
-    max-height: 320px;
-    overflow: auto;
-  }
-
-  .tag-filter {
-    padding: 5px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s ease;
-
-    text-transform: capitalize;
-  }
-
-  .tag-filter:hover {
-    background: var(--surface-hover);
-    border-color: var(--orange-light);
-    color: var(--orange);
-  }
-
-  .tag-filter--active {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: var(--white);
-  }
-
-  .tag-filter--hidden {
-    display: none;
-  }
-
-  .tag-filters--expanded .tag-filter--hidden {
-    display: inline-flex;
-  }
-
-  .tag-filter-toggle {
-    padding: 5px 14px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    color: var(--text-secondary);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-
-    transition: all 0.15s ease;
-    margin-left: auto;
-  }
-
-  .tag-filter-toggle:hover {
-    border-color: var(--orange);
-    color: var(--orange);
   }
 
   /* ── Search banner ───────────────────────────────────────────────────────── */

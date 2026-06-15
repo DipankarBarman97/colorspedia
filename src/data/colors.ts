@@ -216,6 +216,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Raspberry 950", hex: "#21010c", weight: 950 },
     ],
   },
+  {
+    id: "vermilion",
+    name: "Vermilion",
+    slug: "vermilion",
+    description:
+      "Brilliant and ceremonial — vermilion blazes with the intensity of lacquer and ancient pigment.",
+    tags: ["warm", "vivid", "bold"],
+    baseHex: "#e34234",
+    shades: [
+      { name: "Vermilion 50", hex: "#fef3f1", weight: 50 },
+      { name: "Vermilion 100", hex: "#fde0db", weight: 100 },
+      { name: "Vermilion 200", hex: "#fbc1b7", weight: 200 },
+      { name: "Vermilion 300", hex: "#f7958a", weight: 300 },
+      { name: "Vermilion 400", hex: "#ee5f51", weight: 400 },
+      { name: "Vermilion 500", hex: "#e34234", weight: 500 },
+      { name: "Vermilion 600", hex: "#bd2f24", weight: 600 },
+      { name: "Vermilion 700", hex: "#92231b", weight: 700 },
+      { name: "Vermilion 800", hex: "#671813", weight: 800 },
+      { name: "Vermilion 900", hex: "#400e0b", weight: 900 },
+      { name: "Vermilion 950", hex: "#200706", weight: 950 },
+    ],
+  },
 
   // ─── Pinks ───────────────────────────────────────────────────────────────────
   {
@@ -524,6 +546,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Wisteria 800", hex: "#4a2c56", weight: 800 },
       { name: "Wisteria 900", hex: "#2c1933", weight: 900 },
       { name: "Wisteria 950", hex: "#160c1a", weight: 950 },
+    ],
+  },
+  {
+    id: "amethyst",
+    name: "Amethyst",
+    slug: "amethyst",
+    description:
+      "Gemstone elegance and quiet power — amethyst pairs spiritual calm with regal depth.",
+    tags: ["cool", "luxury", "precious"],
+    baseHex: "#9966cc",
+    shades: [
+      { name: "Amethyst 50", hex: "#f7f3fc", weight: 50 },
+      { name: "Amethyst 100", hex: "#ece2f7", weight: 100 },
+      { name: "Amethyst 200", hex: "#d8c4ef", weight: 200 },
+      { name: "Amethyst 300", hex: "#bd9be3", weight: 300 },
+      { name: "Amethyst 400", hex: "#ac7fd9", weight: 400 },
+      { name: "Amethyst 500", hex: "#9966cc", weight: 500 },
+      { name: "Amethyst 600", hex: "#7d4fab", weight: 600 },
+      { name: "Amethyst 700", hex: "#5f3c82", weight: 700 },
+      { name: "Amethyst 800", hex: "#42295b", weight: 800 },
+      { name: "Amethyst 900", hex: "#271837", weight: 900 },
+      { name: "Amethyst 950", hex: "#140c1c", weight: 950 },
     ],
   },
 
@@ -856,6 +900,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Ice Blue 800", hex: "#1f434e", weight: 800 },
       { name: "Ice Blue 900", hex: "#12272e", weight: 900 },
       { name: "Ice Blue 950", hex: "#091317", weight: 950 },
+    ],
+  },
+  {
+    id: "teal-blue",
+    name: "Teal Blue",
+    slug: "teal-blue",
+    description:
+      "Crisp and contemporary — teal blue bridges the calm of cyan and the trust of navy.",
+    tags: ["cool", "modern", "fresh"],
+    baseHex: "#367588",
+    shades: [
+      { name: "Teal Blue 50", hex: "#f0f8fa", weight: 50 },
+      { name: "Teal Blue 100", hex: "#daeef2", weight: 100 },
+      { name: "Teal Blue 200", hex: "#b6dde5", weight: 200 },
+      { name: "Teal Blue 300", hex: "#86c4d2", weight: 300 },
+      { name: "Teal Blue 400", hex: "#549cb3", weight: 400 },
+      { name: "Teal Blue 500", hex: "#367588", weight: 500 },
+      { name: "Teal Blue 600", hex: "#2b5d6d", weight: 600 },
+      { name: "Teal Blue 700", hex: "#214653", weight: 700 },
+      { name: "Teal Blue 800", hex: "#16303a", weight: 800 },
+      { name: "Teal Blue 900", hex: "#0d1c22", weight: 900 },
+      { name: "Teal Blue 950", hex: "#060e11", weight: 950 },
     ],
   },
 
@@ -1297,6 +1363,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Neon Green 800", hex: "#0c5900", weight: 800 },
       { name: "Neon Green 900", hex: "#063400", weight: 900 },
       { name: "Neon Green 950", hex: "#031a00", weight: 950 },
+    ],
+  },
+  {
+    id: "spruce",
+    name: "Spruce",
+    slug: "spruce",
+    description:
+      "Crisp and resinous — spruce carries the cool, blue-toned green of high-altitude conifers.",
+    tags: ["cool", "natural", "deep"],
+    baseHex: "#0a5c4e",
+    shades: [
+      { name: "Spruce 50", hex: "#eef9f6", weight: 50 },
+      { name: "Spruce 100", hex: "#d1efe7", weight: 100 },
+      { name: "Spruce 200", hex: "#a3dfcf", weight: 200 },
+      { name: "Spruce 300", hex: "#6bc7b1", weight: 300 },
+      { name: "Spruce 400", hex: "#36a48f", weight: 400 },
+      { name: "Spruce 500", hex: "#0a5c4e", weight: 500 },
+      { name: "Spruce 600", hex: "#084a3f", weight: 600 },
+      { name: "Spruce 700", hex: "#06382f", weight: 700 },
+      { name: "Spruce 800", hex: "#042620", weight: 800 },
+      { name: "Spruce 900", hex: "#021512", weight: 900 },
+      { name: "Spruce 950", hex: "#010a09", weight: 950 },
     ],
   },
 
@@ -1854,6 +1942,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Rose Gold 950", hex: "#180d10", weight: 950 },
     ],
   },
+  {
+    id: "chestnut",
+    name: "Chestnut",
+    slug: "chestnut",
+    description:
+      "Warm reddish-brown with autumnal richness — chestnut feels grounded, classic, and inviting.",
+    tags: ["warm", "earthy", "classic"],
+    baseHex: "#954535",
+    shades: [
+      { name: "Chestnut 50", hex: "#fbf4f1", weight: 50 },
+      { name: "Chestnut 100", hex: "#f4e0d9", weight: 100 },
+      { name: "Chestnut 200", hex: "#e8c2b3", weight: 200 },
+      { name: "Chestnut 300", hex: "#d89a81", weight: 300 },
+      { name: "Chestnut 400", hex: "#c06f54", weight: 400 },
+      { name: "Chestnut 500", hex: "#954535", weight: 500 },
+      { name: "Chestnut 600", hex: "#79372a", weight: 600 },
+      { name: "Chestnut 700", hex: "#5c2a20", weight: 700 },
+      { name: "Chestnut 800", hex: "#401d16", weight: 800 },
+      { name: "Chestnut 900", hex: "#26110d", weight: 900 },
+      { name: "Chestnut 950", hex: "#130806", weight: 950 },
+    ],
+  },
 
   // ─── Neutrals & Whites ───────────────────────────────────────────────────────
   {
@@ -2030,6 +2140,28 @@ export const colorFamilies: ColorFamily[] = [
       { name: "Stone 800", hex: "#292524", weight: 800 },
       { name: "Stone 900", hex: "#1c1917", weight: 900 },
       { name: "Stone 950", hex: "#0c0a09", weight: 950 },
+    ],
+  },
+  {
+    id: "graphite",
+    name: "Graphite",
+    slug: "graphite",
+    description:
+      "Industrial and precise — graphite offers a cooler, more technical alternative to charcoal.",
+    tags: ["neutral", "cool", "modern"],
+    baseHex: "#41424c",
+    shades: [
+      { name: "Graphite 50", hex: "#f4f4f6", weight: 50 },
+      { name: "Graphite 100", hex: "#e3e3e7", weight: 100 },
+      { name: "Graphite 200", hex: "#c7c8d0", weight: 200 },
+      { name: "Graphite 300", hex: "#a3a5b2", weight: 300 },
+      { name: "Graphite 400", hex: "#6f717f", weight: 400 },
+      { name: "Graphite 500", hex: "#41424c", weight: 500 },
+      { name: "Graphite 600", hex: "#34353d", weight: 600 },
+      { name: "Graphite 700", hex: "#27282e", weight: 700 },
+      { name: "Graphite 800", hex: "#1b1b1f", weight: 800 },
+      { name: "Graphite 900", hex: "#101012", weight: 900 },
+      { name: "Graphite 950", hex: "#080809", weight: 950 },
     ],
   },
   {

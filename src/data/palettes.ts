@@ -46,7 +46,7 @@ export const paletteSets: Palette[] = [
     description: "Burnished reds, ambers, and deep ochres of the fall season.",
     longDescription:
       "Autumn Harvest captures that bittersweet richness of the turning season — the blaze of amber maples, the deep ochre of fallen leaves, the rust of old iron. It's a palette full of warmth and melancholy in equal measure, perfect for seasonal campaigns, cosy brands, or anything that wants to feel richly textured and alive.",
-    tags: ["warm", "earthy"],
+    tags: ["seasonal", "earthy"],
     mood: "Warm & Cosy",
     bestFor: [
       "Seasonal Campaigns",
@@ -68,7 +68,7 @@ export const paletteSets: Palette[] = [
     description: "Smouldering reds and charcoal tones of dying embers.",
     longDescription:
       "Ember Glow draws from the last light of a fire — deep crimson cooling to burgundy, with ashy charcoal and burnt sienna anchoring the palette. It's brooding and warm at once, ideal for whiskey brands, artisan food, or any project that wants to feel crafted with heat.",
-    tags: ["warm", "deep"],
+    tags: ["deep", "brooding"],
     mood: "Brooding & Warm",
     bestFor: [
       "Spirits & Beverages",
@@ -90,7 +90,7 @@ export const paletteSets: Palette[] = [
     description: "Sun-bleached pinks and warm sands of the arid landscape.",
     longDescription:
       "Desert Rose blends the blush of a blooming cactus flower against terracotta earth and sun-bleached sand. This palette radiates dry heat and resilience — perfect for beauty brands, boho aesthetics, or anything that wants to feel sun-kissed and naturally beautiful.",
-    tags: ["warm", "earthy"],
+    tags: ["earthy", "romantic"],
     mood: "Sun-Kissed & Natural",
     bestFor: [
       "Beauty Brands",
@@ -112,7 +112,7 @@ export const paletteSets: Palette[] = [
     description: "Turmeric, saffron, and paprika from a bustling bazaar.",
     longDescription:
       "Spice Market pulls from the vivid, saturated hues of an open-air market — the deep orange of turmeric powder, blazing saffron yellow, rich paprika red, and warm cumin brown. It's a palette that smells as good as it looks, ideal for food brands, travel, and cultural projects with heat and character.",
-    tags: ["warm", "vibrant"],
+    tags: ["culinary", "vibrant"],
     mood: "Vivid & Aromatic",
     bestFor: [
       "Food Brands",
@@ -134,7 +134,7 @@ export const paletteSets: Palette[] = [
     description: "Molten lava oranges and ashen greys of an active crater.",
     longDescription:
       "Volcano draws from the raw, elemental drama of an eruption — rivers of glowing magma, smouldering orange against near-black basalt rock, and the ashen grey of cooling lava fields. It's a palette of unstoppable energy and geological power, ideal for energy companies, sports brands, or any project that wants to feel like a force of nature.",
-    tags: ["warm", "bold"],
+    tags: ["bold", "dramatic"],
     mood: "Raw & Powerful",
     bestFor: ["Energy Brands", "Sports", "Gaming", "Heavy Industry"],
     colors: [
@@ -152,7 +152,7 @@ export const paletteSets: Palette[] = [
       "Searing oranges and deep char tones of an uncontrolled blaze.",
     longDescription:
       "Wildfire captures the raw, consuming energy of flames spreading across dry land — blistering orange-red at the core, deepening to smoke-blackened char at the edges. It's a palette of urgency and unstoppable momentum, perfect for action brands, energy products, or anything that wants to feel like it's burning through the competition.",
-    tags: ["warm", "bold"],
+    tags: ["bold", "energetic"],
     mood: "Intense & Untamed",
     bestFor: [
       "Sports Brands",
@@ -174,7 +174,7 @@ export const paletteSets: Palette[] = [
     description: "Warm browns, cinnamon reds, and toasted caramel tones.",
     longDescription:
       "Cinnamon Spice draws from the comforting aroma of a bakery in winter — toasted caramel, warm cinnamon brown, and the deep red-brown of nutmeg and clove. It's a palette built for cosiness and warmth, ideal for coffee shops, seasonal packaging, or home brands that want to feel inviting.",
-    tags: ["warm", "cozy"],
+    tags: ["cozy", "culinary"],
     mood: "Cosy & Aromatic",
     bestFor: [
       "Coffee Shops",
@@ -190,6 +190,50 @@ export const paletteSets: Palette[] = [
       { hex: "#451a03", name: "Dark Roast" },
     ],
   },
+  {
+    id: "campfire",
+    name: "Campfire",
+    description: "Glowing orange flames against deep night-blue smoke.",
+    longDescription:
+      "Campfire captures the warm circle of light cut from a dark forest night — flickering orange and gold flame tones surrounded by deep indigo smoke and shadow. It's a palette of warmth amid darkness, perfect for outdoor brands, storytelling apps, or cosy seasonal campaigns.",
+    tags: ["cozy", "outdoor"],
+    mood: "Warm & Sheltering",
+    bestFor: [
+      "Outdoor Brands",
+      "Storytelling Apps",
+      "Seasonal Campaigns",
+      "Camping Gear",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Flame Core" },
+      { hex: "#f97316", name: "Campfire Orange" },
+      { hex: "#b45309", name: "Embers" },
+      { hex: "#312e81", name: "Night Smoke" },
+      { hex: "#1e1b4b", name: "Dark Forest" },
+    ],
+  },
+  {
+    id: "paprika",
+    name: "Paprika",
+    description: "Smoky reds and warm browns of ground paprika and chili.",
+    longDescription:
+      "Paprika is bold and earthy — deep brick red, smoky brown, and a flash of golden chili oil. It's a palette of robust, confident warmth, perfect for spice brands, Latin American food, or bold restaurant branding.",
+    tags: ["culinary", "bold"],
+    mood: "Bold & Robust",
+    bestFor: [
+      "Spice Brands",
+      "Restaurant Branding",
+      "Packaging",
+      "Latin Cuisine",
+    ],
+    colors: [
+      { hex: "#fbbf24", name: "Chili Oil" },
+      { hex: "#ea580c", name: "Paprika Orange" },
+      { hex: "#b91c1c", name: "Smoked Brick" },
+      { hex: "#78350f", name: "Toasted Brown" },
+      { hex: "#451a03", name: "Dark Roast" },
+    ],
+  },
 
   // ── Earth & Nature ───────────────────────────────────────────────────────
   {
@@ -198,7 +242,7 @@ export const paletteSets: Palette[] = [
     description: "Terracotta, sand, and warm neutrals inspired by the desert.",
     longDescription:
       "Earth & Clay draws from the rich, sun-baked palette of the American Southwest — terracotta vessels, red canyon walls, and bleached driftwood. This palette pairs beautifully with natural textures and organic shapes, making it ideal for artisan brands, interior design, or any aesthetic rooted in handmade authenticity.",
-    tags: ["earthy", "warm"],
+    tags: ["earthy", "artisan"],
     mood: "Artisan & Earthy",
     bestFor: [
       "Interior Design",
@@ -220,7 +264,7 @@ export const paletteSets: Palette[] = [
     description: "Earthy greens and mossy tones from the woodland palette.",
     longDescription:
       "Forest Floor brings the layered richness of old-growth woodland into your design. Bright lime canopy gives way to sage mid-tones and deep hunter greens that feel both grounding and alive. Use it for anything connected to sustainability, wellness, the outdoors, or brands that want to feel genuinely rooted.",
-    tags: ["natural", "earthy"],
+    tags: ["natural", "outdoor"],
     mood: "Grounded & Natural",
     bestFor: ["Eco Brands", "Wellness Apps", "Food & Organic", "Outdoor Gear"],
     colors: [
@@ -237,7 +281,7 @@ export const paletteSets: Palette[] = [
     description: "Muted greens and grey stones of an ancient woodland path.",
     longDescription:
       "Moss & Stone captures the quiet beauty of an old forest trail — the grey of lichen-covered rock, the deep olive of ground cover, the soft sage of filtered light. This palette is understated and organic, perfect for slow-living brands, sustainable fashion, or editorial design that values restraint.",
-    tags: ["natural", "earthy"],
+    tags: ["natural", "muted"],
     mood: "Quiet & Organic",
     bestFor: [
       "Sustainable Fashion",
@@ -259,7 +303,7 @@ export const paletteSets: Palette[] = [
     description: "Rich greens and botanical tones from a lush greenhouse.",
     longDescription:
       "Botanical evokes the dense, humid richness of a Victorian glasshouse — deep jungle greens, warm botanical gold, and the rich brown of fertile soil. It's a palette that feels both lush and sophisticated, ideal for wellness brands, high-end food packaging, or editorial work with a natural luxury feel.",
-    tags: ["natural", "rich"],
+    tags: ["botanical", "lush"],
     mood: "Lush & Sophisticated",
     bestFor: [
       "Wellness Brands",
@@ -281,7 +325,7 @@ export const paletteSets: Palette[] = [
     description: "Dense, humid greens of a tropical rainforest canopy.",
     longDescription:
       "Jungle plunges deep into the tropical canopy — electric lime filtering through dense foliage, bright emerald mid-tones, and the near-black of the forest floor where little light reaches. It's the palette of adventure travel, outdoor apparel, and any brand that wants to feel genuinely wild.",
-    tags: ["natural", "vibrant"],
+    tags: ["tropical", "outdoor"],
     mood: "Wild & Adventurous",
     bestFor: [
       "Adventure Travel",
@@ -303,7 +347,7 @@ export const paletteSets: Palette[] = [
     description: "Wildflower yellows and soft greens of an open countryside.",
     longDescription:
       "Summer Meadow captures a warm afternoon in open countryside — butter yellow wildflowers, soft sage grass, lavender in the distance, and the warm tan of a dusty path. It's a palette of uncomplicated joy and natural beauty, perfect for artisan food, countryside hospitality, or brands that want to feel genuinely wholesome.",
-    tags: ["natural", "warm"],
+    tags: ["natural", "cheerful"],
     mood: "Wholesome & Joyful",
     bestFor: [
       "Artisan Food",
@@ -325,7 +369,7 @@ export const paletteSets: Palette[] = [
     description: "Golden grasses and dusty ochres of the African plains.",
     longDescription:
       "Savanna stretches across the warm gold of sun-dried grass, the dusty ochre of red earth, and the muted green of scattered acacia trees beneath a wide open sky. It's a palette of vastness and warmth, ideal for travel brands, documentary work, or outdoor apparel that wants to feel expansive.",
-    tags: ["earthy", "warm"],
+    tags: ["earthy", "outdoor"],
     mood: "Wild & Expansive",
     bestFor: [
       "Travel & Safari",
@@ -364,6 +408,50 @@ export const paletteSets: Palette[] = [
       { hex: "#1c1917", name: "Forest Shadow" },
     ],
   },
+  {
+    id: "canyon",
+    name: "Canyon",
+    description: "Layered red rock and sandstone of a desert canyon.",
+    longDescription:
+      "Canyon stacks the striated colours of eroded sandstone — deep rust red, dusty orange, and pale cream where centuries of wind have worn the rock smooth. It's a palette of geological time and quiet majesty, ideal for travel brands, outdoor apparel, or architecture rooted in place.",
+    tags: ["earthy", "dramatic"],
+    mood: "Majestic & Timeless",
+    bestFor: [
+      "Travel Brands",
+      "Outdoor Apparel",
+      "Architecture",
+      "Photography",
+    ],
+    colors: [
+      { hex: "#fef3c7", name: "Wind-Worn Cream" },
+      { hex: "#fb923c", name: "Canyon Orange" },
+      { hex: "#c2410c", name: "Rust Layer" },
+      { hex: "#7c2d12", name: "Deep Sandstone" },
+      { hex: "#44403c", name: "Shadowed Rock" },
+    ],
+  },
+  {
+    id: "orchard",
+    name: "Orchard",
+    description: "Ripe fruit reds and warm greens of a productive orchard.",
+    longDescription:
+      "Orchard brings together the rich red of ripe apples, the warm green of leaves, and the golden hue of late afternoon sun filtering through branches. It's a palette of abundance and seasonal cheer, perfect for farm brands, food packaging, or autumn campaigns.",
+    tags: ["culinary", "seasonal"],
+    mood: "Abundant & Cheerful",
+    bestFor: [
+      "Farm Brands",
+      "Food Packaging",
+      "Autumn Campaigns",
+      "Family Products",
+    ],
+    colors: [
+      { hex: "#fef08a", name: "Afternoon Light" },
+      { hex: "#84cc16", name: "Orchard Leaf" },
+      { hex: "#dc2626", name: "Ripe Apple" },
+      { hex: "#7f1d1d", name: "Deep Cherry" },
+      { hex: "#78350f", name: "Branch Brown" },
+    ],
+  },
 
   // ── Ocean & Water ────────────────────────────────────────────────────────
   {
@@ -389,7 +477,7 @@ export const paletteSets: Palette[] = [
     description: "Salt-washed tones of seafoam, driftwood, and open sky.",
     longDescription:
       "Coastal brings the unhurried calm of a seaside morning — pale seafoam greens, bleached sand, washed-out sky blue, and warm driftwood tones that feel effortlessly relaxed. It's the palette of beach houses, coastal lifestyle brands, and any design that wants to slow the pace and breathe.",
-    tags: ["fresh", "pastel"],
+    tags: ["coastal", "fresh"],
     mood: "Relaxed & Coastal",
     bestFor: [
       "Travel & Hospitality",
@@ -451,7 +539,7 @@ export const paletteSets: Palette[] = [
       "Vivid corals and electric blues of a thriving reef ecosystem.",
     longDescription:
       "Coral Reef captures the extraordinary biodiversity of colour found underwater — vivid coral orange, hot pink sea anemone, electric turquoise water, and the deep cobalt of open reef. It's one of nature's most generous palettes, perfect for marine conservation brands, tropical hospitality, or any design that wants to feel teeming with life.",
-    tags: ["tropical", "vibrant"],
+    tags: ["tropical", "bold"],
     mood: "Vibrant & Alive",
     bestFor: [
       "Marine Brands",
@@ -473,7 +561,7 @@ export const paletteSets: Palette[] = [
     description: "Stormy grey-blues and electric teal of a tropical downpour.",
     longDescription:
       "Monsoon captures the dramatic, charged atmosphere of a tropical storm — dark steel-grey clouds, electric teal lightning, the deep navy of driving rain, and the vivid green that everything turns immediately after. It's a palette of drama, renewal, and raw atmospheric power.",
-    tags: ["cool", "deep"],
+    tags: ["dramatic", "cool"],
     mood: "Dramatic & Charged",
     bestFor: [
       "Weather Apps",
@@ -495,7 +583,7 @@ export const paletteSets: Palette[] = [
     description: "Shallow rockpool greens and blues with sandy accents.",
     longDescription:
       "Tidepool captures the small, self-contained world of a coastal rockpool — clear shallow blue-green water, sea-anemone pink, and the warm sand visible just beneath the surface. It's a palette of curiosity and gentle discovery, perfect for marine education, kids' apps, or coastal lifestyle brands.",
-    tags: ["fresh", "cool"],
+    tags: ["coastal", "fresh"],
     mood: "Curious & Refreshing",
     bestFor: ["Marine Education", "Kids' Apps", "Coastal Brands", "Aquariums"],
     colors: [
@@ -523,6 +611,51 @@ export const paletteSets: Palette[] = [
       { hex: "#164e63", name: "Glacial Pool" },
     ],
   },
+  {
+    id: "harbor",
+    name: "Harbor",
+    description: "Muted navy and weathered teal of an old fishing harbour.",
+    longDescription:
+      "Harbor draws from the weathered, working palette of a small coastal town — faded teal boat hulls, deep navy water, and the soft grey-white of salt-worn wood. It's a palette of quiet maritime heritage, perfect for seafood brands, coastal hospitality, or nautical lifestyle products.",
+    tags: ["coastal", "heritage"],
+    mood: "Weathered & Maritime",
+    bestFor: [
+      "Seafood Brands",
+      "Coastal Hospitality",
+      "Nautical Lifestyle",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#f1f5f9", name: "Salt Wood" },
+      { hex: "#94a3b8", name: "Sea Grey" },
+      { hex: "#0d9488", name: "Faded Teal" },
+      { hex: "#1e3a8a", name: "Harbor Navy" },
+      { hex: "#172554", name: "Deep Water" },
+    ],
+  },
+  {
+    id: "mangrove",
+    name: "Mangrove",
+    description:
+      "Muddy greens and brackish blues of a coastal mangrove forest.",
+    longDescription:
+      "Mangrove captures the unique in-between world where forest meets sea — murky olive green, brackish blue-grey water, and the warm brown of exposed roots. It's a palette of resilience and biodiversity, ideal for conservation brands, eco-tourism, or scientific publications.",
+    tags: ["natural", "muted"],
+    mood: "Resilient & Biodiverse",
+    bestFor: [
+      "Conservation Brands",
+      "Eco Tourism",
+      "Scientific Publications",
+      "Documentaries",
+    ],
+    colors: [
+      { hex: "#d9f99d", name: "Filtered Sun" },
+      { hex: "#65a30d", name: "Mangrove Green" },
+      { hex: "#0e7490", name: "Brackish Blue" },
+      { hex: "#57534e", name: "Root Brown" },
+      { hex: "#1c1917", name: "Mud Dark" },
+    ],
+  },
 
   // ── Cool & Night ─────────────────────────────────────────────────────────
   {
@@ -531,7 +664,7 @@ export const paletteSets: Palette[] = [
     description: "Deep, moody tones for dramatic, high-impact interfaces.",
     longDescription:
       "Midnight Run plunges into the deep end of the spectrum — layered indigos and violets that feel simultaneously sophisticated and mysterious. It's the palette of late-night productivity tools, premium dark-mode interfaces, and brands that position themselves as the serious, focused alternative.",
-    tags: ["deep", "cool"],
+    tags: ["deep", "mysterious"],
     mood: "Dramatic & Sophisticated",
     bestFor: [
       "Dark Mode UI",
@@ -554,7 +687,7 @@ export const paletteSets: Palette[] = [
       "Electric, high-contrast colors straight from a neon-lit city.",
     longDescription:
       "Neon Nights channels the electric energy of rain-slicked city streets after dark — vivid chartreuse, cyan, hot pink, and orange against near-black darkness. This palette is built for brands that want to feel cutting-edge, countercultural, or simply impossible to ignore.",
-    tags: ["vivid", "electric"],
+    tags: ["electric", "urban"],
     mood: "Electric & Edgy",
     bestFor: ["Gaming", "Streetwear", "Music & Events", "Cyberpunk Aesthetic"],
     colors: [
@@ -571,7 +704,7 @@ export const paletteSets: Palette[] = [
     description: "Deep space purples and cosmic blues of the night sky.",
     longDescription:
       "Galaxy pulls color from the furthest reaches of the observable universe — the deep violet of a nebula, the midnight blue of open space, and the occasional spark of stellar gold. It's a palette of boundless ambition and wonder, perfect for tech startups, creative agencies, or anyone who wants to think at cosmic scale.",
-    tags: ["deep", "cool"],
+    tags: ["celestial", "deep"],
     mood: "Cosmic & Ambitious",
     bestFor: [
       "Tech Startups",
@@ -593,7 +726,7 @@ export const paletteSets: Palette[] = [
     description: "Dancing greens and purples of the northern lights.",
     longDescription:
       "Aurora captures the ethereal, shifting beauty of the borealis — electric green rippling into teal, deepening through violet to the dark indigo of an Arctic night sky. It's otherworldly and alive, perfect for creative technology brands, music platforms, or any project that wants to feel genuinely magical.",
-    tags: ["cool", "vibrant"],
+    tags: ["celestial", "electric"],
     mood: "Ethereal & Magical",
     bestFor: [
       "Creative Tech",
@@ -615,7 +748,7 @@ export const paletteSets: Palette[] = [
     description: "Hot pink and acid yellow against brutal dark concrete.",
     longDescription:
       "Cyberpunk tears its palette directly from a dystopian megacity — screaming magenta neon, acid yellow, electric violet, all blazing against near-black urban darkness. It's aggressive, confrontational, and impossible to ignore — perfect for gaming, streetwear, and any brand operating in the space between technology and counterculture.",
-    tags: ["vivid", "electric"],
+    tags: ["electric", "urban"],
     mood: "Aggressive & Futuristic",
     bestFor: ["Gaming", "Streetwear", "Music", "Cyberpunk & Sci-Fi"],
     colors: [
@@ -632,7 +765,7 @@ export const paletteSets: Palette[] = [
     description: "Bioluminescent blues of the unexplored ocean floor.",
     longDescription:
       "Deep Sea descends into the hadal zone where sunlight never reaches — the deep navy and near-black of abyssal water punctuated by the eerie bioluminescent blues and teals of deep-sea creatures. It's a palette of mystery, discovery, and the unknown, ideal for science brands, exploratory tech, or anything that thrives in depth.",
-    tags: ["deep", "cool"],
+    tags: ["deep", "mysterious"],
     mood: "Mysterious & Deep",
     bestFor: ["Science Brands", "Exploratory Tech", "Documentaries", "Gaming"],
     colors: [
@@ -649,7 +782,7 @@ export const paletteSets: Palette[] = [
     description: "Deep navy night sky scattered with silver starlight.",
     longDescription:
       "Starlit draws from a clear night far from city lights — deep navy and indigo sky punctuated by the cool silver-white of distant stars. It's a palette of stillness and quiet wonder, ideal for astronomy apps, sleep and wellness products, or premium dark-mode interfaces.",
-    tags: ["deep", "cool"],
+    tags: ["celestial", "calm"],
     mood: "Quiet & Infinite",
     bestFor: [
       "Astronomy Apps",
@@ -671,7 +804,7 @@ export const paletteSets: Palette[] = [
     description: "Icy blues and stark whites with a touch of electric cyan.",
     longDescription:
       "Frostbite is sharp and unforgiving — bright white frost, cold steel blue, and a jolt of electric cyan that feels almost dangerous. It's a palette of extreme cold and high energy, well suited to gaming, winter sports brands, or tech products with an edge.",
-    tags: ["cool", "electric"],
+    tags: ["electric", "cool"],
     mood: "Sharp & Chilling",
     bestFor: ["Gaming", "Winter Sports", "Tech Brands", "Horror Aesthetic"],
     colors: [
@@ -680,6 +813,45 @@ export const paletteSets: Palette[] = [
       { hex: "#0ea5e9", name: "Steel Blue" },
       { hex: "#1e3a8a", name: "Deep Freeze" },
       { hex: "#0f172a", name: "Arctic Dark" },
+    ],
+  },
+  {
+    id: "eclipse",
+    name: "Eclipse",
+    description: "Dramatic black and gold ring of a total solar eclipse.",
+    longDescription:
+      "Eclipse captures the rare, breathtaking moment when the sun is completely obscured — a thin golden corona burning against absolute black, with deep purple twilight at the edges. It's a palette of rare drama and cosmic scale, perfect for premium tech, events, or science communication.",
+    tags: ["celestial", "dramatic"],
+    mood: "Rare & Dramatic",
+    bestFor: ["Premium Tech", "Events", "Science Communication", "Gaming"],
+    colors: [
+      { hex: "#fde047", name: "Corona Gold" },
+      { hex: "#a16207", name: "Solar Ring" },
+      { hex: "#581c87", name: "Twilight Purple" },
+      { hex: "#1e1b4b", name: "Eclipse Dark" },
+      { hex: "#020617", name: "Totality" },
+    ],
+  },
+  {
+    id: "noctilucent",
+    name: "Noctilucent",
+    description: "Glowing electric blue clouds against a deep purple sky.",
+    longDescription:
+      "Noctilucent takes its name from rare high-altitude clouds that glow electric blue against the darkest part of twilight. The palette pairs luminous cyan-blue with deep violet and near-black, creating something otherworldly and rare — ideal for music platforms, sci-fi branding, or premium night-mode apps.",
+    tags: ["celestial", "electric"],
+    mood: "Otherworldly & Rare",
+    bestFor: [
+      "Music Platforms",
+      "Sci-Fi Branding",
+      "Night Mode Apps",
+      "Digital Art",
+    ],
+    colors: [
+      { hex: "#a5f3fc", name: "Noctilucent Glow" },
+      { hex: "#22d3ee", name: "Electric Cloud" },
+      { hex: "#7c3aed", name: "Twilight Violet" },
+      { hex: "#312e81", name: "Deep Dusk" },
+      { hex: "#020617", name: "Night Black" },
     ],
   },
 
@@ -730,7 +902,7 @@ export const paletteSets: Palette[] = [
     description: "Fruity, bright pastels inspired by summer frozen desserts.",
     longDescription:
       "Sorbet takes the playfulness of candy and dials up the saturation just enough — raspberry pink, mango orange, lemon yellow, and lime green that feel fresh and appetizing without tipping into garish. It's the palette of food brands, summer packaging, and consumer apps that want to feel delicious.",
-    tags: ["pastel", "vibrant"],
+    tags: ["pastel", "culinary"],
     mood: "Fresh & Appetising",
     bestFor: [
       "Food Brands",
@@ -752,7 +924,7 @@ export const paletteSets: Palette[] = [
     description: "Soft whites and pale blues of a bright, overcast sky.",
     longDescription:
       "Cloud strips color back to the gentlest possible range — near-white, pale grey-blue, soft periwinkle, and cool lavender that feel open, airy, and completely unthreatening. It's the perfect palette for meditation apps, mental health platforms, or any product that needs to feel immediately calming.",
-    tags: ["pastel", "minimal"],
+    tags: ["pastel", "calm"],
     mood: "Airy & Calming",
     bestFor: ["Meditation Apps", "Mental Health", "Minimal UI", "Healthcare"],
     colors: [
@@ -769,7 +941,7 @@ export const paletteSets: Palette[] = [
     description: "Delicate French pastry hues — pistachio, rose, and violet.",
     longDescription:
       "Macaron draws from the precise, jewel-like colors of a Parisian patisserie window — pale pistachio, dusty rose, soft lavender, lemon cream, and sky blue. It's a palette of refined delicacy, perfect for luxury food brands, upscale beauty, or editorial work that wants to feel like a display case on the Rue du Bac.",
-    tags: ["pastel", "soft"],
+    tags: ["pastel", "culinary"],
     mood: "Delicate & Refined",
     bestFor: [
       "Luxury Food",
@@ -791,7 +963,7 @@ export const paletteSets: Palette[] = [
     description: "Fleeting pinks and soft whites of hanami season.",
     longDescription:
       "Cherry Blossom captures the brief, heartbreaking beauty of sakura season — the palest pink blossoms against white sky, deepening through rose to the warm grey of ancient bark. It's a palette about impermanence and beauty, deeply associated with Japanese aesthetics and perfect for anything that wants to feel both delicate and meaningful.",
-    tags: ["pastel", "fresh"],
+    tags: ["floral", "soft"],
     mood: "Fleeting & Beautiful",
     bestFor: ["Japanese Aesthetics", "Beauty", "Spring Campaigns", "Wellness"],
     colors: [
@@ -825,7 +997,7 @@ export const paletteSets: Palette[] = [
     description: "Washed-out pastels that bleed gently into one another.",
     longDescription:
       "Watercolor mimics the soft diffusion of pigment on wet paper — pale blue bleeding into lavender, soft yellow fading into mint. Nothing here is fully saturated; everything feels gentle and handmade. It's ideal for stationery, art supplies, children's books, or wedding design.",
-    tags: ["pastel", "soft"],
+    tags: ["pastel", "artisan"],
     mood: "Gentle & Artistic",
     bestFor: [
       "Stationery",
@@ -839,6 +1011,50 @@ export const paletteSets: Palette[] = [
       { hex: "#bfdbfe", name: "Sky Wash" },
       { hex: "#e9d5ff", name: "Lavender Wash" },
       { hex: "#fbcfe8", name: "Pink Wash" },
+    ],
+  },
+  {
+    id: "powder-room",
+    name: "Powder Room",
+    description: "Powdery pinks and soft mint of a vintage vanity table.",
+    longDescription:
+      "Powder Room evokes a vintage dressing table — powdery rose pink, soft mint green, and the warm cream of aged ivory. It's nostalgic and gentle, perfect for beauty brands, vintage-inspired packaging, or boutique hospitality.",
+    tags: ["pastel", "vintage"],
+    mood: "Nostalgic & Gentle",
+    bestFor: [
+      "Beauty Brands",
+      "Vintage Packaging",
+      "Boutique Hospitality",
+      "Wedding Design",
+    ],
+    colors: [
+      { hex: "#fffbeb", name: "Aged Ivory" },
+      { hex: "#fbcfe8", name: "Powder Pink" },
+      { hex: "#fda4af", name: "Rose Dust" },
+      { hex: "#a7f3d0", name: "Soft Mint" },
+      { hex: "#ddd6fe", name: "Pale Violet" },
+    ],
+  },
+  {
+    id: "milky",
+    name: "Milky",
+    description: "Creamy off-whites and the faintest hints of pastel.",
+    longDescription:
+      "Milky reduces everything almost to monochrome — soft cream, pale oat, and the barest whisper of blush and blue. It's a palette of extreme restraint, perfect for premium minimal branding, skincare, or baby products that want to feel pure.",
+    tags: ["minimal", "soft"],
+    mood: "Pure & Restrained",
+    bestFor: [
+      "Premium Minimal Branding",
+      "Skincare",
+      "Baby Products",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fffdf7", name: "Milk White" },
+      { hex: "#fef3e2", name: "Oat Cream" },
+      { hex: "#fde8e8", name: "Faint Blush" },
+      { hex: "#e0f2fe", name: "Faint Blue" },
+      { hex: "#e7e5e4", name: "Soft Stone" },
     ],
   },
 
@@ -866,7 +1082,7 @@ export const paletteSets: Palette[] = [
     description: "Loud, festive, and irresistibly fun primary brights.",
     longDescription:
       "Carnival throws the whole color wheel at you at once — screaming yellow, electric blue, vivid red, neon green, and hot orange, all at maximum confidence. It's the palette of fairground rides, festival branding, and brands that have absolutely no interest in blending in.",
-    tags: ["vivid", "playful"],
+    tags: ["festive", "playful"],
     mood: "Festive & Fearless",
     bestFor: [
       "Events & Festivals",
@@ -888,7 +1104,7 @@ export const paletteSets: Palette[] = [
     description: "Bold primaries and stark contrasts inspired by Warhol.",
     longDescription:
       "Pop Art channels the flat, graphic energy of 1960s commercial art — pure cyan, magenta, yellow, and black arranged with maximum visual tension. It's confrontational, democratic, and impossible to ignore, ideal for cultural institutions, fashion brands, or any project that wants to feel like a statement.",
-    tags: ["vivid", "bold"],
+    tags: ["vivid", "graphic"],
     mood: "Graphic & Confrontational",
     bestFor: [
       "Cultural Institutions",
@@ -911,7 +1127,7 @@ export const paletteSets: Palette[] = [
       "Groovy 70s tones — avocado, mustard, burnt orange, and brown.",
     longDescription:
       "Retro Funk reaches back to the warm, slightly weird color universe of the 1970s — avocado green appliances, harvest gold kitchens, burnt orange shag carpet, and rich walnut brown. It's nostalgic and knowing, perfect for vintage brands, record shops, or any project leaning into analogue warmth.",
-    tags: ["warm", "retro"],
+    tags: ["retro", "vintage"],
     mood: "Nostalgic & Groovy",
     bestFor: ["Vintage Brands", "Record Shops", "Retro UI", "Food & Drink"],
     colors: [
@@ -929,7 +1145,7 @@ export const paletteSets: Palette[] = [
       "Geometric 80s brights inspired by the Memphis design movement.",
     longDescription:
       "Memphis takes the bold, anti-functionalist energy of the 1980s design movement and packs it into a palette — primary yellow, cobalt, vivid pink, and black arranged in deliberate visual noise. It's postmodern and playful, perfect for design-forward brands, creative studios, or anyone who wants to signal that they know their design history.",
-    tags: ["vivid", "retro"],
+    tags: ["retro", "graphic"],
     mood: "Postmodern & Playful",
     bestFor: ["Design Studios", "Creative Agencies", "Branding", "Editorial"],
     colors: [
@@ -946,7 +1162,7 @@ export const paletteSets: Palette[] = [
     description: "Pastel pink and cyan of nostalgic digital aesthetics.",
     longDescription:
       "Vaporwave distills an entire internet subculture into color — hazy pink fading to lavender, electric cyan, soft purple, and the pale teal of Windows 95 screensavers. It's ironic and sincere at the same time, perfect for music, digital art, or any brand that wants to feel like a memory of the future.",
-    tags: ["vivid", "retro"],
+    tags: ["retro", "electric"],
     mood: "Nostalgic & Ironic",
     bestFor: ["Music Brands", "Digital Art", "Internet Culture", "Gaming"],
     colors: [
@@ -963,7 +1179,7 @@ export const paletteSets: Palette[] = [
     description: "Juicy citrus brights — lime, mango, and hot pink.",
     longDescription:
       "Tropicana is built for maximum refreshment — zesty lime green, juicy mango orange, and a splash of hot pink against bright cyan. It's loud, fun, and unapologetically summery, ideal for juice brands, summer fashion, festivals, and beach clubs.",
-    tags: ["vivid", "tropical"],
+    tags: ["tropical", "vibrant"],
     mood: "Juicy & Energetic",
     bestFor: ["Juice Brands", "Summer Fashion", "Festivals", "Beach Clubs"],
     colors: [
@@ -980,7 +1196,7 @@ export const paletteSets: Palette[] = [
     description: "Spray-can brights clashing against urban concrete grey.",
     longDescription:
       "Graffiti throws saturated spray-paint colors — electric yellow, hot magenta, and vivid blue — against the flat grey of a concrete wall. It's deliberately clashing and full of attitude, perfect for streetwear, music festivals, skate brands, or urban art projects.",
-    tags: ["vivid", "bold"],
+    tags: ["vivid", "urban"],
     mood: "Urban & Rebellious",
     bestFor: ["Streetwear", "Music Festivals", "Skate Brands", "Urban Art"],
     colors: [
@@ -989,6 +1205,45 @@ export const paletteSets: Palette[] = [
       { hex: "#3b82f6", name: "Spray Blue" },
       { hex: "#a3a3a3", name: "Concrete" },
       { hex: "#27272a", name: "Wall Shadow" },
+    ],
+  },
+  {
+    id: "arcade",
+    name: "Arcade",
+    description: "Saturated primary brights of classic 80s arcade cabinets.",
+    longDescription:
+      "Arcade channels the glowing CRT colours of classic video games — saturated red, electric blue, bright yellow, and deep black. It's a palette of nostalgia and pure fun, perfect for gaming brands, retro tech, or playful consumer apps.",
+    tags: ["retro", "playful"],
+    mood: "Nostalgic & Playful",
+    bestFor: ["Gaming Brands", "Retro Tech", "Consumer Apps", "Entertainment"],
+    colors: [
+      { hex: "#facc15", name: "Coin Yellow" },
+      { hex: "#3b82f6", name: "Player Blue" },
+      { hex: "#ef4444", name: "Game Over Red" },
+      { hex: "#22c55e", name: "Power Green" },
+      { hex: "#18181b", name: "CRT Black" },
+    ],
+  },
+  {
+    id: "festival",
+    name: "Festival",
+    description: "Bright clashing colours of flags, lanterns, and celebration.",
+    longDescription:
+      "Festival pulls from the joyous chaos of a street celebration — vivid red, sunshine yellow, hot pink, and bright green, all competing for attention. It's a palette of pure celebration, perfect for event branding, cultural festivals, or vibrant consumer products.",
+    tags: ["festive", "vivid"],
+    mood: "Joyous & Vibrant",
+    bestFor: [
+      "Event Branding",
+      "Cultural Festivals",
+      "Consumer Products",
+      "Social Media",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Lantern Yellow" },
+      { hex: "#fb7185", name: "Festival Pink" },
+      { hex: "#ef4444", name: "Flag Red" },
+      { hex: "#4ade80", name: "Garland Green" },
+      { hex: "#818cf8", name: "Banner Violet" },
     ],
   },
 
@@ -1043,7 +1298,7 @@ export const paletteSets: Palette[] = [
     description: "Regal purples and rich golds of sovereign authority.",
     longDescription:
       "Royal draws from the historical iconography of monarchy — deep purple velvet, burnished gold leaf, and ivory parchment. It's a palette that immediately signals heritage, authority, and exceptional status, perfect for established institutions, luxury hospitality, or premium products that want to wear their prestige openly.",
-    tags: ["luxury", "deep"],
+    tags: ["luxury", "heritage"],
     mood: "Regal & Authoritative",
     bestFor: [
       "Heritage Brands",
@@ -1065,7 +1320,7 @@ export const paletteSets: Palette[] = [
     description: "Effervescent golds and creams of a celebratory moment.",
     longDescription:
       "Champagne captures the warm sparkle of a celebration — the pale gold of fine wine, warm cream, soft blush, and the faintest hint of rose. It's sophisticated without being cold, festive without being loud, and ideal for weddings, luxury events, beauty brands, or any occasion that deserves to feel special.",
-    tags: ["luxury", "warm"],
+    tags: ["luxury", "festive"],
     mood: "Celebratory & Refined",
     bestFor: [
       "Weddings & Events",
@@ -1088,7 +1343,7 @@ export const paletteSets: Palette[] = [
       "High-contrast black, white, and muted greys of classic cinema.",
     longDescription:
       "Film Noir strips the world to its most dramatic essentials — pure black shadow, harsh white light, and the endless grey scale in between. Occasionally a single accent of blood red or amber cuts through the darkness. It's a palette of moral ambiguity, tension, and cinematic storytelling.",
-    tags: ["luxury", "minimal"],
+    tags: ["cinematic", "minimal"],
     mood: "Cinematic & Tense",
     bestFor: ["Film & Media", "Premium Publishing", "Photography", "Fashion"],
     colors: [
@@ -1106,7 +1361,7 @@ export const paletteSets: Palette[] = [
       "Imperial jade greens and burnished gold of East Asian heritage.",
     longDescription:
       "Jade & Gold draws from the iconic visual language of East Asian imperial culture — the deep, saturated green of carved jade, the warm lustre of burnished gold, and the rich lacquer red of ceremonial objects. It's a palette of heritage, craftsmanship, and cultural prestige.",
-    tags: ["luxury", "rich"],
+    tags: ["luxury", "heritage"],
     mood: "Imperial & Prestigious",
     bestFor: [
       "Heritage Luxury",
@@ -1128,7 +1383,7 @@ export const paletteSets: Palette[] = [
     description: "Deep jewel tones of rich velvet upholstery.",
     longDescription:
       "Velvet draws from the plush interiors of old theatres and grand hotels — deep emerald, rich burgundy, and royal sapphire, all with the soft sheen of fabric catching low light. It's a palette of indulgence and drama, ideal for theatre branding, luxury furniture, or premium cosmetics.",
-    tags: ["luxury", "rich"],
+    tags: ["luxury", "dramatic"],
     mood: "Plush & Opulent",
     bestFor: [
       "Theatre Branding",
@@ -1150,7 +1405,7 @@ export const paletteSets: Palette[] = [
     description: "Black, gold, and emerald geometry of the Gatsby era.",
     longDescription:
       "Art Deco channels the glamour of the 1920s — sharp black geometry, gleaming gold accents, and the rich emerald green favoured by the era's grand hotels and theatres. It's a palette of celebration and precision, perfect for hospitality, event branding, fashion, or premium packaging.",
-    tags: ["luxury", "retro"],
+    tags: ["heritage", "graphic"],
     mood: "Glamorous & Geometric",
     bestFor: ["Hospitality", "Event Branding", "Fashion", "Premium Packaging"],
     colors: [
@@ -1159,6 +1414,50 @@ export const paletteSets: Palette[] = [
       { hex: "#065f46", name: "Deco Emerald" },
       { hex: "#1c1917", name: "Deco Black" },
       { hex: "#f5f5f4", name: "Ivory Trim" },
+    ],
+  },
+  {
+    id: "marble",
+    name: "Marble",
+    description: "Cool white and grey veining of polished marble stone.",
+    longDescription:
+      "Marble draws from the cool elegance of polished stone — bright white, soft grey veining, and the occasional warm gold accent. It's a palette of timeless luxury, perfect for high-end real estate, beauty, or premium hospitality branding.",
+    tags: ["luxury", "minimal"],
+    mood: "Timeless & Elegant",
+    bestFor: [
+      "Real Estate",
+      "Beauty Brands",
+      "Premium Hospitality",
+      "Architecture",
+    ],
+    colors: [
+      { hex: "#fafafa", name: "Marble White" },
+      { hex: "#e4e4e7", name: "Veining Grey" },
+      { hex: "#a1a1aa", name: "Stone Grey" },
+      { hex: "#d4af37", name: "Gold Accent" },
+      { hex: "#27272a", name: "Dark Vein" },
+    ],
+  },
+  {
+    id: "cognac",
+    name: "Cognac",
+    description: "Warm amber-brown of fine aged spirits in cut crystal.",
+    longDescription:
+      "Cognac captures the warm glow of aged spirits held up to candlelight — deep amber, burnished copper, and the dark mahogany of an oak barrel. It's a palette of refined indulgence, perfect for spirits brands, gentlemen's accessories, or premium leather goods.",
+    tags: ["luxury", "culinary"],
+    mood: "Refined & Indulgent",
+    bestFor: [
+      "Spirits Brands",
+      "Leather Goods",
+      "Premium Accessories",
+      "Fine Dining",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Candlelight" },
+      { hex: "#d97706", name: "Cognac Amber" },
+      { hex: "#b45309", name: "Burnished Copper" },
+      { hex: "#78350f", name: "Oak Barrel" },
+      { hex: "#1c1917", name: "Dark Leather" },
     ],
   },
 
@@ -1257,7 +1556,7 @@ export const paletteSets: Palette[] = [
     description: "Raw brutalist greys of exposed concrete architecture.",
     longDescription:
       "Concrete embraces the raw, unfinished beauty of brutalist architecture — the cold grey of poured concrete, weathered aggregate, and the stark white of high-contrast lighting. It's a palette that refuses ornamentation, perfect for architecture firms, industrial brands, or any project that wants to feel structurally honest.",
-    tags: ["neutral", "cool"],
+    tags: ["neutral", "industrial"],
     mood: "Raw & Structural",
     bestFor: [
       "Architecture Firms",
@@ -1279,7 +1578,7 @@ export const paletteSets: Palette[] = [
     description: "Aged paper tones and warm sepia of historical documents.",
     longDescription:
       "Parchment draws from the warm, aged palette of manuscripts and historical documents — yellowed ivory, warm sepia, aged leather brown, and the faded rust of old iron gall ink. It's the palette of heritage, storytelling, and craft, ideal for publishing, cultural institutions, or any brand that wants to feel like it has a genuine history.",
-    tags: ["neutral", "warm"],
+    tags: ["heritage", "warm"],
     mood: "Historical & Warm",
     bestFor: [
       "Publishing",
@@ -1301,7 +1600,7 @@ export const paletteSets: Palette[] = [
     description: "Soft greys and muted blues of an early morning mist.",
     longDescription:
       "Fog settles everything into soft focus — pale grey-blue, muted slate, and the faintest hint of lavender, as if seen through morning mist. It's a palette of calm and restraint, ideal for minimal UI, wellness apps, photography portfolios, or architecture studios.",
-    tags: ["neutral", "cool"],
+    tags: ["neutral", "calm"],
     mood: "Soft & Subdued",
     bestFor: [
       "Minimal UI",
@@ -1323,7 +1622,7 @@ export const paletteSets: Palette[] = [
     description: "Warm off-whites and gentle beige of a sunlit linen closet.",
     longDescription:
       "Linen Room is quiet domestic comfort — warm off-white, soft beige, and the faintest hint of dusty rose, like sunlight falling across folded linen. It's the palette of considered home brands, interior design, and hospitality that wants to feel lived-in and calm.",
-    tags: ["neutral", "warm"],
+    tags: ["neutral", "cozy"],
     mood: "Calm & Domestic",
     bestFor: [
       "Home Goods",
@@ -1339,6 +1638,50 @@ export const paletteSets: Palette[] = [
       { hex: "#a1887f", name: "Warm Taupe" },
     ],
   },
+  {
+    id: "gallery",
+    name: "Gallery",
+    description: "Crisp white walls and grey concrete of a modern art gallery.",
+    longDescription:
+      "Gallery is built for content, not decoration — crisp white, light grey, and a single deep charcoal accent that lets art and typography take centre stage. It's the palette of museum branding, portfolio sites, and any project that values restraint above all.",
+    tags: ["neutral", "minimal"],
+    mood: "Restrained & Curatorial",
+    bestFor: [
+      "Museum Branding",
+      "Portfolio Sites",
+      "Editorial",
+      "Art Galleries",
+    ],
+    colors: [
+      { hex: "#ffffff", name: "Gallery White" },
+      { hex: "#f4f4f5", name: "Wall Grey" },
+      { hex: "#d4d4d8", name: "Frame Grey" },
+      { hex: "#52525b", name: "Plinth Grey" },
+      { hex: "#18181b", name: "Charcoal Accent" },
+    ],
+  },
+  {
+    id: "oat-milk",
+    name: "Oat Milk",
+    description: "Warm beige and soft cream of plant-based dairy alternatives.",
+    longDescription:
+      "Oat Milk is gentle, warm, and contemporary — soft beige, warm cream, and a muted sage accent. It's the palette of modern wellness brands, plant-based food packaging, or minimalist home goods that want to feel approachable and natural.",
+    tags: ["neutral", "wellness"],
+    mood: "Approachable & Natural",
+    bestFor: [
+      "Wellness Brands",
+      "Plant-Based Packaging",
+      "Home Goods",
+      "Minimal Branding",
+    ],
+    colors: [
+      { hex: "#fefbf6", name: "Oat Cream" },
+      { hex: "#f5ead9", name: "Warm Beige" },
+      { hex: "#e3d5c0", name: "Toasted Oat" },
+      { hex: "#a8a29e", name: "Soft Grey" },
+      { hex: "#7c8a72", name: "Sage Accent" },
+    ],
+  },
 
   // ── Food & Culinary ───────────────────────────────────────────────────────
   {
@@ -1347,7 +1690,7 @@ export const paletteSets: Palette[] = [
     description: "Earthy greens and warm creams of a Japanese tea ceremony.",
     longDescription:
       "Matcha draws from the quiet ritual of Japanese tea — vivid powdered-green matcha, soft cream, and the warm wood tones of a tea house. It's a palette of calm focus and ceremony, perfect for tea brands, wellness cafés, or anything inspired by Japanese aesthetics.",
-    tags: ["natural", "calm"],
+    tags: ["culinary", "calm"],
     mood: "Calm & Ceremonial",
     bestFor: [
       "Tea Brands",
@@ -1369,7 +1712,7 @@ export const paletteSets: Palette[] = [
     description: "Rich coffee browns and creamy foam tones.",
     longDescription:
       "Espresso layers the colours of a perfect cup — dark roasted bean brown at the base, warm caramel mid-tones, and the soft cream of steamed milk foam on top. It's a palette of comfort and quality, ideal for coffee brands, cafés, and warm, inviting packaging.",
-    tags: ["warm", "rich"],
+    tags: ["culinary", "cozy"],
     mood: "Rich & Comforting",
     bestFor: ["Coffee Brands", "Cafes", "Branding", "Packaging"],
     colors: [
@@ -1378,6 +1721,1874 @@ export const paletteSets: Palette[] = [
       { hex: "#b45309", name: "Caramel" },
       { hex: "#78350f", name: "Roasted Bean" },
       { hex: "#2e1a0f", name: "Espresso" },
+    ],
+  },
+  {
+    id: "berry-tart",
+    name: "Berry Tart",
+    description: "Deep berry purples and creamy pastry tones.",
+    longDescription:
+      "Berry Tart pairs the deep purple-red of fresh berries with the warm golden crust and cream of a baked tart. It's a palette of indulgent sweetness, perfect for bakeries, dessert brands, or food photography.",
+    tags: ["culinary", "rich"],
+    mood: "Sweet & Indulgent",
+    bestFor: ["Bakeries", "Dessert Brands", "Food Photography", "Packaging"],
+    colors: [
+      { hex: "#fef3c7", name: "Pastry Cream" },
+      { hex: "#fbbf24", name: "Golden Crust" },
+      { hex: "#a21caf", name: "Berry Purple" },
+      { hex: "#701a75", name: "Deep Berry" },
+      { hex: "#3b0764", name: "Blackberry" },
+    ],
+  },
+  {
+    id: "citrus-grove",
+    name: "Citrus Grove",
+    description: "Bright citrus yellows, oranges, and leafy greens.",
+    longDescription:
+      "Citrus Grove bursts with the bright, zesty colours of an orange orchard — sunny yellow, vivid orange, and the deep green of waxy leaves. It's a palette of freshness and vitality, perfect for juice brands, health products, or summer packaging.",
+    tags: ["culinary", "fresh"],
+    mood: "Zesty & Vital",
+    bestFor: [
+      "Juice Brands",
+      "Health Products",
+      "Summer Packaging",
+      "Food Brands",
+    ],
+    colors: [
+      { hex: "#fef08a", name: "Lemon Zest" },
+      { hex: "#fde047", name: "Citrus Yellow" },
+      { hex: "#fb923c", name: "Orange Burst" },
+      { hex: "#16a34a", name: "Leaf Green" },
+      { hex: "#14532d", name: "Deep Leaf" },
+    ],
+  },
+  {
+    id: "olive-grove",
+    name: "Olive Grove",
+    description: "Muted greens and warm stone of a Mediterranean olive grove.",
+    longDescription:
+      "Olive Grove draws from the sun-drenched hills of the Mediterranean — dusty olive green, warm limestone, and the deep green-black of cured olives. It's a palette of rustic sophistication, perfect for Mediterranean food brands, olive oil packaging, or boutique hospitality.",
+    tags: ["culinary", "earthy"],
+    mood: "Rustic & Sophisticated",
+    bestFor: [
+      "Mediterranean Brands",
+      "Olive Oil Packaging",
+      "Boutique Hospitality",
+      "Food & Drink",
+    ],
+    colors: [
+      { hex: "#fefce8", name: "Limestone" },
+      { hex: "#d9d9a3", name: "Sun-Bleached Grass" },
+      { hex: "#808000", name: "Olive Grove" },
+      { hex: "#4d4d00", name: "Cured Olive" },
+      { hex: "#292524", name: "Deep Earth" },
+    ],
+  },
+  {
+    id: "honeycomb",
+    name: "Honeycomb",
+    description: "Golden honey ambers and warm waxy yellows.",
+    longDescription:
+      "Honeycomb glows with the warm, layered colours of a beehive — deep golden honey, warm beeswax yellow, and the rich brown of a wooden hive frame. It's a palette of natural sweetness and craft, perfect for artisan food brands, natural skincare, or sustainable packaging.",
+    tags: ["culinary", "artisan"],
+    mood: "Sweet & Artisan",
+    bestFor: [
+      "Artisan Food Brands",
+      "Natural Skincare",
+      "Sustainable Packaging",
+      "Farmers Markets",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Beeswax" },
+      { hex: "#fde047", name: "Honey Gold" },
+      { hex: "#f59e0b", name: "Deep Honey" },
+      { hex: "#92400e", name: "Hive Brown" },
+      { hex: "#451a03", name: "Dark Comb" },
+    ],
+  },
+  {
+    id: "tomato-vine",
+    name: "Tomato Vine",
+    description: "Ripe tomato reds and fresh vine greens.",
+    longDescription:
+      "Tomato Vine pairs the deep red of sun-ripened tomatoes with the bright green of fresh vines and leaves. It's a palette of garden-fresh vitality, perfect for Italian food brands, sauce packaging, or farm-to-table branding.",
+    tags: ["culinary", "fresh"],
+    mood: "Fresh & Vital",
+    bestFor: [
+      "Italian Food Brands",
+      "Sauce Packaging",
+      "Farm-to-Table",
+      "Restaurant Branding",
+    ],
+    colors: [
+      { hex: "#fef08a", name: "Sunlight" },
+      { hex: "#84cc16", name: "Vine Green" },
+      { hex: "#dc2626", name: "Ripe Tomato" },
+      { hex: "#7f1d1d", name: "Deep Tomato" },
+      { hex: "#365314", name: "Deep Vine" },
+    ],
+  },
+  {
+    id: "dark-chocolate",
+    name: "Dark Chocolate",
+    description: "Rich cocoa browns with warm gold accent.",
+    longDescription:
+      "Dark Chocolate layers deep cocoa brown with a warm golden accent reminiscent of foil wrapping, finished with a soft cream highlight. It's a palette of rich indulgence, perfect for chocolate brands, premium confectionery, or dessert packaging.",
+    tags: ["culinary", "luxury"],
+    mood: "Rich & Indulgent",
+    bestFor: [
+      "Chocolate Brands",
+      "Confectionery",
+      "Dessert Packaging",
+      "Gift Boxes",
+    ],
+    colors: [
+      { hex: "#fef3c7", name: "Cream Swirl" },
+      { hex: "#d4af37", name: "Foil Gold" },
+      { hex: "#92400e", name: "Cocoa Brown" },
+      { hex: "#451a03", name: "Dark Cocoa" },
+      { hex: "#1c1208", name: "Deepest Chocolate" },
+    ],
+  },
+  {
+    id: "herb-garden",
+    name: "Herb Garden",
+    description: "Fresh greens of basil, mint, and rosemary.",
+    longDescription:
+      "Herb Garden gathers the varied greens of a kitchen herb patch — bright basil, cool mint, and deep rosemary, with a touch of warm terracotta pot. It's a palette of fresh culinary inspiration, perfect for recipe apps, organic food brands, or kitchenware.",
+    tags: ["culinary", "botanical"],
+    mood: "Fresh & Culinary",
+    bestFor: ["Recipe Apps", "Organic Food Brands", "Kitchenware", "Packaging"],
+    colors: [
+      { hex: "#d9f99d", name: "Basil Light" },
+      { hex: "#86efac", name: "Mint Green" },
+      { hex: "#16a34a", name: "Garden Green" },
+      { hex: "#14532d", name: "Rosemary" },
+      { hex: "#c2410c", name: "Terracotta Pot" },
+    ],
+  },
+  {
+    id: "wine-cellar",
+    name: "Wine Cellar",
+    description: "Deep burgundy and oak tones of an aged wine cellar.",
+    longDescription:
+      "Wine Cellar pairs the deep red-purple of aged wine with the warm brown of oak barrels and the cool grey of stone cellar walls. It's a palette of aged sophistication, perfect for wine brands, fine dining, or cellar-door hospitality.",
+    tags: ["culinary", "luxury"],
+    mood: "Aged & Sophisticated",
+    bestFor: ["Wine Brands", "Fine Dining", "Cellar Hospitality", "Packaging"],
+    colors: [
+      { hex: "#fef3c7", name: "Candle Light" },
+      { hex: "#92400e", name: "Oak Barrel" },
+      { hex: "#7f1d1d", name: "Aged Wine" },
+      { hex: "#581c87", name: "Deep Burgundy" },
+      { hex: "#3f3f46", name: "Stone Cellar" },
+    ],
+  },
+
+  // ── Seasonal ──────────────────────────────────────────────────────────────
+  {
+    id: "winter-frost",
+    name: "Winter Frost",
+    description: "Crisp whites, icy blues, and deep evergreen accents.",
+    longDescription:
+      "Winter Frost combines the crisp white of fresh snow with icy pale blue and a deep evergreen accent reminiscent of pine branches dusted with frost. It's a palette of seasonal cheer with a cool, clean edge, perfect for holiday campaigns, winter retail, or seasonal packaging.",
+    tags: ["seasonal", "cool"],
+    mood: "Crisp & Festive",
+    bestFor: [
+      "Holiday Campaigns",
+      "Winter Retail",
+      "Seasonal Packaging",
+      "Greeting Cards",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Fresh Snow" },
+      { hex: "#bae6fd", name: "Ice Blue" },
+      { hex: "#64748b", name: "Frosted Slate" },
+      { hex: "#14532d", name: "Evergreen" },
+      { hex: "#052e16", name: "Deep Pine" },
+    ],
+  },
+  {
+    id: "harvest-moon",
+    name: "Harvest Moon",
+    description: "Deep amber moonlight against twilight purple fields.",
+    longDescription:
+      "Harvest Moon captures the warm orange glow of a full autumn moon rising over darkening fields — deep amber and gold against twilight purple and near-black. It's a palette of seasonal transition and quiet drama, perfect for autumn campaigns, storytelling brands, or premium seasonal packaging.",
+    tags: ["seasonal", "dramatic"],
+    mood: "Atmospheric & Seasonal",
+    bestFor: [
+      "Autumn Campaigns",
+      "Storytelling Brands",
+      "Seasonal Packaging",
+      "Editorial",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Moon Glow" },
+      { hex: "#f59e0b", name: "Harvest Amber" },
+      { hex: "#c2410c", name: "Dusk Orange" },
+      { hex: "#581c87", name: "Twilight Field" },
+      { hex: "#1e1b4b", name: "Night Field" },
+    ],
+  },
+  {
+    id: "spring-rain",
+    name: "Spring Rain",
+    description: "Soft greens and grey-blue tones of a fresh spring shower.",
+    longDescription:
+      "Spring Rain blends the soft green of new growth with the cool grey-blue of overcast spring skies and rain-slicked pavement. It's a palette of renewal and gentle freshness, perfect for wellness apps, garden brands, or spring marketing campaigns.",
+    tags: ["seasonal", "fresh"],
+    mood: "Fresh & Renewing",
+    bestFor: [
+      "Wellness Apps",
+      "Garden Brands",
+      "Spring Campaigns",
+      "Lifestyle",
+    ],
+    colors: [
+      { hex: "#f0fdf4", name: "New Growth" },
+      { hex: "#bbf7d0", name: "Spring Green" },
+      { hex: "#94a3b8", name: "Rain Grey" },
+      { hex: "#64748b", name: "Overcast Blue" },
+      { hex: "#334155", name: "Storm Grey" },
+    ],
+  },
+  {
+    id: "summer-haze",
+    name: "Summer Haze",
+    description: "Warm golden light and soft blue of a hazy summer afternoon.",
+    longDescription:
+      "Summer Haze captures the soft, golden quality of light on a hot afternoon — warm yellow sunlight, dusty rose, and the pale hazy blue of a heat-shimmered sky. It's a palette of lazy warmth, perfect for summer campaigns, lifestyle brands, or travel marketing.",
+    tags: ["seasonal", "warm"],
+    mood: "Lazy & Golden",
+    bestFor: [
+      "Summer Campaigns",
+      "Lifestyle Brands",
+      "Travel Marketing",
+      "Photography",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Golden Light" },
+      { hex: "#fde68a", name: "Sun Haze" },
+      { hex: "#fca5a5", name: "Dusty Rose" },
+      { hex: "#a5b4fc", name: "Haze Blue" },
+      { hex: "#bae6fd", name: "Sky Shimmer" },
+    ],
+  },
+  {
+    id: "first-frost",
+    name: "First Frost",
+    description: "Pale silver-white frost over deep autumn foliage.",
+    longDescription:
+      "First Frost captures the moment autumn turns to winter — a thin layer of silver-white frost settling over the last deep red and amber leaves of the season. It's a palette of seasonal transition, perfect for late-autumn campaigns, premium packaging, or editorial design.",
+    tags: ["seasonal", "muted"],
+    mood: "Transitional & Crisp",
+    bestFor: [
+      "Late Autumn Campaigns",
+      "Premium Packaging",
+      "Editorial",
+      "Greeting Cards",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Frost Silver" },
+      { hex: "#cbd5e1", name: "Frosted Edge" },
+      { hex: "#b45309", name: "Amber Leaf" },
+      { hex: "#7f1d1d", name: "Deep Red Leaf" },
+      { hex: "#44403c", name: "Bare Branch" },
+    ],
+  },
+  {
+    id: "summer-solstice",
+    name: "Summer Solstice",
+    description: "Brightest golds and deep blues of the longest day.",
+    longDescription:
+      "Summer Solstice celebrates the height of summer — the brightest possible gold sunlight against a deep, saturated sky blue, with a touch of warm coral. It's a palette of peak vitality, perfect for summer festivals, beachwear, or seasonal events.",
+    tags: ["seasonal", "vibrant"],
+    mood: "Peak & Vital",
+    bestFor: ["Summer Festivals", "Beachwear", "Seasonal Events", "Travel"],
+    colors: [
+      { hex: "#fde047", name: "Solstice Gold" },
+      { hex: "#fb923c", name: "Warm Coral" },
+      { hex: "#0ea5e9", name: "Deep Sky" },
+      { hex: "#0369a1", name: "Solstice Blue" },
+      { hex: "#0c4a6e", name: "Twilight Deep" },
+    ],
+  },
+  {
+    id: "autumn-equinox",
+    name: "Autumn Equinox",
+    description: "Balanced warm and cool tones marking the turn of the season.",
+    longDescription:
+      "Autumn Equinox balances warm amber and rust against cool slate blue, representing the equal split of day and night. It's a palette of balance and transition, perfect for seasonal brand refreshes, editorial calendars, or autumn product lines.",
+    tags: ["seasonal", "earthy"],
+    mood: "Balanced & Transitional",
+    bestFor: [
+      "Seasonal Refreshes",
+      "Editorial Calendars",
+      "Autumn Products",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Equinox Gold" },
+      { hex: "#ea580c", name: "Autumn Rust" },
+      { hex: "#78716c", name: "Balance Grey" },
+      { hex: "#475569", name: "Slate Blue" },
+      { hex: "#1e293b", name: "Deep Slate" },
+    ],
+  },
+  {
+    id: "spring-thaw",
+    name: "Spring Thaw",
+    description: "Melting ice blues giving way to the first green shoots.",
+    longDescription:
+      "Spring Thaw shows the moment winter loosens its grip — pale icy blue melting into the soft green of the season's first growth, with warm brown earth peeking through. It's a palette of hopeful change, perfect for spring campaigns, garden brands, or renewal-themed marketing.",
+    tags: ["seasonal", "fresh"],
+    mood: "Hopeful & Changing",
+    bestFor: [
+      "Spring Campaigns",
+      "Garden Brands",
+      "Renewal Marketing",
+      "Lifestyle",
+    ],
+    colors: [
+      { hex: "#f0f9ff", name: "Melting Ice" },
+      { hex: "#bae6fd", name: "Thaw Blue" },
+      { hex: "#bbf7d0", name: "First Shoot" },
+      { hex: "#4ade80", name: "New Green" },
+      { hex: "#92400e", name: "Thawed Earth" },
+    ],
+  },
+  {
+    id: "midsummer-night",
+    name: "Midsummer Night",
+    description: "Warm twilight purples and the gold of fireflies.",
+    longDescription:
+      "Midsummer Night captures a warm summer evening — deep twilight purple-blue skies dotted with the gold flicker of fireflies, and the lingering warmth of the day's heat. It's a palette of magical warmth, perfect for summer events, storytelling brands, or evening campaigns.",
+    tags: ["seasonal", "celestial"],
+    mood: "Magical & Warm",
+    bestFor: [
+      "Summer Events",
+      "Storytelling Brands",
+      "Evening Campaigns",
+      "Editorial",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Firefly Gold" },
+      { hex: "#fb923c", name: "Lingering Warmth" },
+      { hex: "#7c3aed", name: "Twilight Purple" },
+      { hex: "#4338ca", name: "Deep Dusk" },
+      { hex: "#1e1b4b", name: "Midsummer Night" },
+    ],
+  },
+  {
+    id: "winter-solstice",
+    name: "Winter Solstice",
+    description: "Deepest blues and a single warm candle-light accent.",
+    longDescription:
+      "Winter Solstice marks the longest night — the deepest possible blue-black, broken only by the warm gold of a single candle flame. It's a palette of quiet reflection and hope, perfect for winter campaigns, candle brands, or year-end branding.",
+    tags: ["seasonal", "cozy"],
+    mood: "Quiet & Reflective",
+    bestFor: [
+      "Winter Campaigns",
+      "Candle Brands",
+      "Year-End Branding",
+      "Editorial",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Candle Flame" },
+      { hex: "#fbbf24", name: "Warm Glow" },
+      { hex: "#1e3a8a", name: "Solstice Blue" },
+      { hex: "#1e1b4b", name: "Deep Night" },
+      { hex: "#020617", name: "Longest Night" },
+    ],
+  },
+
+  // ── Tech & Digital ────────────────────────────────────────────────────────
+  {
+    id: "circuit",
+    name: "Circuit",
+    description: "Dark board green and glowing trace lines of a circuit board.",
+    longDescription:
+      "Circuit draws from the inner workings of electronics — deep PCB green, glowing copper traces, and bright signal-light cyan against near-black components. It's a palette of technical precision and quiet energy, perfect for hardware brands, developer tools, or cyberpunk aesthetics.",
+    tags: ["tech", "electric"],
+    mood: "Technical & Precise",
+    bestFor: [
+      "Hardware Brands",
+      "Developer Tools",
+      "Cyberpunk Aesthetic",
+      "Tech Events",
+    ],
+    colors: [
+      { hex: "#22d3ee", name: "Signal Cyan" },
+      { hex: "#fb923c", name: "Copper Trace" },
+      { hex: "#15803d", name: "Board Green" },
+      { hex: "#14532d", name: "Deep Board" },
+      { hex: "#09090b", name: "Component Black" },
+    ],
+  },
+  {
+    id: "holographic",
+    name: "Holographic",
+    description: "Iridescent pinks, blues, and purples of holographic foil.",
+    longDescription:
+      "Holographic mimics the shifting, iridescent surface of foil packaging and prismatic film — soft pink shifting to cyan, then violet, against a clean white base. It's a palette of futuristic shimmer, perfect for beauty packaging, music releases, or trend-forward digital products.",
+    tags: ["tech", "electric"],
+    mood: "Iridescent & Futuristic",
+    bestFor: [
+      "Beauty Packaging",
+      "Music Releases",
+      "Digital Products",
+      "Gen-Z Branding",
+    ],
+    colors: [
+      { hex: "#ffffff", name: "Foil White" },
+      { hex: "#fbcfe8", name: "Holo Pink" },
+      { hex: "#a5f3fc", name: "Holo Cyan" },
+      { hex: "#c4b5fd", name: "Holo Violet" },
+      { hex: "#818cf8", name: "Holo Indigo" },
+    ],
+  },
+  {
+    id: "terminal",
+    name: "Terminal",
+    description:
+      "Classic green-on-black phosphor of a retro computer terminal.",
+    longDescription:
+      "Terminal pays homage to early computing — phosphor green text glowing against pure black, with amber and cyan as alternate accent signals. It's a palette of hacker culture and nostalgic tech, perfect for developer brands, retro gaming, or cybersecurity products.",
+    tags: ["tech", "retro"],
+    mood: "Retro & Technical",
+    bestFor: [
+      "Developer Brands",
+      "Retro Gaming",
+      "Cybersecurity",
+      "Tech Events",
+    ],
+    colors: [
+      { hex: "#4ade80", name: "Phosphor Green" },
+      { hex: "#22d3ee", name: "Cyan Signal" },
+      { hex: "#fbbf24", name: "Amber Alert" },
+      { hex: "#27272a", name: "Terminal Grey" },
+      { hex: "#000000", name: "Terminal Black" },
+    ],
+  },
+  {
+    id: "data-stream",
+    name: "Data Stream",
+    description: "Cool blues and violets of flowing digital information.",
+    longDescription:
+      "Data Stream visualises the flow of information — cool electric blue, deep violet, and the faint cyan glow of data points moving through a dark interface. It's a palette of clarity within complexity, perfect for analytics dashboards, fintech, or AI product branding.",
+    tags: ["tech", "cool"],
+    mood: "Flowing & Analytical",
+    bestFor: [
+      "Analytics Dashboards",
+      "Fintech",
+      "AI Branding",
+      "SaaS Products",
+    ],
+    colors: [
+      { hex: "#a5f3fc", name: "Data Point" },
+      { hex: "#38bdf8", name: "Stream Blue" },
+      { hex: "#6366f1", name: "Flow Indigo" },
+      { hex: "#4338ca", name: "Deep Stream" },
+      { hex: "#1e1b4b", name: "Interface Dark" },
+    ],
+  },
+  {
+    id: "neural-net",
+    name: "Neural Net",
+    description: "Glowing nodes and connections of an AI network.",
+    longDescription:
+      "Neural Net visualises the abstract architecture of machine learning — glowing violet nodes connected by bright cyan lines against deep space-black. It's a palette of intelligent complexity, perfect for AI companies, research branding, or futuristic product launches.",
+    tags: ["tech", "electric"],
+    mood: "Intelligent & Complex",
+    bestFor: [
+      "AI Companies",
+      "Research Branding",
+      "Product Launches",
+      "Tech Events",
+    ],
+    colors: [
+      { hex: "#a5f3fc", name: "Node Cyan" },
+      { hex: "#818cf8", name: "Connection Violet" },
+      { hex: "#6d28d9", name: "Deep Node" },
+      { hex: "#312e81", name: "Network Indigo" },
+      { hex: "#020617", name: "Space Black" },
+    ],
+  },
+  {
+    id: "augmented",
+    name: "Augmented",
+    description: "Translucent overlay blues and whites of AR interfaces.",
+    longDescription:
+      "Augmented draws from the translucent overlay graphics of augmented reality — bright cyan-white interface elements against a neutral grey real-world backdrop, with a violet accent for active elements. It's a palette of digital overlay, perfect for AR brands, smart glasses, or interactive product design.",
+    tags: ["tech", "cool"],
+    mood: "Digital & Overlay",
+    bestFor: [
+      "AR Brands",
+      "Smart Devices",
+      "Interactive Design",
+      "Tech Products",
+    ],
+    colors: [
+      { hex: "#ffffff", name: "Overlay White" },
+      { hex: "#a5f3fc", name: "Interface Cyan" },
+      { hex: "#a78bfa", name: "Active Violet" },
+      { hex: "#a1a1aa", name: "Real World Grey" },
+      { hex: "#3f3f46", name: "Background Dark" },
+    ],
+  },
+  {
+    id: "power-grid",
+    name: "Power Grid",
+    description: "Electric yellow warning tones against dark infrastructure.",
+    longDescription:
+      "Power Grid draws from the visual language of energy infrastructure — bright warning yellow and electric blue against dark steel and concrete. It's a palette of contained power, perfect for energy companies, electric vehicle brands, or industrial tech.",
+    tags: ["tech", "industrial"],
+    mood: "Powerful & Contained",
+    bestFor: [
+      "Energy Companies",
+      "EV Brands",
+      "Industrial Tech",
+      "Infrastructure",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Warning Yellow" },
+      { hex: "#38bdf8", name: "Power Blue" },
+      { hex: "#3f3f46", name: "Steel Grey" },
+      { hex: "#27272a", name: "Dark Infrastructure" },
+      { hex: "#09090b", name: "Grid Black" },
+    ],
+  },
+  {
+    id: "quantum",
+    name: "Quantum",
+    description: "Shifting purples and teals representing quantum states.",
+    longDescription:
+      "Quantum represents uncertainty and possibility — shifting between deep violet and bright teal, as if existing in multiple states at once, against a near-black background. It's a palette of cutting-edge science, perfect for quantum computing brands, research institutions, or sci-fi branding.",
+    tags: ["tech", "electric"],
+    mood: "Uncertain & Cutting-Edge",
+    bestFor: [
+      "Quantum Computing",
+      "Research Institutions",
+      "Sci-Fi Branding",
+      "Tech Events",
+    ],
+    colors: [
+      { hex: "#5eead4", name: "Quantum Teal" },
+      { hex: "#22d3ee", name: "State Cyan" },
+      { hex: "#8b5cf6", name: "Quantum Violet" },
+      { hex: "#4c1d95", name: "Deep State" },
+      { hex: "#0a0a0a", name: "Probability Black" },
+    ],
+  },
+  {
+    id: "server-room",
+    name: "Server Room",
+    description: "Cool blue LED status lights against black rack hardware.",
+    longDescription:
+      "Server Room channels the quiet hum of a data centre — cool blue and green status LEDs blinking against the matte black of rack-mounted hardware. It's a palette of infrastructure reliability, perfect for cloud brands, hosting companies, or enterprise tech.",
+    tags: ["tech", "cool"],
+    mood: "Reliable & Infrastructural",
+    bestFor: [
+      "Cloud Brands",
+      "Hosting Companies",
+      "Enterprise Tech",
+      "B2B SaaS",
+    ],
+    colors: [
+      { hex: "#4ade80", name: "Status Green" },
+      { hex: "#38bdf8", name: "LED Blue" },
+      { hex: "#52525b", name: "Rack Grey" },
+      { hex: "#27272a", name: "Server Black" },
+      { hex: "#09090b", name: "Deep Rack" },
+    ],
+  },
+  {
+    id: "glitch",
+    name: "Glitch",
+    description: "Clashing RGB channel shifts of a digital glitch.",
+    longDescription:
+      "Glitch deliberately clashes — separated red, green, and blue channels as if a digital signal has broken apart, against stark black and white. It's a palette of digital disruption, perfect for music releases, experimental brands, or edgy digital art.",
+    tags: ["tech", "electric"],
+    mood: "Disruptive & Experimental",
+    bestFor: ["Music Releases", "Experimental Brands", "Digital Art", "Gaming"],
+    colors: [
+      { hex: "#ffffff", name: "Signal White" },
+      { hex: "#22d3ee", name: "Cyan Channel" },
+      { hex: "#f472b6", name: "Magenta Channel" },
+      { hex: "#facc15", name: "Yellow Channel" },
+      { hex: "#000000", name: "Signal Loss" },
+    ],
+  },
+
+  // ── Vintage & Heritage ────────────────────────────────────────────────────
+  {
+    id: "polaroid",
+    name: "Polaroid",
+    description: "Faded warm tones and soft contrast of an instant photograph.",
+    longDescription:
+      "Polaroid mimics the slightly faded, warm-toned look of an instant photo — soft cream, muted orange, dusty teal, and a warm brown border. It's a palette of nostalgic memory, perfect for lifestyle brands, photography apps, or scrapbook-style design.",
+    tags: ["vintage", "warm"],
+    mood: "Nostalgic & Faded",
+    bestFor: [
+      "Lifestyle Brands",
+      "Photography Apps",
+      "Scrapbook Design",
+      "Social Media",
+    ],
+    colors: [
+      { hex: "#fef3e2", name: "Polaroid Border" },
+      { hex: "#fdba74", name: "Faded Orange" },
+      { hex: "#5eead4", name: "Muted Teal" },
+      { hex: "#92400e", name: "Photo Brown" },
+      { hex: "#44403c", name: "Vintage Shadow" },
+    ],
+  },
+  {
+    id: "vinyl",
+    name: "Vinyl",
+    description: "Deep black grooves and warm amber label of a record.",
+    longDescription:
+      "Vinyl draws from the analogue warmth of a record collection — deep matte black, warm amber label colours, and a touch of dusty red. It's a palette of analogue authenticity, perfect for music brands, audio equipment, or record store branding.",
+    tags: ["vintage", "retro"],
+    mood: "Analogue & Authentic",
+    bestFor: [
+      "Music Brands",
+      "Audio Equipment",
+      "Record Stores",
+      "Podcast Branding",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Label Gold" },
+      { hex: "#d97706", name: "Amber Label" },
+      { hex: "#b91c1c", name: "Dusty Red" },
+      { hex: "#292524", name: "Vinyl Grey" },
+      { hex: "#0c0a09", name: "Record Black" },
+    ],
+  },
+  {
+    id: "typewriter",
+    name: "Typewriter",
+    description: "Aged paper and inky black of a vintage typewriter.",
+    longDescription:
+      "Typewriter is stark and literary — warm aged paper, deep ink black, and a single rust-red ribbon accent. It's a palette of considered craft and the written word, perfect for publishing, writing apps, or literary branding.",
+    tags: ["vintage", "artisan"],
+    mood: "Literary & Considered",
+    bestFor: ["Publishing", "Writing Apps", "Literary Branding", "Stationery"],
+    colors: [
+      { hex: "#fefce8", name: "Aged Paper" },
+      { hex: "#e7e5e4", name: "Paper Shadow" },
+      { hex: "#b91c1c", name: "Ribbon Red" },
+      { hex: "#44403c", name: "Ink Grey" },
+      { hex: "#1c1917", name: "Ink Black" },
+    ],
+  },
+  {
+    id: "tarnished-brass",
+    name: "Tarnished Brass",
+    description: "Aged brass golds and deep verdigris greens.",
+    longDescription:
+      "Tarnished Brass pairs the warm gold of aged brass fittings with the deep green-blue of verdigris patina. It's a palette of timeworn elegance, perfect for antique brands, heritage hospitality, or steampunk-inspired design.",
+    tags: ["heritage", "artisan"],
+    mood: "Timeworn & Elegant",
+    bestFor: [
+      "Antique Brands",
+      "Heritage Hospitality",
+      "Steampunk Design",
+      "Premium Packaging",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Polished Brass" },
+      { hex: "#ca8a04", name: "Tarnished Gold" },
+      { hex: "#0d9488", name: "Verdigris" },
+      { hex: "#134e4a", name: "Deep Patina" },
+      { hex: "#1c1917", name: "Aged Iron" },
+    ],
+  },
+  {
+    id: "sepia-tone",
+    name: "Sepia Tone",
+    description: "Classic sepia browns of antique photography.",
+    longDescription:
+      "Sepia Tone is the colour of memory itself — warm brown-toned highlights fading to deep umber shadow, exactly as old photographs age over time. It's a palette of pure nostalgia, perfect for heritage brands, photography apps, or documentary projects.",
+    tags: ["vintage", "heritage"],
+    mood: "Nostalgic & Aged",
+    bestFor: [
+      "Heritage Brands",
+      "Photography Apps",
+      "Documentaries",
+      "Editorial",
+    ],
+    colors: [
+      { hex: "#fef3e2", name: "Sepia Highlight" },
+      { hex: "#d2b48c", name: "Sepia Mid" },
+      { hex: "#92400e", name: "Sepia Brown" },
+      { hex: "#5c3a1e", name: "Deep Sepia" },
+      { hex: "#2e1a0f", name: "Sepia Shadow" },
+    ],
+  },
+  {
+    id: "letterpress",
+    name: "Letterpress",
+    description: "Deep ink black and cream paper of letterpress printing.",
+    longDescription:
+      "Letterpress draws from the tactile world of traditional printing — deep, slightly uneven black ink pressed into warm cream paper, with a single accent of deep red ink. It's a palette of craft and permanence, perfect for stationery, print studios, or premium branding.",
+    tags: ["artisan", "heritage"],
+    mood: "Crafted & Permanent",
+    bestFor: ["Stationery", "Print Studios", "Premium Branding", "Invitations"],
+    colors: [
+      { hex: "#fefce8", name: "Cream Paper" },
+      { hex: "#f5f0e1", name: "Aged Cream" },
+      { hex: "#991b1b", name: "Press Red" },
+      { hex: "#3f3f46", name: "Ink Grey" },
+      { hex: "#18181b", name: "Press Black" },
+    ],
+  },
+  {
+    id: "atomic-age",
+    name: "Atomic Age",
+    description: "Optimistic turquoise and orange of 1950s design.",
+    longDescription:
+      "Atomic Age channels the bright optimism of mid-century design — turquoise, warm orange, and mustard yellow against creamy white. It's a palette of confident retro-futurism, perfect for diner branding, retro furniture, or nostalgic tech products.",
+    tags: ["retro", "cheerful"],
+    mood: "Optimistic & Retro-Futurist",
+    bestFor: [
+      "Diner Branding",
+      "Retro Furniture",
+      "Nostalgic Tech",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fffbeb", name: "Cream White" },
+      { hex: "#fbbf24", name: "Mustard Yellow" },
+      { hex: "#fb923c", name: "Atomic Orange" },
+      { hex: "#0d9488", name: "Atomic Turquoise" },
+      { hex: "#134e4a", name: "Deep Turquoise" },
+    ],
+  },
+  {
+    id: "victorian",
+    name: "Victorian",
+    description: "Deep wallpaper greens and burgundy of a Victorian parlour.",
+    longDescription:
+      "Victorian draws from the dense, layered interiors of the 19th century — deep botanical green wallpaper, rich burgundy upholstery, and warm brass accents. It's a palette of ornate heritage, perfect for period drama branding, antique shops, or heritage hotels.",
+    tags: ["heritage", "dramatic"],
+    mood: "Ornate & Heritage",
+    bestFor: [
+      "Period Branding",
+      "Antique Shops",
+      "Heritage Hotels",
+      "Premium Packaging",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Brass Accent" },
+      { hex: "#831843", name: "Burgundy Velvet" },
+      { hex: "#14532d", name: "Parlour Green" },
+      { hex: "#052e16", name: "Deep Green" },
+      { hex: "#1c1917", name: "Dark Wood" },
+    ],
+  },
+  {
+    id: "tin-toy",
+    name: "Tin Toy",
+    description: "Faded primary colours of a vintage painted tin toy.",
+    longDescription:
+      "Tin Toy captures the slightly faded, chipped-paint look of an old wind-up toy — muted red, dusty blue, and warm yellow against worn metal grey. It's a palette of charming imperfection, perfect for vintage toy brands, children's books, or nostalgic packaging.",
+    tags: ["vintage", "playful"],
+    mood: "Charming & Worn",
+    bestFor: [
+      "Vintage Toy Brands",
+      "Children's Books",
+      "Nostalgic Packaging",
+      "Illustration",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Faded Yellow" },
+      { hex: "#fca5a5", name: "Faded Red" },
+      { hex: "#93c5fd", name: "Dusty Blue" },
+      { hex: "#a8a29e", name: "Worn Metal" },
+      { hex: "#57534e", name: "Tin Shadow" },
+    ],
+  },
+  {
+    id: "postcard",
+    name: "Postcard",
+    description: "Sun-faded pastel tones of a vintage travel postcard.",
+    longDescription:
+      "Postcard mimics the slightly bleached, sun-faded colours of a decades-old travel postcard — soft turquoise sea, faded coral sky, and warm sandy tones. It's a palette of well-travelled nostalgia, perfect for travel brands, retro tourism campaigns, or stationery.",
+    tags: ["vintage", "coastal"],
+    mood: "Faded & Well-Travelled",
+    bestFor: ["Travel Brands", "Retro Tourism", "Stationery", "Packaging"],
+    colors: [
+      { hex: "#fef3e2", name: "Faded Sand" },
+      { hex: "#fdba9d", name: "Faded Coral" },
+      { hex: "#a5d8d8", name: "Faded Turquoise" },
+      { hex: "#7fa8a8", name: "Sea Mid" },
+      { hex: "#4a6b6b", name: "Deep Sea Fade" },
+    ],
+  },
+
+  // ── Gemstone ──────────────────────────────────────────────────────────────
+  {
+    id: "ruby",
+    name: "Ruby",
+    description: "Brilliant red gemstone tones with deep crimson shadow.",
+    longDescription:
+      "Ruby is pure gemstone brilliance — vivid red at its brightest facet, deepening to crimson and near-black shadow at the core. It's a palette of precious intensity, perfect for jewellery brands, luxury cosmetics, or premium Valentine's campaigns.",
+    tags: ["luxury", "gemstone"],
+    mood: "Brilliant & Precious",
+    bestFor: [
+      "Jewellery Brands",
+      "Luxury Cosmetics",
+      "Valentine's Campaigns",
+      "Premium Packaging",
+    ],
+    colors: [
+      { hex: "#fecaca", name: "Ruby Light" },
+      { hex: "#f87171", name: "Bright Facet" },
+      { hex: "#dc2626", name: "Ruby Red" },
+      { hex: "#7f1d1d", name: "Deep Ruby" },
+      { hex: "#1c1917", name: "Shadow Core" },
+    ],
+  },
+  {
+    id: "topaz",
+    name: "Topaz",
+    description: "Warm golden-orange gemstone tones with amber depth.",
+    longDescription:
+      "Topaz glows with warm golden-orange light, deepening through amber to a rich brown core. It's a palette of warm luxury and quiet richness, perfect for jewellery, premium spirits, or autumn luxury campaigns.",
+    tags: ["luxury", "gemstone"],
+    mood: "Warm & Luxurious",
+    bestFor: [
+      "Jewellery Brands",
+      "Premium Spirits",
+      "Autumn Campaigns",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fef3c7", name: "Topaz Light" },
+      { hex: "#fbbf24", name: "Golden Topaz" },
+      { hex: "#d97706", name: "Amber Depth" },
+      { hex: "#92400e", name: "Deep Topaz" },
+      { hex: "#451a03", name: "Topaz Core" },
+    ],
+  },
+  {
+    id: "tourmaline",
+    name: "Tourmaline",
+    description: "Vivid teal-green gemstone tones with deep emerald shadow.",
+    longDescription:
+      "Tourmaline captures the vivid blue-green of this prized gemstone — bright teal at its brightest, deepening through emerald to near-black. It's a palette of vivid precious depth, perfect for jewellery, luxury wellness, or premium packaging.",
+    tags: ["luxury", "gemstone"],
+    mood: "Vivid & Precious",
+    bestFor: [
+      "Jewellery Brands",
+      "Luxury Wellness",
+      "Premium Packaging",
+      "Beauty",
+    ],
+    colors: [
+      { hex: "#a7f3d0", name: "Tourmaline Light" },
+      { hex: "#2dd4bf", name: "Bright Teal" },
+      { hex: "#0d9488", name: "Tourmaline Green" },
+      { hex: "#065f46", name: "Deep Emerald" },
+      { hex: "#022c22", name: "Shadow Core" },
+    ],
+  },
+  {
+    id: "citrine",
+    name: "Citrine",
+    description: "Sunny yellow gemstone tones with deep golden shadow.",
+    longDescription:
+      "Citrine radiates sunny, optimistic yellow, deepening through gold to a warm brown core. It's a palette of bright clarity and quiet confidence, perfect for jewellery, wellness brands, or sunny lifestyle campaigns.",
+    tags: ["luxury", "gemstone"],
+    mood: "Sunny & Confident",
+    bestFor: [
+      "Jewellery Brands",
+      "Wellness Brands",
+      "Lifestyle Campaigns",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Citrine Light" },
+      { hex: "#fde047", name: "Sunny Citrine" },
+      { hex: "#eab308", name: "Golden Citrine" },
+      { hex: "#a16207", name: "Deep Gold" },
+      { hex: "#422006", name: "Shadow Core" },
+    ],
+  },
+  {
+    id: "sapphire-gem",
+    name: "Sapphire",
+    description: "Deep royal blue gemstone tones with bright facet highlight.",
+    longDescription:
+      "Sapphire glows with the deep royal blue of this classic gemstone, from a bright icy facet highlight down to a near-black core. It's a palette of regal precision, perfect for jewellery brands, premium tech, or formal event branding.",
+    tags: ["luxury", "gemstone"],
+    mood: "Regal & Precise",
+    bestFor: ["Jewellery Brands", "Premium Tech", "Formal Events", "Packaging"],
+    colors: [
+      { hex: "#dbeafe", name: "Sapphire Facet" },
+      { hex: "#60a5fa", name: "Bright Sapphire" },
+      { hex: "#2563eb", name: "Sapphire Blue" },
+      { hex: "#1e3a8a", name: "Deep Sapphire" },
+      { hex: "#0c1a3d", name: "Shadow Core" },
+    ],
+  },
+  {
+    id: "opal",
+    name: "Opal",
+    description: "Iridescent pastel shifts of milky opal stone.",
+    longDescription:
+      "Opal captures the soft, milky iridescence of this unique gemstone — pale pink shifting through lavender and mint against a creamy white base. It's a palette of gentle iridescence, perfect for jewellery brands, beauty packaging, or bridal design.",
+    tags: ["luxury", "gemstone"],
+    mood: "Iridescent & Gentle",
+    bestFor: [
+      "Jewellery Brands",
+      "Beauty Packaging",
+      "Bridal Design",
+      "Premium Gifts",
+    ],
+    colors: [
+      { hex: "#fefefe", name: "Opal White" },
+      { hex: "#fbcfe8", name: "Opal Pink" },
+      { hex: "#ddd6fe", name: "Opal Lavender" },
+      { hex: "#a7f3d0", name: "Opal Mint" },
+      { hex: "#cbd5e1", name: "Opal Shadow" },
+    ],
+  },
+  {
+    id: "onyx-gem",
+    name: "Onyx",
+    description: "Pure glossy black gemstone with silver edge highlight.",
+    longDescription:
+      "Onyx is pure, polished black with a thin silver edge of reflected light and a deep grey transition zone. It's a palette of absolute elegance, perfect for luxury jewellery, premium menswear, or high-end packaging.",
+    tags: ["luxury", "gemstone"],
+    mood: "Absolute & Elegant",
+    bestFor: [
+      "Luxury Jewellery",
+      "Premium Menswear",
+      "High-End Packaging",
+      "Watches",
+    ],
+    colors: [
+      { hex: "#e4e4e7", name: "Silver Edge" },
+      { hex: "#a1a1aa", name: "Reflected Light" },
+      { hex: "#52525b", name: "Onyx Grey" },
+      { hex: "#27272a", name: "Deep Onyx" },
+      { hex: "#0a0a0a", name: "Onyx Black" },
+    ],
+  },
+  {
+    id: "garnet",
+    name: "Garnet",
+    description: "Deep wine-red gemstone tones with warm brown depth.",
+    longDescription:
+      "Garnet glows with deep wine-red at its brightest, deepening through burgundy to a warm brown shadow core. It's a palette of warm precious depth, perfect for jewellery brands, autumn luxury campaigns, or premium leather goods.",
+    tags: ["luxury", "gemstone"],
+    mood: "Warm & Precious",
+    bestFor: [
+      "Jewellery Brands",
+      "Autumn Campaigns",
+      "Leather Goods",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fecaca", name: "Garnet Light" },
+      { hex: "#f87171", name: "Bright Garnet" },
+      { hex: "#b91c1c", name: "Garnet Red" },
+      { hex: "#7f1d1d", name: "Deep Garnet" },
+      { hex: "#451a03", name: "Brown Core" },
+    ],
+  },
+  {
+    id: "moonstone",
+    name: "Moonstone",
+    description: "Soft silvery blue-white glow of moonstone gem.",
+    longDescription:
+      "Moonstone captures the soft, glowing adularescence of this gem — pale silvery white with a cool blue-grey sheen and a deeper slate shadow. It's a palette of soft luminosity, perfect for jewellery brands, premium skincare, or celestial-themed branding.",
+    tags: ["luxury", "gemstone"],
+    mood: "Luminous & Soft",
+    bestFor: [
+      "Jewellery Brands",
+      "Premium Skincare",
+      "Celestial Branding",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Moonstone White" },
+      { hex: "#e2e8f0", name: "Soft Sheen" },
+      { hex: "#bfdbfe", name: "Blue Glow" },
+      { hex: "#94a3b8", name: "Cool Grey" },
+      { hex: "#475569", name: "Slate Shadow" },
+    ],
+  },
+  {
+    id: "obsidian-gem",
+    name: "Obsidian",
+    description: "Volcanic glass black with a sharp violet sheen.",
+    longDescription:
+      "Obsidian is sharp-edged volcanic glass — deep black with an unexpected violet sheen catching the light, fading to pure black at the core. It's a palette of dark precision, perfect for premium tech, luxury fashion, or dramatic editorial branding.",
+    tags: ["luxury", "gemstone"],
+    mood: "Dark & Precise",
+    bestFor: [
+      "Premium Tech",
+      "Luxury Fashion",
+      "Editorial Branding",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#c4b5fd", name: "Violet Sheen" },
+      { hex: "#7c3aed", name: "Glass Violet" },
+      { hex: "#3f3f46", name: "Volcanic Grey" },
+      { hex: "#18181b", name: "Deep Glass" },
+      { hex: "#000000", name: "Obsidian Core" },
+    ],
+  },
+
+  // ── Botanical & Floral ────────────────────────────────────────────────────
+  {
+    id: "tulip-field",
+    name: "Tulip Field",
+    description: "Bold pinks, reds, and yellows of a Dutch tulip field.",
+    longDescription:
+      "Tulip Field captures the bold, blocky colour rows of a flower farm in bloom — vivid pink, deep red, sunny yellow, and the green of long stems. It's a palette of cheerful abundance, perfect for floral brands, spring campaigns, or greeting cards.",
+    tags: ["floral", "cheerful"],
+    mood: "Cheerful & Abundant",
+    bestFor: [
+      "Floral Brands",
+      "Spring Campaigns",
+      "Greeting Cards",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Yellow Row" },
+      { hex: "#f472b6", name: "Pink Row" },
+      { hex: "#dc2626", name: "Red Row" },
+      { hex: "#16a34a", name: "Stem Green" },
+      { hex: "#14532d", name: "Deep Leaf" },
+    ],
+  },
+  {
+    id: "wildflower-meadow",
+    name: "Wildflower Meadow",
+    description: "Soft mixed pastels of scattered wildflowers in tall grass.",
+    longDescription:
+      "Wildflower Meadow scatters soft lavender, pale yellow, dusty pink, and sage green like flowers in uncut grass. It's a palette of unstructured natural beauty, perfect for stationery, wedding design, or organic skincare.",
+    tags: ["floral", "pastel"],
+    mood: "Natural & Unstructured",
+    bestFor: ["Stationery", "Wedding Design", "Organic Skincare", "Packaging"],
+    colors: [
+      { hex: "#fef9c3", name: "Pale Daisy" },
+      { hex: "#fbcfe8", name: "Dusty Pink" },
+      { hex: "#ddd6fe", name: "Wild Lavender" },
+      { hex: "#bbf7d0", name: "Meadow Grass" },
+      { hex: "#86efac", name: "Sage Stem" },
+    ],
+  },
+  {
+    id: "orchid-house",
+    name: "Orchid House",
+    description:
+      "Deep magentas and rich greens of a tropical orchid greenhouse.",
+    longDescription:
+      "Orchid House pairs the deep magenta and purple of exotic orchid blooms with the rich, glossy green of greenhouse foliage. It's a palette of exotic luxury, perfect for high-end florists, beauty brands, or boutique hotel branding.",
+    tags: ["floral", "lush"],
+    mood: "Exotic & Lush",
+    bestFor: [
+      "High-End Florists",
+      "Beauty Brands",
+      "Boutique Hotels",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fae8ff", name: "Orchid Petal" },
+      { hex: "#e879f9", name: "Bright Orchid" },
+      { hex: "#a21caf", name: "Deep Magenta" },
+      { hex: "#15803d", name: "Glossy Leaf" },
+      { hex: "#14532d", name: "Deep Foliage" },
+    ],
+  },
+  {
+    id: "rose-garden",
+    name: "Rose Garden",
+    description: "Classic rose reds and pinks with deep green foliage.",
+    longDescription:
+      "Rose Garden is timeless romance — classic rose red and pink set against deep green leaves and the brown of garden soil. It's a palette of traditional elegance, perfect for wedding brands, fragrance packaging, or romantic stationery.",
+    tags: ["floral", "romantic"],
+    mood: "Romantic & Timeless",
+    bestFor: ["Wedding Brands", "Fragrance Packaging", "Stationery", "Beauty"],
+    colors: [
+      { hex: "#fecdd3", name: "Petal Pink" },
+      { hex: "#fb7185", name: "Rose Pink" },
+      { hex: "#be123c", name: "Rose Red" },
+      { hex: "#166534", name: "Leaf Green" },
+      { hex: "#451a03", name: "Garden Soil" },
+    ],
+  },
+  {
+    id: "sunflower-field",
+    name: "Sunflower Field",
+    description: "Bright golden sunflowers against deep blue summer sky.",
+    longDescription:
+      "Sunflower Field stands tall golden-yellow blooms against a deep, saturated summer sky blue, with rich brown centres and green stems. It's a palette of bold cheerfulness, perfect for summer brands, greeting cards, or home decor.",
+    tags: ["floral", "cheerful"],
+    mood: "Bold & Cheerful",
+    bestFor: ["Summer Brands", "Greeting Cards", "Home Decor", "Packaging"],
+    colors: [
+      { hex: "#fde047", name: "Sunflower Petal" },
+      { hex: "#ca8a04", name: "Golden Centre" },
+      { hex: "#92400e", name: "Seed Brown" },
+      { hex: "#16a34a", name: "Stem Green" },
+      { hex: "#0ea5e9", name: "Summer Sky" },
+    ],
+  },
+  {
+    id: "lavender-field",
+    name: "Lavender Field",
+    description: "Rows of purple lavender against golden Provençal light.",
+    longDescription:
+      "Lavender Field stretches rows of soft purple lavender beneath the warm golden light of Provence, with green stems and pale stone in the distance. It's a palette of fragrant calm, perfect for fragrance brands, wellness products, or French-inspired branding.",
+    tags: ["floral", "wellness"],
+    mood: "Fragrant & Calm",
+    bestFor: [
+      "Fragrance Brands",
+      "Wellness Products",
+      "French-Inspired Branding",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Provençal Light" },
+      { hex: "#ddd6fe", name: "Lavender Row" },
+      { hex: "#a78bfa", name: "Lavender Bloom" },
+      { hex: "#7c3aed", name: "Deep Lavender" },
+      { hex: "#65a30d", name: "Field Green" },
+    ],
+  },
+  {
+    id: "peony-bloom",
+    name: "Peony Bloom",
+    description: "Lush pink peonies with deep green leaves.",
+    longDescription:
+      "Peony Bloom captures the lush, layered petals of a fully open peony — soft blush through to deep rose pink, set against rich green foliage. It's a palette of romantic abundance, perfect for wedding brands, luxury florists, or fragrance packaging.",
+    tags: ["floral", "romantic"],
+    mood: "Romantic & Abundant",
+    bestFor: [
+      "Wedding Brands",
+      "Luxury Florists",
+      "Fragrance Packaging",
+      "Stationery",
+    ],
+    colors: [
+      { hex: "#fff1f2", name: "Petal Blush" },
+      { hex: "#fecdd3", name: "Soft Peony" },
+      { hex: "#fb7185", name: "Peony Pink" },
+      { hex: "#be123c", name: "Deep Peony" },
+      { hex: "#166534", name: "Foliage Green" },
+    ],
+  },
+  {
+    id: "succulent",
+    name: "Succulent",
+    description: "Muted blue-greens and dusty pinks of desert succulents.",
+    longDescription:
+      "Succulent draws from the soft, powdery colours of desert plants — sage and blue-green leaves with dusty pink edges and warm terracotta pots. It's a palette of modern botanical calm, perfect for plant brands, modern interiors, or minimalist packaging.",
+    tags: ["botanical", "calm"],
+    mood: "Modern & Botanical",
+    bestFor: [
+      "Plant Brands",
+      "Modern Interiors",
+      "Minimalist Packaging",
+      "Home Decor",
+    ],
+    colors: [
+      { hex: "#f0fdfa", name: "Powder Mint" },
+      { hex: "#99f6e4", name: "Succulent Green" },
+      { hex: "#5eead4", name: "Blue-Green" },
+      { hex: "#fda4af", name: "Dusty Pink Edge" },
+      { hex: "#c2410c", name: "Terracotta Pot" },
+    ],
+  },
+  {
+    id: "iris-garden",
+    name: "Iris Garden",
+    description: "Deep purple and gold iris blooms with green leaves.",
+    longDescription:
+      "Iris Garden pairs the deep, velvety purple of iris petals with a flash of golden detail and strong green leaves. It's a palette of dramatic botanical elegance, perfect for premium florists, art-inspired branding, or boutique packaging.",
+    tags: ["floral", "dramatic"],
+    mood: "Dramatic & Elegant",
+    bestFor: [
+      "Premium Florists",
+      "Art-Inspired Branding",
+      "Boutique Packaging",
+      "Stationery",
+    ],
+    colors: [
+      { hex: "#fde68a", name: "Iris Gold" },
+      { hex: "#c4b5fd", name: "Iris Light" },
+      { hex: "#7c3aed", name: "Iris Purple" },
+      { hex: "#4c1d95", name: "Deep Iris" },
+      { hex: "#15803d", name: "Leaf Green" },
+    ],
+  },
+  {
+    id: "wisteria-arbor",
+    name: "Wisteria Arbor",
+    description: "Cascading purple wisteria against weathered wood.",
+    longDescription:
+      "Wisteria Arbor drapes soft purple-blue wisteria blooms over the warm grey-brown of a weathered wooden arbor, with green leaves filling the gaps. It's a palette of cascading romance, perfect for garden brands, wedding venues, or seasonal home decor.",
+    tags: ["floral", "romantic"],
+    mood: "Cascading & Romantic",
+    bestFor: ["Garden Brands", "Wedding Venues", "Home Decor", "Stationery"],
+    colors: [
+      { hex: "#ede9fe", name: "Wisteria Light" },
+      { hex: "#c4b5fd", name: "Wisteria Bloom" },
+      { hex: "#a78bfa", name: "Deep Wisteria" },
+      { hex: "#86efac", name: "Leaf Green" },
+      { hex: "#78716c", name: "Weathered Wood" },
+    ],
+  },
+
+  // ── Industrial & Urban ────────────────────────────────────────────────────
+  {
+    id: "factory",
+    name: "Factory",
+    description: "Steel greys and warning yellow of an industrial workspace.",
+    longDescription:
+      "Factory draws from the utilitarian palette of heavy industry — steel grey, safety yellow, and the deep black of machinery. It's a palette of function over form, perfect for industrial brands, workwear, or B2B manufacturing.",
+    tags: ["industrial", "bold"],
+    mood: "Functional & Robust",
+    bestFor: [
+      "Industrial Brands",
+      "Workwear",
+      "B2B Manufacturing",
+      "Tools & Equipment",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Safety Yellow" },
+      { hex: "#a1a1aa", name: "Steel Grey" },
+      { hex: "#71717a", name: "Machine Grey" },
+      { hex: "#3f3f46", name: "Dark Steel" },
+      { hex: "#18181b", name: "Machinery Black" },
+    ],
+  },
+  {
+    id: "subway",
+    name: "Subway",
+    description:
+      "Cool tile whites and transit-sign brights of a metro station.",
+    longDescription:
+      "Subway draws from the utilitarian design of a metro system — cool white tile, bold transit-sign yellow and blue, and deep platform shadow. It's a palette of urban movement, perfect for transit branding, urban lifestyle apps, or streetwear.",
+    tags: ["urban", "graphic"],
+    mood: "Urban & Functional",
+    bestFor: [
+      "Transit Branding",
+      "Urban Lifestyle Apps",
+      "Streetwear",
+      "Wayfinding",
+    ],
+    colors: [
+      { hex: "#f4f4f5", name: "Tile White" },
+      { hex: "#fde047", name: "Transit Yellow" },
+      { hex: "#2563eb", name: "Line Blue" },
+      { hex: "#3f3f46", name: "Platform Grey" },
+      { hex: "#09090b", name: "Tunnel Black" },
+    ],
+  },
+  {
+    id: "warehouse",
+    name: "Warehouse",
+    description: "Raw timber browns and faded industrial reds.",
+    longDescription:
+      "Warehouse pairs the warm brown of old timber beams with faded industrial red paint and cool concrete grey. It's a palette of repurposed industrial space, perfect for loft brands, craft breweries, or creative studio branding.",
+    tags: ["industrial", "artisan"],
+    mood: "Raw & Repurposed",
+    bestFor: [
+      "Loft Brands",
+      "Craft Breweries",
+      "Creative Studios",
+      "Furniture Design",
+    ],
+    colors: [
+      { hex: "#e7e5e4", name: "Concrete Light" },
+      { hex: "#a8a29e", name: "Concrete Grey" },
+      { hex: "#92400e", name: "Timber Brown" },
+      { hex: "#b91c1c", name: "Faded Red" },
+      { hex: "#292524", name: "Iron Dark" },
+    ],
+  },
+  {
+    id: "blueprint",
+    name: "Blueprint",
+    description: "Classic blueprint blue and white technical line work.",
+    longDescription:
+      "Blueprint takes its colour directly from architectural drawings — deep cyanotype blue with crisp white lines, plus a single warm accent for annotations. It's a palette of precision and planning, perfect for architecture firms, engineering brands, or planning tools.",
+    tags: ["industrial", "tech"],
+    mood: "Precise & Technical",
+    bestFor: [
+      "Architecture Firms",
+      "Engineering Brands",
+      "Planning Tools",
+      "Construction",
+    ],
+    colors: [
+      { hex: "#ffffff", name: "Line White" },
+      { hex: "#bfdbfe", name: "Light Blueprint" },
+      { hex: "#2563eb", name: "Blueprint Blue" },
+      { hex: "#1e3a8a", name: "Deep Blueprint" },
+      { hex: "#fde047", name: "Annotation" },
+    ],
+  },
+  {
+    id: "scaffolding",
+    name: "Scaffolding",
+    description:
+      "Galvanized steel grey and safety orange of construction sites.",
+    longDescription:
+      "Scaffolding draws from active construction sites — galvanized steel grey, bright safety orange netting, and the deep blue of tarpaulin covers. It's a palette of work-in-progress energy, perfect for construction brands, urban development, or workwear.",
+    tags: ["industrial", "bold"],
+    mood: "Active & Functional",
+    bestFor: [
+      "Construction Brands",
+      "Urban Development",
+      "Workwear",
+      "Signage",
+    ],
+    colors: [
+      { hex: "#fb923c", name: "Safety Orange" },
+      { hex: "#d4d4d8", name: "Galvanized Grey" },
+      { hex: "#71717a", name: "Steel Mid" },
+      { hex: "#2563eb", name: "Tarpaulin Blue" },
+      { hex: "#27272a", name: "Site Dark" },
+    ],
+  },
+  {
+    id: "skyline",
+    name: "Skyline",
+    description: "Silhouetted city towers against a deep dusk gradient.",
+    longDescription:
+      "Skyline silhouettes the sharp edges of city towers in deep charcoal against a dusk gradient running from warm orange to deep blue-violet. It's a palette of urban ambition, perfect for real estate brands, city tourism, or business district branding.",
+    tags: ["urban", "dramatic"],
+    mood: "Ambitious & Urban",
+    bestFor: [
+      "Real Estate Brands",
+      "City Tourism",
+      "Business Branding",
+      "Editorial",
+    ],
+    colors: [
+      { hex: "#fb923c", name: "Dusk Orange" },
+      { hex: "#f472b6", name: "Skyline Pink" },
+      { hex: "#7c3aed", name: "Dusk Violet" },
+      { hex: "#312e81", name: "Deep Dusk" },
+      { hex: "#18181b", name: "Tower Silhouette" },
+    ],
+  },
+  {
+    id: "loading-dock",
+    name: "Loading Dock",
+    description: "Weathered yellow caution stripes and concrete grey.",
+    longDescription:
+      "Loading Dock pairs faded caution-stripe yellow and black with the cool grey of poured concrete and a hint of rust from old machinery. It's a palette of utilitarian texture, perfect for logistics brands, streetwear, or industrial-style interiors.",
+    tags: ["industrial", "muted"],
+    mood: "Utilitarian & Textured",
+    bestFor: [
+      "Logistics Brands",
+      "Streetwear",
+      "Industrial Interiors",
+      "Signage",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Caution Yellow" },
+      { hex: "#a8a29e", name: "Concrete Grey" },
+      { hex: "#78716c", name: "Dock Stone" },
+      { hex: "#92400e", name: "Rust Accent" },
+      { hex: "#18181b", name: "Caution Black" },
+    ],
+  },
+  {
+    id: "neon-shop-sign",
+    name: "Neon Shop Sign",
+    description: "Glowing neon tube colours against dark brick.",
+    longDescription:
+      "Neon Shop Sign glows with the classic colours of hand-bent neon tubing — hot pink, electric blue, and warm white — set against dark, textured brick. It's a palette of urban nightlife, perfect for bars, retro signage, or nightlife branding.",
+    tags: ["urban", "electric"],
+    mood: "Glowing & Nocturnal",
+    bestFor: [
+      "Bars",
+      "Retro Signage",
+      "Nightlife Branding",
+      "Restaurant Design",
+    ],
+    colors: [
+      { hex: "#fdf4ff", name: "Neon White" },
+      { hex: "#f472b6", name: "Neon Pink" },
+      { hex: "#22d3ee", name: "Neon Blue" },
+      { hex: "#57534e", name: "Brick Grey" },
+      { hex: "#1c1917", name: "Brick Dark" },
+    ],
+  },
+  {
+    id: "rooftop",
+    name: "Rooftop",
+    description: "Warm string lights against deep urban evening sky.",
+    longDescription:
+      "Rooftop pairs the warm amber glow of string lights with the deep blue-purple of an evening city sky and the silhouette grey of surrounding buildings. It's a palette of urban relaxation, perfect for bar branding, event spaces, or lifestyle apps.",
+    tags: ["urban", "cozy"],
+    mood: "Relaxed & Social",
+    bestFor: ["Bar Branding", "Event Spaces", "Lifestyle Apps", "Hospitality"],
+    colors: [
+      { hex: "#fde68a", name: "String Light" },
+      { hex: "#fb923c", name: "Warm Glow" },
+      { hex: "#6366f1", name: "Evening Sky" },
+      { hex: "#312e81", name: "Deep Evening" },
+      { hex: "#3f3f46", name: "Building Grey" },
+    ],
+  },
+  {
+    id: "underground",
+    name: "Underground",
+    description: "Deep concrete tones with a single bold spray-paint accent.",
+    longDescription:
+      "Underground stays mostly in shades of raw concrete grey, broken by a single bold accent of spray-paint red or orange. It's a palette of restrained edge, perfect for music venues, skate brands, or underground culture branding.",
+    tags: ["urban", "muted"],
+    mood: "Edgy & Restrained",
+    bestFor: [
+      "Music Venues",
+      "Skate Brands",
+      "Underground Culture",
+      "Streetwear",
+    ],
+    colors: [
+      { hex: "#fb923c", name: "Spray Accent" },
+      { hex: "#d4d4d8", name: "Light Concrete" },
+      { hex: "#a1a1aa", name: "Concrete Mid" },
+      { hex: "#52525b", name: "Concrete Dark" },
+      { hex: "#18181b", name: "Tunnel Black" },
+    ],
+  },
+
+  // ── Children & Play ───────────────────────────────────────────────────────
+  {
+    id: "building-blocks",
+    name: "Building Blocks",
+    description: "Bold primary colours of classic wooden building blocks.",
+    longDescription:
+      "Building Blocks uses the bold, simple primaries of classic children's toys — red, yellow, blue, and green against warm wood tones. It's a palette of joyful simplicity, perfect for children's brands, educational products, or playful packaging.",
+    tags: ["playful", "bold"],
+    mood: "Joyful & Simple",
+    bestFor: [
+      "Children's Brands",
+      "Educational Products",
+      "Toy Packaging",
+      "Nurseries",
+    ],
+    colors: [
+      { hex: "#facc15", name: "Block Yellow" },
+      { hex: "#ef4444", name: "Block Red" },
+      { hex: "#3b82f6", name: "Block Blue" },
+      { hex: "#22c55e", name: "Block Green" },
+      { hex: "#d2b48c", name: "Wood Tone" },
+    ],
+  },
+  {
+    id: "balloon-pop",
+    name: "Balloon Pop",
+    description: "Bright party balloon colours against pale sky blue.",
+    longDescription:
+      "Balloon Pop floats bright pink, yellow, and purple balloons against a soft sky-blue background. It's a palette of pure celebration, perfect for birthday brands, party supplies, or children's events.",
+    tags: ["festive", "playful"],
+    mood: "Festive & Light",
+    bestFor: [
+      "Birthday Brands",
+      "Party Supplies",
+      "Children's Events",
+      "Greeting Cards",
+    ],
+    colors: [
+      { hex: "#dbeafe", name: "Sky Backdrop" },
+      { hex: "#fde047", name: "Yellow Balloon" },
+      { hex: "#f472b6", name: "Pink Balloon" },
+      { hex: "#a78bfa", name: "Purple Balloon" },
+      { hex: "#4ade80", name: "Green Balloon" },
+    ],
+  },
+  {
+    id: "crayon-box",
+    name: "Crayon Box",
+    description: "The full bright spectrum of a classic crayon box.",
+    longDescription:
+      "Crayon Box samples five bright, slightly waxy-looking colours straight from a classic 24-pack — red, orange, blue, green, and purple. It's a palette of unfiltered childhood creativity, perfect for educational brands, art supplies, or kids' apps.",
+    tags: ["playful", "vivid"],
+    mood: "Creative & Unfiltered",
+    bestFor: ["Educational Brands", "Art Supplies", "Kids' Apps", "Packaging"],
+    colors: [
+      { hex: "#ef4444", name: "Crayon Red" },
+      { hex: "#fb923c", name: "Crayon Orange" },
+      { hex: "#3b82f6", name: "Crayon Blue" },
+      { hex: "#22c55e", name: "Crayon Green" },
+      { hex: "#a855f7", name: "Crayon Purple" },
+    ],
+  },
+  {
+    id: "playground",
+    name: "Playground",
+    description:
+      "Bright equipment colours against rubber-mat red and grass green.",
+    longDescription:
+      "Playground draws from the bright primary colours of outdoor play equipment, set against rubberised safety-red flooring and bright grass green. It's a palette of energetic outdoor fun, perfect for children's brands, sports camps, or outdoor education.",
+    tags: ["playful", "outdoor"],
+    mood: "Energetic & Outdoor",
+    bestFor: [
+      "Children's Brands",
+      "Sports Camps",
+      "Outdoor Education",
+      "Recreation",
+    ],
+    colors: [
+      { hex: "#fde047", name: "Slide Yellow" },
+      { hex: "#3b82f6", name: "Climbing Blue" },
+      { hex: "#dc2626", name: "Safety Red" },
+      { hex: "#65a30d", name: "Grass Green" },
+      { hex: "#f97316", name: "Equipment Orange" },
+    ],
+  },
+  {
+    id: "bubblegum",
+    name: "Bubblegum",
+    description: "Sweet pink and blue bubblegum tones with a pop of yellow.",
+    longDescription:
+      "Bubblegum is sugary and fun — bright bubblegum pink and blue with a pop of lemon yellow and a soft white base. It's a palette of sweet simplicity, perfect for confectionery, kids' fashion, or playful app interfaces.",
+    tags: ["playful", "vivid"],
+    mood: "Sweet & Simple",
+    bestFor: ["Confectionery", "Kids' Fashion", "App Interfaces", "Packaging"],
+    colors: [
+      { hex: "#ffffff", name: "Bubble White" },
+      { hex: "#fde047", name: "Lemon Pop" },
+      { hex: "#f472b6", name: "Bubblegum Pink" },
+      { hex: "#60a5fa", name: "Bubblegum Blue" },
+      { hex: "#a78bfa", name: "Grape Pop" },
+    ],
+  },
+  {
+    id: "story-time",
+    name: "Story Time",
+    description: "Warm storybook colours of cosy bedtime reading.",
+    longDescription:
+      "Story Time wraps warm cream pages with soft orange, gentle blue, and a deep navy for night sky illustrations. It's a palette of cosy imagination, perfect for children's books, bedtime apps, or educational branding.",
+    tags: ["cozy", "playful"],
+    mood: "Cosy & Imaginative",
+    bestFor: [
+      "Children's Books",
+      "Bedtime Apps",
+      "Educational Branding",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fef3e2", name: "Storybook Page" },
+      { hex: "#fdba74", name: "Warm Glow" },
+      { hex: "#93c5fd", name: "Gentle Blue" },
+      { hex: "#4338ca", name: "Night Sky" },
+      { hex: "#1e1b4b", name: "Deep Night" },
+    ],
+  },
+  {
+    id: "lego-bricks",
+    name: "Brick Builder",
+    description: "Glossy primary brick colours with bright white base.",
+    longDescription:
+      "Brick Builder uses the glossy, saturated primaries of classic building bricks — red, yellow, blue, and green against a clean white base. It's a palette of constructive play, perfect for toy brands, STEM education, or kids' app interfaces.",
+    tags: ["playful", "bold"],
+    mood: "Constructive & Bright",
+    bestFor: ["Toy Brands", "STEM Education", "Kids' Apps", "Packaging"],
+    colors: [
+      { hex: "#ffffff", name: "Brick White" },
+      { hex: "#facc15", name: "Brick Yellow" },
+      { hex: "#ef4444", name: "Brick Red" },
+      { hex: "#2563eb", name: "Brick Blue" },
+      { hex: "#16a34a", name: "Brick Green" },
+    ],
+  },
+  {
+    id: "circus-tent",
+    name: "Circus Tent",
+    description: "Bold red and white stripes with golden accents.",
+    longDescription:
+      "Circus Tent stripes bold red and cream white together, finished with a flash of golden brass and deep navy. It's a palette of classic spectacle, perfect for entertainment brands, children's events, or vintage-style packaging.",
+    tags: ["festive", "heritage"],
+    mood: "Spectacular & Classic",
+    bestFor: [
+      "Entertainment Brands",
+      "Children's Events",
+      "Vintage Packaging",
+      "Posters",
+    ],
+    colors: [
+      { hex: "#fef3e2", name: "Tent Cream" },
+      { hex: "#dc2626", name: "Tent Red" },
+      { hex: "#fbbf24", name: "Brass Accent" },
+      { hex: "#1e3a8a", name: "Circus Navy" },
+      { hex: "#18181b", name: "Ring Black" },
+    ],
+  },
+  {
+    id: "puppet-show",
+    name: "Puppet Show",
+    description: "Warm wood tones with bright felt-fabric accent colours.",
+    longDescription:
+      "Puppet Show combines the warm brown of wooden stage elements with bright felt-fabric colours — red, yellow, and turquoise. It's a palette of handmade charm, perfect for children's theatre, craft brands, or playful educational content.",
+    tags: ["playful", "artisan"],
+    mood: "Handmade & Charming",
+    bestFor: [
+      "Children's Theatre",
+      "Craft Brands",
+      "Educational Content",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fef9c3", name: "Felt Yellow" },
+      { hex: "#f87171", name: "Felt Red" },
+      { hex: "#5eead4", name: "Felt Turquoise" },
+      { hex: "#92400e", name: "Wood Stage" },
+      { hex: "#451a03", name: "Deep Wood" },
+    ],
+  },
+  {
+    id: "kite-flying",
+    name: "Kite Flying",
+    description: "Bright kite colours against open blue sky.",
+    longDescription:
+      "Kite Flying sends bright red, yellow, and pink kites soaring against a wide, clear blue sky with soft white cloud. It's a palette of carefree outdoor joy, perfect for children's brands, outdoor recreation, or spring marketing.",
+    tags: ["playful", "outdoor"],
+    mood: "Carefree & Joyful",
+    bestFor: [
+      "Children's Brands",
+      "Outdoor Recreation",
+      "Spring Marketing",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#f0f9ff", name: "Cloud White" },
+      { hex: "#38bdf8", name: "Open Sky" },
+      { hex: "#facc15", name: "Kite Yellow" },
+      { hex: "#f472b6", name: "Kite Pink" },
+      { hex: "#ef4444", name: "Kite Red" },
+    ],
+  },
+
+  // ── Wellness & Spa ────────────────────────────────────────────────────────
+  {
+    id: "zen-garden",
+    name: "Zen Garden",
+    description: "Raked sand beige and moss green of a meditation garden.",
+    longDescription:
+      "Zen Garden draws from the deliberate simplicity of a Japanese rock garden — pale raked sand, smooth grey stone, and a single deep moss-green accent. It's a palette of calm intentionality, perfect for meditation apps, spas, or minimalist wellness branding.",
+    tags: ["wellness", "calm"],
+    mood: "Calm & Intentional",
+    bestFor: [
+      "Meditation Apps",
+      "Spas",
+      "Wellness Branding",
+      "Minimal Interiors",
+    ],
+    colors: [
+      { hex: "#fafaf9", name: "Raked Sand" },
+      { hex: "#e7e5e4", name: "Pale Stone" },
+      { hex: "#a8a29e", name: "Grey Stone" },
+      { hex: "#4d7c0f", name: "Moss Accent" },
+      { hex: "#1c1917", name: "Shadow Stone" },
+    ],
+  },
+  {
+    id: "hot-springs",
+    name: "Hot Springs",
+    description: "Warm mineral blues and steamy whites of a thermal spa.",
+    longDescription:
+      "Hot Springs blends warm mineral-blue water with the soft white of rising steam and the grey stone of a thermal bath. It's a palette of restorative warmth, perfect for spa brands, thermal resorts, or self-care products.",
+    tags: ["wellness", "cool"],
+    mood: "Restorative & Warm",
+    bestFor: [
+      "Spa Brands",
+      "Thermal Resorts",
+      "Self-Care Products",
+      "Wellness Retreats",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Steam White" },
+      { hex: "#a5f3fc", name: "Mineral Blue" },
+      { hex: "#0e7490", name: "Spring Teal" },
+      { hex: "#475569", name: "Wet Stone" },
+      { hex: "#1e293b", name: "Deep Pool" },
+    ],
+  },
+  {
+    id: "aromatherapy",
+    name: "Aromatherapy",
+    description: "Soft botanical greens and warm amber of essential oils.",
+    longDescription:
+      "Aromatherapy combines the soft green of botanical extracts with the warm amber of glass oil bottles and a touch of lavender. It's a palette of natural restoration, perfect for essential oil brands, wellness packaging, or holistic health products.",
+    tags: ["wellness", "botanical"],
+    mood: "Restorative & Botanical",
+    bestFor: [
+      "Essential Oil Brands",
+      "Wellness Packaging",
+      "Holistic Health",
+      "Spas",
+    ],
+    colors: [
+      { hex: "#f0fdf4", name: "Botanical White" },
+      { hex: "#bbf7d0", name: "Soft Green" },
+      { hex: "#d97706", name: "Amber Bottle" },
+      { hex: "#a78bfa", name: "Lavender Note" },
+      { hex: "#3f6212", name: "Deep Herb" },
+    ],
+  },
+  {
+    id: "salt-cave",
+    name: "Salt Cave",
+    description: "Soft pink salt tones and warm cave-light amber.",
+    longDescription:
+      "Salt Cave draws from the soft pink-orange glow of Himalayan salt walls lit from within — warm pink, soft amber, and the deep grey of cave shadow. It's a palette of grounded warmth, perfect for spa brands, wellness retreats, or natural beauty packaging.",
+    tags: ["wellness", "warm"],
+    mood: "Grounded & Warm",
+    bestFor: ["Spa Brands", "Wellness Retreats", "Natural Beauty", "Packaging"],
+    colors: [
+      { hex: "#fff1f2", name: "Salt White" },
+      { hex: "#fecdd3", name: "Salt Pink" },
+      { hex: "#fb923c", name: "Cave Amber" },
+      { hex: "#92400e", name: "Deep Salt" },
+      { hex: "#44403c", name: "Cave Shadow" },
+    ],
+  },
+  {
+    id: "morning-yoga",
+    name: "Morning Yoga",
+    description: "Soft sunrise pinks and calm sage of an early practice.",
+    longDescription:
+      "Morning Yoga combines the soft pink and orange of an early sunrise with calm sage green and warm wood tones. It's a palette of mindful beginnings, perfect for yoga studios, wellness apps, or morning-routine branding.",
+    tags: ["wellness", "pastel"],
+    mood: "Mindful & Soft",
+    bestFor: [
+      "Yoga Studios",
+      "Wellness Apps",
+      "Morning Routine Branding",
+      "Activewear",
+    ],
+    colors: [
+      { hex: "#fff7ed", name: "Sunrise Cream" },
+      { hex: "#fed7aa", name: "Soft Sunrise" },
+      { hex: "#fca5a5", name: "Dawn Pink" },
+      { hex: "#86efac", name: "Sage Calm" },
+      { hex: "#a8a29e", name: "Wood Grey" },
+    ],
+  },
+  {
+    id: "river-stone",
+    name: "River Stone",
+    description: "Smooth grey-green river stones and clear water blue.",
+    longDescription:
+      "River Stone draws from smooth stones in a clear mountain stream — soft grey-green, pale water blue, and warm taupe. It's a palette of grounded tranquility, perfect for wellness brands, mindfulness apps, or natural skincare.",
+    tags: ["wellness", "natural"],
+    mood: "Tranquil & Grounded",
+    bestFor: [
+      "Wellness Brands",
+      "Mindfulness Apps",
+      "Natural Skincare",
+      "Spas",
+    ],
+    colors: [
+      { hex: "#f0f9ff", name: "Clear Water" },
+      { hex: "#bae6fd", name: "Stream Blue" },
+      { hex: "#a8a29e", name: "River Stone" },
+      { hex: "#78716c", name: "Wet Stone" },
+      { hex: "#44403c", name: "Deep Stone" },
+    ],
+  },
+  {
+    id: "lotus-pond",
+    name: "Lotus Pond",
+    description: "Soft pink lotus blooms against deep pond green.",
+    longDescription:
+      "Lotus Pond pairs the soft pink of lotus flowers with the deep green of pond water and lily pads, plus a warm cream centre accent. It's a palette of serene beauty, perfect for spiritual wellness brands, meditation spaces, or botanical packaging.",
+    tags: ["wellness", "botanical"],
+    mood: "Serene & Beautiful",
+    bestFor: [
+      "Spiritual Wellness",
+      "Meditation Spaces",
+      "Botanical Packaging",
+      "Spas",
+    ],
+    colors: [
+      { hex: "#fdf2f8", name: "Lotus White" },
+      { hex: "#fbcfe8", name: "Lotus Pink" },
+      { hex: "#fef9c3", name: "Bloom Centre" },
+      { hex: "#15803d", name: "Lily Pad" },
+      { hex: "#022c22", name: "Deep Pond" },
+    ],
+  },
+  {
+    id: "himalayan-retreat",
+    name: "Himalayan Retreat",
+    description: "Snow-capped white peaks against deep mountain blue.",
+    longDescription:
+      "Himalayan Retreat pairs the pure white of distant snow peaks with deep mountain blue and the warm brown of prayer-flag accents. It's a palette of elevated tranquility, perfect for mountain retreats, meditation brands, or premium outdoor wellness.",
+    tags: ["wellness", "outdoor"],
+    mood: "Elevated & Tranquil",
+    bestFor: [
+      "Mountain Retreats",
+      "Meditation Brands",
+      "Outdoor Wellness",
+      "Travel",
+    ],
+    colors: [
+      { hex: "#f8fafc", name: "Snow Peak" },
+      { hex: "#bae6fd", name: "Glacier Light" },
+      { hex: "#0369a1", name: "Mountain Blue" },
+      { hex: "#92400e", name: "Prayer Flag" },
+      { hex: "#1e293b", name: "Deep Mountain" },
+    ],
+  },
+  {
+    id: "sound-bath",
+    name: "Sound Bath",
+    description: "Resonant warm bronze and soft purple of singing bowls.",
+    longDescription:
+      "Sound Bath blends the warm bronze tone of singing bowls with soft purple and pale cream, evoking the resonant calm of a sound healing session. It's a palette of vibrational calm, perfect for sound therapy brands, meditation apps, or holistic wellness packaging.",
+    tags: ["wellness", "calm"],
+    mood: "Resonant & Vibrational",
+    bestFor: [
+      "Sound Therapy Brands",
+      "Meditation Apps",
+      "Holistic Wellness",
+      "Packaging",
+    ],
+    colors: [
+      { hex: "#fefce8", name: "Resonant Cream" },
+      { hex: "#e9d5ff", name: "Soft Purple" },
+      { hex: "#c4b5fd", name: "Vibration Violet" },
+      { hex: "#b87333", name: "Bronze Bowl" },
+      { hex: "#78350f", name: "Deep Bronze" },
+    ],
+  },
+  {
+    id: "forest-bathing",
+    name: "Forest Bathing",
+    description:
+      "Deep green canopy light filtering through to soft moss floor.",
+    longDescription:
+      "Forest Bathing immerses in dappled woodland light — bright filtered green at the canopy, deepening through moss and bark to the dark floor below. It's a palette of restorative immersion, perfect for nature therapy brands, wellness retreats, or eco-conscious packaging.",
+    tags: ["wellness", "natural"],
+    mood: "Immersive & Restorative",
+    bestFor: [
+      "Nature Therapy Brands",
+      "Wellness Retreats",
+      "Eco Packaging",
+      "Mindfulness Apps",
+    ],
+    colors: [
+      { hex: "#d9f99d", name: "Filtered Light" },
+      { hex: "#86efac", name: "Canopy Green" },
+      { hex: "#4d7c0f", name: "Moss Floor" },
+      { hex: "#365314", name: "Deep Moss" },
+      { hex: "#1c1917", name: "Forest Shadow" },
     ],
   },
 ];
