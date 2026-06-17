@@ -32,13 +32,13 @@
 
   if (document.readyState === "complete") {
     // Already loaded (e.g. cached page)
-    setTimeout(hide, 50);
+    setTimeout(hide, 4);
   } else {
-    window.addEventListener("load", () => setTimeout(hide, 50));
+    window.addEventListener("load", () => setTimeout(hide, 4));
   }
 
   // Safety fallback — never show longer than 3s
-  setTimeout(hide, 100);
+  setTimeout(hide, 4);
 </script>
 
 <style>

@@ -1,4 +1,3 @@
-// src/pages/sitemap-tools.xml.ts
 // Sitemap for tool pages — extend tools[] as new tools are added
 import type { APIRoute } from "astro";
 
@@ -6,10 +5,14 @@ const siteUrl = "https://colorspedia.com";
 const now = new Date().toISOString();
 
 const tools = [
-  { slug: "palette-generator", label: "Palette Generator" },
-  { slug: "gradient-generator", label: "Gradient Generator" },
   { slug: "color-converter", label: "Color Converter" },
+  { slug: "contrast-checker", label: "Contrast Checker" },
+  { slug: "palette-generator", label: "Palette Generator" },
+  { slug: "tint-shade-generator", label: "Tint & Shade Generator" },
+  { slug: "gradient-generator", label: "Gradient Generator" },
+  { slug: "color-from-image", label: "Color from Image" },
   { slug: "color-mixer", label: "Color Mixer" },
+  { slug: "color-blindness-simulator", label: "Color Blindness Simulator" },
 ];
 
 export const GET: APIRoute = () => {

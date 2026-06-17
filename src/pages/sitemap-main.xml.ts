@@ -21,10 +21,22 @@ const staticPages: SitemapEntry[] = [
   { url: "/", changefreq: "daily", priority: 1.0 },
   { url: "/palettes", changefreq: "weekly", priority: 0.9 },
   { url: "/tools", changefreq: "weekly", priority: 0.8 },
-  { url: "/tools/palette-generator", changefreq: "monthly", priority: 0.7 },
-  { url: "/tools/gradient-generator", changefreq: "monthly", priority: 0.7 },
+
+  // Tools
   { url: "/tools/color-converter", changefreq: "monthly", priority: 0.7 },
+  { url: "/tools/contrast-checker", changefreq: "monthly", priority: 0.7 },
+  { url: "/tools/palette-generator", changefreq: "monthly", priority: 0.7 },
+  { url: "/tools/tint-shade-generator", changefreq: "monthly", priority: 0.7 },
+  { url: "/tools/gradient-generator", changefreq: "monthly", priority: 0.7 },
+  { url: "/tools/color-from-image", changefreq: "monthly", priority: 0.7 },
   { url: "/tools/color-mixer", changefreq: "monthly", priority: 0.7 },
+  {
+    url: "/tools/color-blindness-simulator",
+    changefreq: "monthly",
+    priority: 0.7,
+  },
+
+  // Static Pages
   { url: "/about", changefreq: "yearly", priority: 0.4 },
   { url: "/privacy-policy", changefreq: "yearly", priority: 0.2 },
   { url: "/terms", changefreq: "yearly", priority: 0.2 },

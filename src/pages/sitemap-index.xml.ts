@@ -1,4 +1,3 @@
-// src/pages/sitemap-index.xml.ts
 // Sitemap index pointing to individual section sitemaps
 import type { APIRoute } from "astro";
 
@@ -10,7 +9,7 @@ export const GET: APIRoute = () => {
     "sitemap-main.xml",
     "sitemap-colors.xml",
     "sitemap-palettes.xml",
-    // "sitemap-tools.xml",
+    "sitemap-tools.xml",
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

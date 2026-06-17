@@ -27,7 +27,7 @@ const paletteData = paletteSets?.map((p) => ({
   description: p.description,
   tags: p.tags,
   mood: p.mood,
-  colors: p.colors.map((c) => c.hex.toLowerCase()),
+  colors: p.colors?.map((c) => c.hex.toLowerCase()),
 }));
 ---
 
@@ -732,6 +732,7 @@ const paletteData = paletteSets?.map((p) => ({
     max-width: 360px;
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
   }
 
   .search-icon {
@@ -1263,11 +1264,11 @@ const paletteData = paletteSets?.map((p) => ({
       return;
     }
 
-    const colorResults = (getMatchingColors(query) || []).map((c) => ({
+    const colorResults = (getMatchingColors(query) || [])?.map((c) => ({
       ...c,
       type: "color",
     }));
-    const paletteResults = (getMatchingPalettes(query) || []).map((p) => ({
+    const paletteResults = (getMatchingPalettes(query) || [])?.map((p) => ({
       ...p,
       type: "palette",
     }));
@@ -1429,7 +1430,7 @@ const paletteData = paletteSets?.map((p) => ({
     <div class="suggestion-swatch-strip">
       ${palette.colors
         .slice(0, 5)
-        .map(
+        ?.map(
           (hex) =>
             `<div class="suggestion-swatch-strip-seg" style="background:${hex}"></div>`,
         )

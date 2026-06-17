@@ -5,7 +5,47 @@ const navLinks = [
   { href: "/about", label: "About" },
 ];
 
+const tools = [
+  {
+    href: "/tools/color-converter",
+    label: "Color Converter",
+    accent: "#3b82f6",
+  },
+  {
+    href: "/tools/contrast-checker",
+    label: "Contrast Checker",
+    accent: "#10b981",
+  },
+  {
+    href: "/tools/palette-generator",
+    label: "Palette Generator",
+    accent: "#ec4899",
+  },
+  {
+    href: "/tools/tint-shade-generator",
+    label: "Tint & Shade Generator",
+    accent: "#f97316",
+  },
+  {
+    href: "/tools/gradient-generator",
+    label: "Gradient Generator",
+    accent: "#8b5cf6",
+  },
+  {
+    href: "/tools/color-from-image",
+    label: "Color from Image",
+    accent: "#06b6d4",
+  },
+  { href: "/tools/color-mixer", label: "Color Mixer", accent: "#f59e0b" },
+  {
+    href: "/tools/color-blindness-simulator",
+    label: "Color Blindness Simulator",
+    accent: "#64748b",
+  },
+];
+
 const currentPath = Astro.url.pathname;
+const isToolsActive = currentPath.startsWith("/tools");
 ---
 
 <header class="header-root">
@@ -35,6 +75,78 @@ const currentPath = Astro.url.pathname;
           </a>
         ))
       }
+
+      <!-- Tools dropdown trigger -->
+      <div class="tools-dropdown-wrap" id="tools-dropdown-wrap">
+        <button
+          class={`nav-link tools-trigger ${isToolsActive ? "nav-link--active" : ""}`}
+          id="tools-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="tools-dropdown"
+        >
+          Tools
+          <svg
+            class="tools-chevron"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <!-- Desktop dropdown panel -->
+        <div
+          class="tools-dropdown"
+          id="tools-dropdown"
+          role="menu"
+          aria-label="Tools menu"
+        >
+          <div class="tools-dropdown-header">
+            <span class="tools-dropdown-label">Color Tools</span>
+            <a href="/tools" class="tools-see-all">
+              See all
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg
+              >
+            </a>
+          </div>
+          <div class="tools-dropdown-grid">
+            {
+              tools?.map((tool) => (
+                <a
+                  href={tool.href}
+                  class={`tools-dropdown-item ${currentPath === tool.href ? "tools-dropdown-item--active" : ""}`}
+                  role="menuitem"
+                  style={`--t-accent: ${tool.accent}`}
+                >
+                  <span
+                    class="tools-item-dot"
+                    style={`background: ${tool.accent}`}
+                    aria-hidden="true"
+                  />
+                  {tool.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
     </nav>
 
     <!-- Mobile hamburger -->
@@ -60,7 +172,7 @@ const currentPath = Astro.url.pathname;
     </button>
   </div>
 
-  <!-- Mobile dropdown — absolutely positioned, not in flow -->
+  <!-- Mobile dropdown -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <nav class="mobile-nav" aria-label="Mobile navigation">
       {
@@ -76,6 +188,62 @@ const currentPath = Astro.url.pathname;
           </a>
         ))
       }
+
+      <!-- Mobile Tools section -->
+      <div class="mobile-tools-section">
+        <button
+          class="mobile-tools-toggle"
+          id="mobile-tools-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-tools-list"
+        >
+          <span class="mobile-tools-toggle-left">
+            <span
+              class={`mobile-tools-label ${isToolsActive ? "mobile-tools-label--active" : ""}`}
+              >Tools</span
+            >
+            <span class="mobile-tools-count">{tools.length}</span>
+          </span>
+          <svg
+            class="mobile-tools-chevron"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <div
+          class="mobile-tools-list"
+          id="mobile-tools-list"
+          aria-hidden="true"
+        >
+          <a href="/tools" class="mobile-tool-all"> All Tools → </a>
+          {
+            tools?.map((tool) => (
+              <a
+                href={tool.href}
+                class={`mobile-tool-link ${currentPath === tool.href ? "mobile-tool-link--active" : ""}`}
+                style={`--t-accent: ${tool.accent}`}
+              >
+                <span
+                  class="mobile-tool-dot"
+                  style={`background: ${tool.accent}`}
+                  aria-hidden="true"
+                />
+                {tool.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </nav>
   </div>
 </header>
@@ -89,7 +257,6 @@ const currentPath = Astro.url.pathname;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--border-subtle);
-    /* Needed so the absolute dropdown is anchored here */
     isolation: isolate;
   }
 
@@ -104,7 +271,7 @@ const currentPath = Astro.url.pathname;
     gap: 32px;
   }
 
-  /* ── Desktop nav ─────────────────────────────────────────────────────── */
+  /* ── Desktop nav ───────────────────────────────────────────── */
   .nav {
     display: flex;
     align-items: center;
@@ -119,6 +286,7 @@ const currentPath = Astro.url.pathname;
     color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.15s ease;
+    white-space: nowrap;
   }
   .nav-link:hover {
     color: var(--orange-hover);
@@ -129,7 +297,143 @@ const currentPath = Astro.url.pathname;
     background: var(--orange-subtle);
   }
 
-  /* ── Hamburger ───────────────────────────────────────────────────────── */
+  /* ── Tools trigger button ──────────────────────────────────── */
+  .tools-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    font-family: inherit;
+  }
+
+  .tools-chevron {
+    color: var(--text-muted);
+    transition:
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .tools-trigger:hover .tools-chevron,
+  .tools-trigger[aria-expanded="true"] .tools-chevron {
+    color: var(--orange-hover);
+  }
+
+  .tools-trigger[aria-expanded="true"] .tools-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ── Desktop dropdown wrap ─────────────────────────────────── */
+  .tools-dropdown-wrap {
+    position: relative;
+  }
+
+  /* ── Desktop dropdown panel ────────────────────────────────── */
+  .tools-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 360px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.12),
+      0 6px 20px rgba(0, 0, 0, 0.06);
+    z-index: 200;
+    overflow: hidden;
+    transform-origin: top right;
+  }
+
+  .tools-dropdown.is-open {
+    display: block;
+    animation: dropdownIn 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes dropdownIn {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .tools-dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .tools-dropdown-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .tools-see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    text-decoration: none;
+    transition: gap 0.15s ease;
+  }
+  .tools-see-all:hover {
+    gap: 7px;
+  }
+
+  .tools-dropdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 8px;
+  }
+
+  .tools-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition:
+      background 0.12s ease,
+      color 0.12s ease;
+    line-height: 1.3;
+  }
+  .tools-dropdown-item:hover {
+    background: color-mix(in srgb, var(--t-accent) 8%, transparent);
+    color: var(--t-accent);
+  }
+  .tools-dropdown-item--active {
+    background: color-mix(in srgb, var(--t-accent) 10%, transparent);
+    color: var(--t-accent);
+    font-weight: 600;
+  }
+
+  .tools-item-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Hamburger ─────────────────────────────────────────────── */
   .hamburger {
     display: none;
     align-items: center;
@@ -158,13 +462,13 @@ const currentPath = Astro.url.pathname;
     color: var(--orange);
   }
 
-  /* ── Mobile dropdown — true dropdown, out of flow ────────────────────── */
+  /* ── Mobile dropdown ───────────────────────────────────────── */
   .mobile-menu {
-    display: none; /* toggled to block via JS */
+    display: none;
     position: absolute;
     top: calc(100% + 6px);
     right: 16px;
-    width: 220px;
+    width: 260px;
     background: var(--white);
     border: 1.5px solid var(--border);
     border-radius: 16px;
@@ -173,7 +477,7 @@ const currentPath = Astro.url.pathname;
       0 4px 16px rgba(0, 0, 0, 0.06);
     z-index: 200;
     overflow: hidden;
-    transform-origin: top center;
+    transform-origin: top right;
     animation: menuDrop 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -227,7 +531,156 @@ const currentPath = Astro.url.pathname;
     flex-shrink: 0;
   }
 
-  /* ── Responsive ──────────────────────────────────────────────────────── */
+  /* ── Mobile tools section ──────────────────────────────────── */
+  .mobile-tools-section {
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 4px;
+    padding-top: 4px;
+  }
+
+  .mobile-tools-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  .mobile-tools-toggle:hover {
+    background: var(--surface-hover);
+  }
+  .mobile-tools-toggle[aria-expanded="true"] {
+    background: var(--orange-subtle);
+  }
+
+  .mobile-tools-toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mobile-tools-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .mobile-tools-label--active {
+    color: var(--orange);
+    font-weight: 600;
+  }
+  .mobile-tools-toggle[aria-expanded="true"] .mobile-tools-label {
+    color: var(--orange);
+  }
+
+  .mobile-tools-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--light);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 1px 7px;
+    line-height: 1.6;
+  }
+  .mobile-tools-toggle[aria-expanded="true"] .mobile-tools-count {
+    background: color-mix(in srgb, var(--orange) 10%, transparent);
+    border-color: color-mix(in srgb, var(--orange) 25%, transparent);
+    color: var(--orange);
+  }
+
+  .mobile-tools-chevron {
+    color: var(--text-muted);
+    transition:
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.15s ease;
+    flex-shrink: 0;
+  }
+  .mobile-tools-toggle[aria-expanded="true"] .mobile-tools-chevron {
+    transform: rotate(180deg);
+    color: var(--orange);
+  }
+
+  /* tools sub-list */
+  .mobile-tools-list {
+    display: none;
+    flex-direction: column;
+    gap: 1px;
+    padding: 4px 8px 8px;
+  }
+  .mobile-tools-list.is-open {
+    display: flex;
+    animation: slideDown 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mobile-tool-all {
+    display: block;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--orange);
+    text-decoration: none;
+    border-radius: 8px;
+    letter-spacing: 0.01em;
+    transition: background 0.12s ease;
+    margin-bottom: 2px;
+  }
+  .mobile-tool-all:hover {
+    background: var(--orange-subtle);
+  }
+
+  .mobile-tool-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition:
+      background 0.12s ease,
+      color 0.12s ease;
+  }
+  .mobile-tool-link:hover {
+    background: color-mix(in srgb, var(--t-accent) 8%, transparent);
+    color: var(--t-accent);
+  }
+  .mobile-tool-link--active {
+    background: color-mix(in srgb, var(--t-accent) 10%, transparent);
+    color: var(--t-accent);
+    font-weight: 600;
+  }
+
+  .mobile-tool-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ────────────────────────────────────────────── */
   @media (max-width: 640px) {
     .header-inner {
       padding: 0 16px;
@@ -243,44 +696,107 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  const hamburger = document.getElementById("hamburger")!;
-  const mobileMenu = document.getElementById("mobile-menu")!;
+  // ── Desktop tools dropdown ───────────────────────────────────
+  const toolsTrigger = document.getElementById(
+    "tools-trigger",
+  ) as HTMLButtonElement;
+  const toolsDropdown = document.getElementById("tools-dropdown")!;
+  const toolsWrap = document.getElementById("tools-dropdown-wrap")!;
 
-  function openMenu() {
-    hamburger.setAttribute("aria-expanded", "true");
-    mobileMenu.setAttribute("aria-hidden", "false");
-    mobileMenu.style.display = "block";
+  function openToolsDropdown() {
+    toolsTrigger.setAttribute("aria-expanded", "true");
+    toolsDropdown.classList.add("is-open");
   }
 
-  function closeMenu() {
-    hamburger.setAttribute("aria-expanded", "false");
-    mobileMenu.setAttribute("aria-hidden", "true");
-    mobileMenu.style.display = "none";
+  function closeToolsDropdown() {
+    toolsTrigger.setAttribute("aria-expanded", "false");
+    toolsDropdown.classList.remove("is-open");
   }
 
-  hamburger.addEventListener("click", (e) => {
+  toolsTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
-    const isOpen = hamburger.getAttribute("aria-expanded") === "true";
-    isOpen ? closeMenu() : openMenu();
+    const isOpen = toolsTrigger.getAttribute("aria-expanded") === "true";
+    isOpen ? closeToolsDropdown() : openToolsDropdown();
   });
 
   // Close on outside click
   document.addEventListener("click", (e) => {
-    if (
-      !hamburger.contains(e.target as Node) &&
-      !mobileMenu.contains(e.target as Node)
-    ) {
-      closeMenu();
+    if (!toolsWrap.contains(e.target as Node)) {
+      closeToolsDropdown();
     }
   });
 
   // Close on Escape
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
+    if (e.key === "Escape") {
+      closeToolsDropdown();
+      closeMobileMenu();
+    }
   });
 
-  // Close on nav link click
+  // ── Mobile hamburger ─────────────────────────────────────────
+  const hamburger = document.getElementById("hamburger") as HTMLButtonElement;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+
+  function openMobileMenu() {
+    hamburger.setAttribute("aria-expanded", "true");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    mobileMenu.style.display = "block";
+  }
+
+  function closeMobileMenu() {
+    hamburger.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    mobileMenu.style.display = "none";
+    // also collapse tools sub-list when menu closes
+    collapseMobileTools();
+  }
+
+  hamburger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = hamburger.getAttribute("aria-expanded") === "true";
+    isOpen ? closeMobileMenu() : openMobileMenu();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      !hamburger.contains(e.target as Node) &&
+      !mobileMenu.contains(e.target as Node)
+    ) {
+      closeMobileMenu();
+    }
+  });
+
   mobileMenu.querySelectorAll(".mobile-nav-link").forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  // ── Mobile tools accordion ───────────────────────────────────
+  const mobileToolsToggle = document.getElementById(
+    "mobile-tools-toggle",
+  ) as HTMLButtonElement;
+  const mobileToolsList = document.getElementById("mobile-tools-list")!;
+
+  function expandMobileTools() {
+    mobileToolsToggle.setAttribute("aria-expanded", "true");
+    mobileToolsList.setAttribute("aria-hidden", "false");
+    mobileToolsList.classList.add("is-open");
+  }
+
+  function collapseMobileTools() {
+    mobileToolsToggle.setAttribute("aria-expanded", "false");
+    mobileToolsList.setAttribute("aria-hidden", "true");
+    mobileToolsList.classList.remove("is-open");
+  }
+
+  mobileToolsToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = mobileToolsToggle.getAttribute("aria-expanded") === "true";
+    isOpen ? collapseMobileTools() : expandMobileTools();
+  });
+
+  // Close menu when a tool link is clicked
+  mobileToolsList.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
   });
 </script>
